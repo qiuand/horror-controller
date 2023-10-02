@@ -15,15 +15,18 @@ public class AttackPoint : MonoBehaviour
     float maxHealth;
     float health;
 
-    bool repairing = false;
+    public bool repairing = false;
 
     [SerializeField] AudioSource source;
     [SerializeField] AudioClip shatter;
+
+    public AudioSource repairSource;
 
     GameObject gameManager;
     // Start is called before the first frame update
     void Start()
     {
+        repairSource.enabled = false;
         gameManager = GameObject.FindGameObjectWithTag("Game Manager");
         maxHealth = gameManager.GetComponent<GameManager>().weakPointHealth;
         health = maxHealth;
@@ -47,32 +50,23 @@ public class AttackPoint : MonoBehaviour
             gameObject.GetComponent<MeshRenderer>().enabled = false;
             source.PlayOneShot(shatter);
             timeUntilCanAttack = attackCooldownTime;
-            maxHealth = gameManager.GetComponent<GameManager>().houseHealth -= gameManager.GetComponent<GameManager>().monsterDamage;
+            gameManager.GetComponent<GameManager>().houseHealth -= gameManager.GetComponent<GameManager>().monsterDamage;
             health -= gameManager.GetComponent<GameManager>().monsterDamage;
-        }
-    }
-    private void OnCollisionEnter(Collision collision)
-    {
-        print(1);
-        if (collision.gameObject.tag == "Player")
-        {
-            repairing = true;
-        }
-    }
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            repairing = false;
         }
     }
     private void Repair()
     {
         if (repairing && timeUntilCanRepair <= 0 && health < maxHealth)
         {
+            repairSource.enabled = true;
             timeUntilCanRepair = repairCooldownTime;
             health += repairAmount;
             gameManager.GetComponent<GameManager>().houseHealth += repairAmount;
+            print(health + " out of " + maxHealth);
+        }
+        else if (health==maxHealth)
+        {
+            repairSource.enabled = false;
         }
     }
 }

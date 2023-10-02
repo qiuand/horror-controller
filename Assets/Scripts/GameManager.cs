@@ -2,9 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 public class GameManager : MonoBehaviour
 {
+
+    [SerializeField] TextMeshProUGUI petrifyText;
+
+    float timeToPetrify=10f;
+    float petrifyTimer;
 
     [SerializeField] Slider healthBar;
 
@@ -20,6 +25,8 @@ public class GameManager : MonoBehaviour
 
     public float monsterDamage=5;
 
+    public bool playerIsVisible = false;
+
     [SerializeField] GameObject[] monsterEyepositions= new GameObject[4];
     [SerializeField] GameObject[] monsterAttackPositions;
 
@@ -31,6 +38,7 @@ public class GameManager : MonoBehaviour
         MoveEyeCameraToLocation(monsterEyepositions[monsterEyepositions.Length-1]);
         maxHouseHealth = weakPointHealth * numberOfWeakPoints;
         houseHealth = maxHouseHealth;
+        petrifyTimer = timeToPetrify;
     }
 
     // Update is called once per frame
@@ -41,8 +49,24 @@ public class GameManager : MonoBehaviour
         HumanBlockInput();
         MonsterAttackInput();
         PlayerRepairInput();
+        PetrifyTimer();
+    }
 
-
+    void PetrifyTimer()
+    {
+        petrifyText.text = "Time to petrification: " + System.Math.Round(petrifyTimer, 2) + " seconds";
+        if (playerIsVisible)
+        {
+            petrifyTimer -= Time.deltaTime;
+        }
+        else if (petrifyTimer < timeToPetrify)
+        {
+            petrifyTimer += Time.deltaTime;
+        }
+        if (petrifyTimer <= 0)
+        {
+            petrifyTimer = 0;
+        }
     }
     void MoveEyeCameraToLocation(GameObject reference)
     {
@@ -58,7 +82,11 @@ public class GameManager : MonoBehaviour
     void MoveHumanRepair(GameObject reference)
     {
         GameObject repairPoint = reference.transform.Find("Repair Point").gameObject;
-        player.gameObject.transform.position = repairPoint.transform.position;
+        player.gameObject.transform.position = 
+            new Vector3(
+                repairPoint.transform.position.x,
+                repairPoint.transform.position.y+0.5f,
+                repairPoint.transform.position.z);
         board.gameObject.transform.rotation =
             Quaternion.Euler(
                 repairPoint.transform.rotation.x,
