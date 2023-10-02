@@ -9,9 +9,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI petrifyText;
 
     float timeToPetrify=10f;
-    float petrifyTimer;
-
-    [SerializeField] Slider healthBar;
+    public float petrifyTimer;
 
     public GameObject board;
     public GameObject player;
@@ -44,7 +42,6 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        healthBar.value = houseHealth / maxHouseHealth;
         MonsterInput();
         HumanBlockInput();
         MonsterAttackInput();
@@ -54,7 +51,6 @@ public class GameManager : MonoBehaviour
 
     void PetrifyTimer()
     {
-        petrifyText.text = "Time to petrification: " + System.Math.Round(petrifyTimer, 2) + " seconds";
         if (playerIsVisible)
         {
             petrifyTimer -= Time.deltaTime;
@@ -90,7 +86,7 @@ public class GameManager : MonoBehaviour
         board.gameObject.transform.rotation =
             Quaternion.Euler(
                 repairPoint.transform.rotation.x,
-                repairPoint.transform.rotation.y - 180,
+                repairPoint.transform.rotation.y,
                 repairPoint.transform.rotation.z);
     }
 
