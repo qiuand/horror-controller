@@ -33,6 +33,10 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        for(int i=1; i<Display.displays.Length; i++)
+        {
+            Display.displays[i].Activate();
+        }
         MoveEyeCameraToLocation(monsterEyepositions[monsterEyepositions.Length-1]);
         maxHouseHealth = weakPointHealth * numberOfWeakPoints;
         houseHealth = maxHouseHealth;
@@ -81,7 +85,7 @@ public class GameManager : MonoBehaviour
         player.gameObject.transform.position = 
             new Vector3(
                 repairPoint.transform.position.x,
-                repairPoint.transform.position.y+0.5f,
+                repairPoint.transform.position.y+1f,
                 repairPoint.transform.position.z);
         board.gameObject.transform.rotation =
             Quaternion.Euler(

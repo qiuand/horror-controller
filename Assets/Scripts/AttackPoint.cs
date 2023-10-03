@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class AttackPoint : MonoBehaviour
 {
+    [SerializeField] Image healthBar;
     float timeUntilCanAttack= 0f;
     float attackCooldownTime = 1f;
 
@@ -20,6 +23,8 @@ public class AttackPoint : MonoBehaviour
     [SerializeField] AudioSource source;
     [SerializeField] AudioClip shatter;
 
+    [SerializeField] GameObject sprite;
+
     public AudioSource repairSource;
 
     GameObject gameManager;
@@ -35,9 +40,12 @@ public class AttackPoint : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        healthBar.fillAmount = health / maxHealth;
+
         if (timeUntilCanAttack <= 0 && health>0)
         {
-            gameObject.GetComponent<MeshRenderer>().enabled = true;
+            sprite.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            //gameObject.GetComponent<MeshRenderer>().enabled = true;
         }
         timeUntilCanAttack -= Time.deltaTime;
         timeUntilCanRepair -= Time.deltaTime;
@@ -47,7 +55,8 @@ public class AttackPoint : MonoBehaviour
     {
         if (timeUntilCanAttack <= 0 && health>0)
         {
-            gameObject.GetComponent<MeshRenderer>().enabled = false;
+            sprite.gameObject.GetComponent<SpriteRenderer>().enabled = true;
+            //gameObject.GetComponent<MeshRenderer>().enabled = false;
             source.PlayOneShot(shatter);
             timeUntilCanAttack = attackCooldownTime;
             gameManager.GetComponent<GameManager>().houseHealth -= gameManager.GetComponent<GameManager>().monsterDamage;

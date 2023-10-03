@@ -6,7 +6,8 @@ using TMPro;
 
 public class CanvasScript : MonoBehaviour
 {
-    [SerializeField] Slider healthBar;
+    [SerializeField] Image healthBar;
+
     [SerializeField] TextMeshProUGUI petrifyText;
     GameManager gameManagerScript;
 
@@ -20,7 +21,7 @@ public class CanvasScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        healthBar.value = gameManagerScript.houseHealth / gameManagerScript.maxHouseHealth;
+        healthBar.fillAmount = gameManagerScript.houseHealth / gameManagerScript.maxHouseHealth;
         petrifyText.text = "Time to petrification: " + System.Math.Round(gameManagerScript.petrifyTimer, 2) + " seconds";
     }
 }
