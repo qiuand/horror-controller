@@ -101,11 +101,11 @@ public class GameManager : MonoBehaviour
         {
             MoveEyeCameraToLocation(monsterEyepositions[0]);
         }
-        else if (Input.GetKeyDown("6"))
+        else if (Input.GetKeyDown("7"))
         {
             MoveEyeCameraToLocation(monsterEyepositions[1]);
         }
-        else if (Input.GetKeyDown("7"))
+        else if (Input.GetKeyDown("6"))
         {
             MoveEyeCameraToLocation(monsterEyepositions[2]);
         }
@@ -116,15 +116,15 @@ public class GameManager : MonoBehaviour
     }
     void MonsterAttackInput()
     {
-        if (Input.GetKeyDown("1"))
+        if (Input.GetKeyDown("2"))
         {
             monsterAttackPositions[0].GetComponent<AttackPoint>().OnHit();
         }
-        else if (Input.GetKeyDown("2"))
+        else if (Input.GetKeyDown("3"))
         {
             monsterAttackPositions[1].GetComponent<AttackPoint>().OnHit();
         }
-        else if (Input.GetKeyDown("3"))
+        else if (Input.GetKeyDown("1"))
         {
             monsterAttackPositions[2].GetComponent<AttackPoint>().OnHit();
         }
@@ -137,11 +137,11 @@ public class GameManager : MonoBehaviour
     //Human block
     void HumanBlockInput()
     {
-        if (Input.GetKeyDown("q"))
+        if (Input.GetKeyDown("w"))
         {
             MoveHumanBlock(monsterEyepositions[0]);
         }
-        else if (Input.GetKeyDown("w"))
+        else if (Input.GetKeyDown("q"))
         {
             MoveHumanBlock(monsterEyepositions[1]);
         }
@@ -158,15 +158,15 @@ public class GameManager : MonoBehaviour
     //Player repair
     void PlayerRepairInput()
     {
-        if (Input.GetKeyDown("t"))
+        if (Input.GetKeyDown("y"))
         {
             MoveHumanRepair(monsterAttackPositions[0]);
         }
-        else if (Input.GetKeyDown("y"))
+        else if (Input.GetKeyDown("u"))
         {
             MoveHumanRepair(monsterAttackPositions[1]);
         }
-        else if (Input.GetKeyDown("u"))
+        else if (Input.GetKeyDown("t"))
         {
             MoveHumanRepair(monsterAttackPositions[2]);
         }
