@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
                 repairPoint.transform.position.x,
                 repairPoint.transform.position.y+1f,
                 repairPoint.transform.position.z);
-        board.gameObject.transform.rotation =
+        player.gameObject.transform.rotation =
             Quaternion.Euler(
                 repairPoint.transform.rotation.x,
                 repairPoint.transform.rotation.y,
