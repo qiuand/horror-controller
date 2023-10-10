@@ -14,6 +14,7 @@ public class AttackPoint : MonoBehaviour
     float repairCooldownTime = 2f;
 
     float repairAmount=5;
+    float repairAmountDebuffed = 2.5f;
 
     float maxHealth;
     float health;
@@ -69,13 +70,26 @@ public class AttackPoint : MonoBehaviour
         {
             repairSource.enabled = true;
             timeUntilCanRepair = repairCooldownTime;
-            health += repairAmount;
-            gameManager.GetComponent<GameManager>().houseHealth += repairAmount;
+            if (gameManager.GetComponent<GameManager>().playerIsVisible)
+            {
+                gameManager.GetComponent<GameManager>().houseHealth += repairAmountDebuffed;
+                health += repairAmountDebuffed;
+            }
+            else
+            {
+                gameManager.GetComponent<GameManager>().houseHealth += repairAmount;
+                health += repairAmount;
+            }
+
             print(health + " out of " + maxHealth);
         }
         else if (health==maxHealth)
         {
             repairSource.enabled = false;
+        }
+        if (health > maxHealth)
+        {
+            health = maxHealth;
         }
     }
 }

@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
+
 public class GameManager : MonoBehaviour
 {
+    public float gameTimer = 120f;
 
     [SerializeField] TextMeshProUGUI petrifyText;
 
@@ -33,6 +36,10 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (houseHealth > maxHouseHealth)
+        {
+            houseHealth = maxHouseHealth;
+        }
         for(int i=1; i<Display.displays.Length; i++)
         {
             Display.displays[i].Activate();
@@ -46,6 +53,12 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        gameTimer -= Time.deltaTime;
+
+        if (Input.GetKeyDown("b"))
+        {
+            SceneManager.LoadScene(0);
+        }
         MonsterInput();
         HumanBlockInput();
         MonsterAttackInput();
