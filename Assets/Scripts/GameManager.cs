@@ -7,6 +7,10 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+
+    public float monsterAttackTimer = 1.0f;
+    public float monsterAttackCooldownTimer;
+
     public float gameTimer = 120f;
 
     [SerializeField] TextMeshProUGUI petrifyText;
@@ -36,10 +40,13 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        monsterAttackCooldownTimer = monsterAttackTimer;
+
         if (houseHealth > maxHouseHealth)
         {
             houseHealth = maxHouseHealth;
         }
+
         for(int i=1; i<Display.displays.Length; i++)
         {
             Display.displays[i].Activate();
@@ -54,6 +61,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         gameTimer -= Time.deltaTime;
+        monsterAttackCooldownTimer -= Time.deltaTime;
 
         if (Input.GetKeyDown("b"))
         {
@@ -110,40 +118,43 @@ public class GameManager : MonoBehaviour
     //Monster eye
     void MonsterInput()
     {
-        if (Input.GetKeyDown("5"))
-        {
-            MoveEyeCameraToLocation(monsterEyepositions[0]);
-        }
-        else if (Input.GetKeyDown("7"))
-        {
-            MoveEyeCameraToLocation(monsterEyepositions[1]);
-        }
-        else if (Input.GetKeyDown("6"))
-        {
-            MoveEyeCameraToLocation(monsterEyepositions[2]);
-        }
-        else if (Input.GetKeyDown("8"))
-        {
-            MoveEyeCameraToLocation(monsterEyepositions[3]);
-        }
+            if (Input.GetKeyDown("5"))
+            {
+                MoveEyeCameraToLocation(monsterEyepositions[0]);
+            }
+            else if (Input.GetKeyDown("7"))
+            {
+                MoveEyeCameraToLocation(monsterEyepositions[1]);
+            }
+            else if (Input.GetKeyDown("6"))
+            {
+                MoveEyeCameraToLocation(monsterEyepositions[2]);
+            }
+            else if (Input.GetKeyDown("8"))
+            {
+                MoveEyeCameraToLocation(monsterEyepositions[3]);
+            }
     }
     void MonsterAttackInput()
     {
-        if (Input.GetKeyDown("2"))
+        if (monsterAttackCooldownTimer <= 0)
         {
-            monsterAttackPositions[0].GetComponent<AttackPoint>().OnHit();
-        }
-        else if (Input.GetKeyDown("3"))
-        {
-            monsterAttackPositions[1].GetComponent<AttackPoint>().OnHit();
-        }
-        else if (Input.GetKeyDown("1"))
-        {
-            monsterAttackPositions[2].GetComponent<AttackPoint>().OnHit();
-        }
-        else if (Input.GetKeyDown("4"))
-        {
+            if (Input.GetKeyDown("2"))
+            {
+                monsterAttackPositions[0].GetComponent<AttackPoint>().OnHit();
+            }
+            else if (Input.GetKeyDown("3"))
+            {
+                monsterAttackPositions[1].GetComponent<AttackPoint>().OnHit();
+            }
+            else if (Input.GetKeyDown("1"))
+            {
+                monsterAttackPositions[2].GetComponent<AttackPoint>().OnHit();
+            }
+            else if (Input.GetKeyDown("4"))
+            {
 
+            }
         }
     }
 

@@ -54,6 +54,8 @@ public class AttackPoint : MonoBehaviour
     }
     public void OnHit()
     {
+        gameManager.GetComponent<GameManager>().monsterAttackCooldownTimer = gameManager.GetComponent<GameManager>().monsterAttackTimer;
+
         if (timeUntilCanAttack <= 0 && health>0)
         {
             sprite.gameObject.GetComponent<SpriteRenderer>().enabled = true;
