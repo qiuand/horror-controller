@@ -7,6 +7,12 @@ using TMPro;
 public class AttackPoint : MonoBehaviour
 {
     [SerializeField] Image healthBar;
+
+    float monsterDamage=25;
+    public float monsterHealth;
+
+    public bool isDefended = false;
+
     float timeUntilCanAttack= 0f;
     float attackCooldownTime = 1f;
 
@@ -14,7 +20,7 @@ public class AttackPoint : MonoBehaviour
     float repairCooldownTime = 2f;
 
     float repairAmount=5;
-    float repairAmountDebuffed = 2.5f;
+    float repairAmountDebuffed = 5f;
 
     float maxHealth;
     float health;
@@ -23,6 +29,7 @@ public class AttackPoint : MonoBehaviour
 
     [SerializeField] AudioSource source;
     [SerializeField] AudioClip shatter;
+    [SerializeField] AudioClip roar;
 
     [SerializeField] GameObject sprite;
 
@@ -58,12 +65,22 @@ public class AttackPoint : MonoBehaviour
 
         if (timeUntilCanAttack <= 0 && health>0)
         {
-            sprite.gameObject.GetComponent<SpriteRenderer>().enabled = true;
-            //gameObject.GetComponent<MeshRenderer>().enabled = false;
-            source.PlayOneShot(shatter);
-            timeUntilCanAttack = attackCooldownTime;
-            gameManager.GetComponent<GameManager>().houseHealth -= gameManager.GetComponent<GameManager>().monsterDamage;
-            health -= gameManager.GetComponent<GameManager>().monsterDamage;
+            if (isDefended)
+            {
+                gameManager.GetComponent<GameManager>().stabTimer = gameManager.GetComponent<GameManager>().stabTimerCooldown;
+                source.PlayOneShot(roar);
+                gameManager.GetComponent<GameManager>().monsterHealth -= monsterDamage;
+                Debug.Log("hitted");
+            }
+            else
+            {
+                sprite.gameObject.GetComponent<SpriteRenderer>().enabled = true;
+                //gameObject.GetComponent<MeshRenderer>().enabled = false;
+                source.PlayOneShot(shatter);
+                timeUntilCanAttack = attackCooldownTime;
+                gameManager.GetComponent<GameManager>().houseHealth -= gameManager.GetComponent<GameManager>().monsterDamage;
+                health -= gameManager.GetComponent<GameManager>().monsterDamage;
+            }
         }
     }
     private void Repair()

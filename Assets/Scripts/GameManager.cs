@@ -7,7 +7,11 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public float stabTimerCooldown = 1.0f;
+    public float stabTimer=0f;
 
+    public float monsterMaxHealth = 100;
+    public float monsterHealth;
     public float monsterAttackTimer = 1.0f;
     public float monsterAttackCooldownTimer;
 
@@ -40,6 +44,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        monsterHealth = monsterMaxHealth;
+
         monsterAttackCooldownTimer = monsterAttackTimer;
 
         if (houseHealth > maxHouseHealth)
@@ -60,6 +66,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        stabTimer -= Time.deltaTime;
         gameTimer -= Time.deltaTime;
         monsterAttackCooldownTimer -= Time.deltaTime;
 
@@ -102,6 +109,12 @@ public class GameManager : MonoBehaviour
     }
     void MoveHumanRepair(GameObject reference)
     {
+        for (int i = 0; i < monsterAttackPositions.Length; i++)
+        {
+            monsterAttackPositions[i].GetComponent<AttackPoint>().isDefended = false;
+        }
+        reference.GetComponent<AttackPoint>().isDefended = true;
+
         GameObject repairPoint = reference.transform.Find("Repair Point").gameObject;
         player.gameObject.transform.position = 
             new Vector3(

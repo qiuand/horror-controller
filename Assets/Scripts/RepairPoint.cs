@@ -26,10 +26,10 @@ public class RepairPoint : MonoBehaviour
     }
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.tag == "Player")
+/*        if (collision.gameObject.tag == "Player")
         {
             parent.GetComponent<AttackPoint>().repairing = false;
             parent.GetComponent<AttackPoint>().repairSource.enabled = false;
-        }
+        }*/
     }
 }

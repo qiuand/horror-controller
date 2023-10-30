@@ -189,9 +189,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 8452690691749443967}
+  monsterHealth: 0
+  isDefended: 0
   repairing: 0
   source: {fileID: 6003680805336271576}
   shatter: {fileID: 8300000, guid: c4b5e58c1c1c7114fba260011615f8b4, type: 3}
+  roar: {fileID: 8300000, guid: ab080071119d76d4cac390434c7ece32, type: 3}
   sprite: {fileID: 7875721011021007106}
   repairSource: {fileID: 6186227453690881458}
 --- !u!82 &6003680805336271576
