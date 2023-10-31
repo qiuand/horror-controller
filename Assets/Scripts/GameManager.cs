@@ -12,14 +12,14 @@ public class GameManager : MonoBehaviour
 
     public float monsterMaxHealth = 100;
     public float monsterHealth;
-    public float monsterAttackTimer = 1.0f;
+    public float monsterAttackTimer = 2.0f;
     public float monsterAttackCooldownTimer;
 
     public float gameTimer = 120f;
 
     [SerializeField] TextMeshProUGUI petrifyText;
 
-    float timeToPetrify=10f;
+    float timeToPetrify=5f;
     public float petrifyTimer;
 
     public GameObject board;
@@ -32,7 +32,10 @@ public class GameManager : MonoBehaviour
     public float maxHouseHealth;
     public float houseHealth;
 
-    public float monsterDamage=5;
+    public float monsterDamage;
+
+    public float minMonsterDamage = 1;
+    float maxMonsterDamage = 10;
 
     public bool playerIsVisible = false;
 
@@ -44,6 +47,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        monsterDamage = minMonsterDamage;
         monsterHealth = monsterMaxHealth;
 
         monsterAttackCooldownTimer = monsterAttackTimer;
@@ -66,9 +70,13 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (monsterDamage < maxMonsterDamage)
+        {
+            monsterDamage += Time.deltaTime;
+        }
         stabTimer -= Time.deltaTime;
         gameTimer -= Time.deltaTime;
-        monsterAttackCooldownTimer -= Time.deltaTime;
+        monsterAttackCooldownTimer -= Time.deltaTime*1.5f;
 
         if (Input.GetKeyDown("b"))
         {
@@ -150,7 +158,7 @@ public class GameManager : MonoBehaviour
     }
     void MonsterAttackInput()
     {
-        if (monsterAttackCooldownTimer <= 0)
+        if (/*monsterAttackCooldownTimer <= 0*/ true)
         {
             if (Input.GetKeyDown("2"))
             {

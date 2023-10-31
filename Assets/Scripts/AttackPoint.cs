@@ -8,7 +8,7 @@ public class AttackPoint : MonoBehaviour
 {
     [SerializeField] Image healthBar;
 
-    float monsterDamage=25;
+    float monsterDamage=50;
     public float monsterHealth;
 
     public bool isDefended = false;
@@ -61,25 +61,27 @@ public class AttackPoint : MonoBehaviour
     }
     public void OnHit()
     {
-        gameManager.GetComponent<GameManager>().monsterAttackCooldownTimer = gameManager.GetComponent<GameManager>().monsterAttackTimer;
 
-        if (timeUntilCanAttack <= 0 && health>0)
+        if (/*timeUntilCanAttack <= 0 &&*/ health>0)
         {
-            if (isDefended)
+/*            if (isDefended)
             {
+                gameManager.GetComponent<GameManager>().monsterAttackCooldownTimer = 15f;
                 gameManager.GetComponent<GameManager>().stabTimer = gameManager.GetComponent<GameManager>().stabTimerCooldown;
                 source.PlayOneShot(roar);
-                gameManager.GetComponent<GameManager>().monsterHealth -= monsterDamage;
+ *//*               gameManager.GetComponent<GameManager>().monsterHealth -= monsterDamage;*//*
                 Debug.Log("hitted");
             }
-            else
+            else*/
             {
+                gameManager.GetComponent<GameManager>().monsterAttackCooldownTimer = gameManager.GetComponent<GameManager>().monsterAttackTimer;
                 sprite.gameObject.GetComponent<SpriteRenderer>().enabled = true;
                 //gameObject.GetComponent<MeshRenderer>().enabled = false;
                 source.PlayOneShot(shatter);
                 timeUntilCanAttack = attackCooldownTime;
                 gameManager.GetComponent<GameManager>().houseHealth -= gameManager.GetComponent<GameManager>().monsterDamage;
                 health -= gameManager.GetComponent<GameManager>().monsterDamage;
+                gameManager.GetComponent<GameManager>().monsterDamage = gameManager.GetComponent<GameManager>().minMonsterDamage;
             }
         }
     }
