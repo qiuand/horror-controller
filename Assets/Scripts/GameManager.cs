@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+
+    public bool houseDestroyed = false;
+
     public float stabTimerCooldown = 1.0f;
     public float stabTimer=0f;
 
@@ -37,10 +40,12 @@ public class GameManager : MonoBehaviour
     public float minMonsterDamage = 1;
     float maxMonsterDamage = 10;
 
+    float temporaryHealthCalculation=0;
+
     public bool playerIsVisible = false;
 
-    [SerializeField] GameObject[] monsterEyepositions= new GameObject[4];
-    [SerializeField] GameObject[] monsterAttackPositions;
+    public GameObject[] monsterEyepositions= new GameObject[4];
+    public  GameObject[] monsterAttackPositions;
 
     [SerializeField] GameObject defaultBarricadePoint;
 
@@ -52,10 +57,7 @@ public class GameManager : MonoBehaviour
 
         monsterAttackCooldownTimer = monsterAttackTimer;
 
-        if (houseHealth > maxHouseHealth)
-        {
-            houseHealth = maxHouseHealth;
-        }
+
 
         for(int i=1; i<Display.displays.Length; i++)
         {
@@ -70,6 +72,9 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        houseDestroyed = CalculateHouseDestroyed();
+        houseHealth = CalculateHouseHealth();
+
         if (monsterDamage < maxMonsterDamage)
         {
             monsterDamage += Time.deltaTime;
@@ -89,6 +94,34 @@ public class GameManager : MonoBehaviour
         PetrifyTimer();
     }
 
+    bool CalculateHouseDestroyed()
+    {
+        int destroyedPoints = 0;
+        for (int i = 0; i < monsterAttackPositions.Length; i++)
+        {
+            if (monsterAttackPositions[i].GetComponent<AttackPoint>().health <= 0)
+            {
+                destroyedPoints++;
+            }
+        }
+        if (destroyedPoints >= 2)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    float CalculateHouseHealth()
+    {
+        temporaryHealthCalculation = 0;
+        for (int i = 0; i < monsterAttackPositions.Length; i++)
+        {
+            temporaryHealthCalculation += monsterAttackPositions[i].GetComponent<AttackPoint>().health;
+        }
+        return (temporaryHealthCalculation);
+    }
     void PetrifyTimer()
     {
         if (playerIsVisible)
@@ -155,6 +188,10 @@ public class GameManager : MonoBehaviour
             {
                 MoveEyeCameraToLocation(monsterEyepositions[3]);
             }
+            else if (Input.GetKeyDown("9"))
+            {
+                MoveEyeCameraToLocation(monsterEyepositions[4]);
+            }
     }
     void MonsterAttackInput()
     {
@@ -195,6 +232,10 @@ public class GameManager : MonoBehaviour
             MoveHumanBlock(monsterEyepositions[2]);
         }
         else if (Input.GetKeyDown("r"))
+        {
+            MoveHumanBlock(monsterEyepositions[3]);
+        }
+        else if (Input.GetKeyDown("a"))
         {
             board.gameObject.transform.position = defaultBarricadePoint.transform.position;
             board.gameObject.transform.rotation = defaultBarricadePoint.transform.rotation;

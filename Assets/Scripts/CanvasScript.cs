@@ -6,6 +6,9 @@ using TMPro;
 
 public class CanvasScript : MonoBehaviour
 {
+
+    [SerializeField] TextMeshProUGUI separateWeakPointText;
+
     [SerializeField] TextMeshProUGUI winText;
     [SerializeField] TextMeshProUGUI monsterAttackText;
 
@@ -31,7 +34,12 @@ public class CanvasScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameManagerScript.petrifyTimer <= 0)
+        separateWeakPointText.text =
+            "Weak point 1: " + gameManagerScript.monsterAttackPositions[0].GetComponent<AttackPoint>().health / gameManagerScript.monsterAttackPositions[0].GetComponent<AttackPoint>().maxHealth+"<br>"+
+            "Weak point 2: " + gameManagerScript.monsterAttackPositions[1].GetComponent<AttackPoint>().health / gameManagerScript.monsterAttackPositions[1].GetComponent<AttackPoint>().maxHealth+ "<br>"+
+            "Weak point 2: " + gameManagerScript.monsterAttackPositions[2].GetComponent<AttackPoint>().health / gameManagerScript.monsterAttackPositions[2].GetComponent<AttackPoint>().maxHealth + "<br>";
+
+        if (gameManagerScript.petrifyTimer <= 0 || gameManagerScript.houseDestroyed)
         {
             winText.enabled = true;
             winText.text = "Monster killed the human";

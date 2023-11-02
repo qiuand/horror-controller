@@ -22,8 +22,8 @@ public class AttackPoint : MonoBehaviour
     float repairAmount=5;
     float repairAmountDebuffed = 5f;
 
-    float maxHealth;
-    float health;
+    public float maxHealth;
+    public float health;
 
     public bool repairing = false;
 
@@ -48,6 +48,10 @@ public class AttackPoint : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (health > maxHealth)
+        {
+            health = maxHealth;
+        }
         healthBar.fillAmount = health / maxHealth;
 
         if (timeUntilCanAttack <= 0 && health>0)
@@ -79,10 +83,14 @@ public class AttackPoint : MonoBehaviour
                 //gameObject.GetComponent<MeshRenderer>().enabled = false;
                 source.PlayOneShot(shatter);
                 timeUntilCanAttack = attackCooldownTime;
-                gameManager.GetComponent<GameManager>().houseHealth -= gameManager.GetComponent<GameManager>().monsterDamage;
+
                 health -= gameManager.GetComponent<GameManager>().monsterDamage;
                 gameManager.GetComponent<GameManager>().monsterDamage = gameManager.GetComponent<GameManager>().minMonsterDamage;
             }
+        }
+        if (health <= 0)
+        {
+            health = 0;
         }
     }
     private void Repair()
