@@ -90,7 +90,7 @@ public class AttackPoint : MonoBehaviour
         }
         if (health <= 0)
         {
-            health = 0;
+            health=0;
         }
     }
     private void Repair()

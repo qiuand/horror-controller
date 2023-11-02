@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] GameObject monsterLight;
+
+    GameObject attachedEyeWall;
 
     public bool houseDestroyed = false;
 
@@ -57,16 +60,15 @@ public class GameManager : MonoBehaviour
 
         monsterAttackCooldownTimer = monsterAttackTimer;
 
-
-
-        for(int i=1; i<Display.displays.Length; i++)
-        {
-            Display.displays[i].Activate();
-        }
         MoveEyeCameraToLocation(monsterEyepositions[monsterEyepositions.Length-1]);
         maxHouseHealth = weakPointHealth * numberOfWeakPoints;
         houseHealth = maxHouseHealth;
         petrifyTimer = timeToPetrify;
+
+        for (int i = 1; i < Display.displays.Length; i++)
+        {
+            Display.displays[i].Activate();
+        }
     }
 
     // Update is called once per frame
@@ -75,25 +77,41 @@ public class GameManager : MonoBehaviour
         houseDestroyed = CalculateHouseDestroyed();
         houseHealth = CalculateHouseHealth();
 
+        CheckIfBoarded();
+        ChargeMonsterDamage();
+        MonsterInput();
+        HumanBlockInput();
+        MonsterAttackInput();
+        PlayerRepairInput();
+        PetrifyTimer();
+
+        if (Input.GetKeyDown("b"))
+        {
+            SceneManager.LoadScene(0);
+        }
+    }
+
+    void CheckIfBoarded()
+    {
+        if (attachedEyeWall && attachedEyeWall.GetComponent<Window>().isBoarded)
+        {
+            monsterLight.SetActive(false);
+        }
+        else
+        {
+            monsterLight.SetActive(true);
+        }
+    }
+    void ChargeMonsterDamage()
+    {
         if (monsterDamage < maxMonsterDamage)
         {
             monsterDamage += Time.deltaTime;
         }
         stabTimer -= Time.deltaTime;
         gameTimer -= Time.deltaTime;
-        monsterAttackCooldownTimer -= Time.deltaTime*1.5f;
-
-        if (Input.GetKeyDown("b"))
-        {
-            SceneManager.LoadScene(0);
-        }
-        MonsterInput();
-        HumanBlockInput();
-        MonsterAttackInput();
-        PlayerRepairInput();
-        PetrifyTimer();
+        monsterAttackCooldownTimer -= Time.deltaTime * 1.5f;
     }
-
     bool CalculateHouseDestroyed()
     {
         int destroyedPoints = 0;
@@ -139,11 +157,17 @@ public class GameManager : MonoBehaviour
     }
     void MoveEyeCameraToLocation(GameObject reference)
     {
+        attachedEyeWall = reference;
         monsterEyeCamera.gameObject.transform.position = reference.transform.position;
         monsterEyeCamera.gameObject.transform.rotation = reference.transform.rotation;
     }
     void MoveHumanBlock(GameObject reference)
     {
+        for (int i = 0; i < monsterEyepositions.Length; i++)
+        {
+            monsterEyepositions[i].GetComponent<Window>().isBoarded = false;
+        }
+        reference.GetComponent<Window>().isBoarded = true;
         GameObject boardPoint = reference.transform.Find("Board Point").gameObject;
         board.gameObject.transform.position = boardPoint.transform.position;
         board.gameObject.transform.rotation = boardPoint.transform.rotation;
