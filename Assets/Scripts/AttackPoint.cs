@@ -68,6 +68,7 @@ public class AttackPoint : MonoBehaviour
 
         if (/*timeUntilCanAttack <= 0 &&*/ health>0)
         {
+            Instantiate(gameManager.GetComponent<GameManager>().monsterExplosion, transform.position, transform.rotation);
 /*            if (isDefended)
             {
                 gameManager.GetComponent<GameManager>().monsterAttackCooldownTimer = 15f;
@@ -97,6 +98,7 @@ public class AttackPoint : MonoBehaviour
     {
         if (repairing && timeUntilCanRepair <= 0 && health < maxHealth)
         {
+            Instantiate(gameManager.GetComponent<GameManager>().sparks, transform.position, transform.rotation);
             repairSource.enabled = true;
             timeUntilCanRepair = repairCooldownTime;
             if (gameManager.GetComponent<GameManager>().playerIsVisible)
