@@ -7,9 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject sparks;
-    public GameObject monsterExplosion;
-
     [SerializeField] GameObject monsterLight;
 
     GameObject attachedEyeWall;
