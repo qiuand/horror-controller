@@ -801,7 +801,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4951028202031025674}
   m_LocalRotation: {x: 0.70710576, y: -0, z: -0, w: 0.7071079}
-  m_LocalPosition: {x: 0, y: 0, z: -1.50003}
+  m_LocalPosition: {x: 0, y: 0, z: -2.50005}
   m_LocalScale: {x: 0.009861633, y: 0.009861633, z: 0.009861633}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -980,7 +980,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5914626699628279535}
   m_LocalRotation: {x: 0.70710576, y: -0, z: -0, w: 0.7071079}
-  m_LocalPosition: {x: 0, y: 0, z: -1.50003}
+  m_LocalPosition: {x: 0, y: 0, z: -3.00006}
   m_LocalScale: {x: 0.009861633, y: 0.009861633, z: 0.009861633}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1242,7 +1242,7 @@ GameObject:
   - component: {fileID: 1538492984151379159}
   - component: {fileID: 5580595497105303164}
   m_Layer: 0
-  m_Name: Sprite
+  m_Name: Monster Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1256,7 +1256,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7875721011021007106}
   m_LocalRotation: {x: 0.5, y: -0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: 0.00000023842, y: 1.00002, z: -0.50001}
+  m_LocalPosition: {x: 0.00000023842, y: 1.00002, z: -1.50003}
   m_LocalScale: {x: 0.2350492, y: 0.2350492, z: 0.2350492}
   m_ConstrainProportionsScale: 0
   m_Children: []
