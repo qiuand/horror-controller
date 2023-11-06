@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+
     public GameObject sparks;
     public GameObject monsterExplosion;
 
@@ -43,7 +44,7 @@ public class GameManager : MonoBehaviour
 
     public float monsterDamage;
 
-    public float minMonsterDamage = 1;
+    public float minMonsterDamage = 0;
     float maxMonsterDamage = 10;
 
     float temporaryHealthCalculation=0;
@@ -174,6 +175,8 @@ public class GameManager : MonoBehaviour
         GameObject boardPoint = reference.transform.Find("Board Point").gameObject;
         board.gameObject.transform.position = boardPoint.transform.position;
         board.gameObject.transform.rotation = boardPoint.transform.rotation;
+        Instantiate(sparks, boardPoint.transform.position, boardPoint.transform.rotation);
+        board.GetComponent<Board>().PlaySound();
     }
     void MoveHumanRepair(GameObject reference)
     {

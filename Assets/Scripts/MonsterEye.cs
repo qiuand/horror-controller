@@ -23,6 +23,7 @@ public class MonsterEye : MonoBehaviour
         Debug.DrawRay(transform.position, player.transform.position - transform.position, Color.green);
         if(Physics.Raycast(transform.position, player.transform.position-transform.position, out hit))
         {
+            print(hit.collider.gameObject);
             if (hit.collider.gameObject.tag == "Player")
             {
                 gameManager.GetComponent<GameManager>().playerIsVisible = true; 
@@ -32,5 +33,9 @@ public class MonsterEye : MonoBehaviour
                 gameManager.GetComponent<GameManager>().playerIsVisible = false;
             }
         }
+    }
+    void GoToTarget()
+    {
+
     }
 }
