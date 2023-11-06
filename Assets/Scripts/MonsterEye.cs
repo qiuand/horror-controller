@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class MonsterEye : MonoBehaviour
 {
+    AudioSource src;
+    [SerializeField] AudioClip move;
+
     GameObject gameManager;
 
     GameObject player;
@@ -11,6 +14,7 @@ public class MonsterEye : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        src = GetComponent<AudioSource>();
         gameManager = GameObject.FindGameObjectWithTag("Game Manager");
         player = GameObject.FindGameObjectWithTag("Player");
         playerRenderer = player.gameObject.GetComponent<MeshRenderer>();
@@ -33,6 +37,11 @@ public class MonsterEye : MonoBehaviour
                 gameManager.GetComponent<GameManager>().playerIsVisible = false;
             }
         }
+    }
+
+    public void playSound()
+    {
+        src.PlayOneShot(move);
     }
     void GoToTarget()
     {

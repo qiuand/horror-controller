@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    AudioSource src;
+    [SerializeField] AudioClip scream;
     // Start is called before the first frame update
     void Start()
     {
-        
+        src = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+    public void playSound()
+    {
+        src.PlayOneShot(scream);
     }
 }

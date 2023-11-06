@@ -5,4 +5,6 @@ https://freesound.org/people/darcyadam/sounds/634265/
 https://freesound.org/people/Andromadax24/sounds/178350/
 https://freesound.org/people/mitchanary/sounds/505121/
 https://freesound.org/people/darcyadam/sounds/634265/
+https://freesound.org/people/d.n.audio.uk/sounds/461049/
+https://freesound.org/people/tcrocker68/sounds/235592/
 */

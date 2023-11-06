@@ -7,7 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-
+    public static string whoWon = "";
+    public GameObject tail;
     public GameObject sparks;
     public GameObject monsterExplosion;
 
@@ -24,6 +25,8 @@ public class GameManager : MonoBehaviour
     public float monsterHealth;
     public float monsterAttackTimer = 2.0f;
     public float monsterAttackCooldownTimer;
+
+    bool visibleFlag;
 
     public float gameTimer = 120f;
 
@@ -56,6 +59,10 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] GameObject defaultBarricadePoint;
 
+    private void Awake()
+    {
+
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -78,6 +85,8 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        CheckWin();
         houseDestroyed = CalculateHouseDestroyed();
         houseHealth = CalculateHouseHealth();
 
@@ -94,7 +103,19 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene(0);
         }
     }
-
+    void CheckWin()
+    {
+        if (petrifyTimer <= 0 || CalculateHouseDestroyed())
+        {
+            whoWon = "Monster Victory";
+            SceneManager.LoadScene(1);
+        }
+        else if (gameTimer <= 0)
+        {
+            whoWon = "Human Victory";
+            SceneManager.LoadScene(1);
+        }
+    }
     void CheckIfBoarded()
     {
         if (attachedEyeWall && attachedEyeWall.GetComponent<Window>().isBoarded)
@@ -148,10 +169,16 @@ public class GameManager : MonoBehaviour
     {
         if (playerIsVisible)
         {
+            if (!visibleFlag)
+            {
+                player.GetComponent<Player>().playSound();
+            }
+            visibleFlag = true;
             petrifyTimer -= Time.deltaTime;
         }
         else if (petrifyTimer < timeToPetrify)
         {
+            visibleFlag = false;
             petrifyTimer += Time.deltaTime;
         }
         if (petrifyTimer <= 0)
@@ -161,6 +188,7 @@ public class GameManager : MonoBehaviour
     }
     void MoveEyeCameraToLocation(GameObject reference)
     {
+        monsterEyeCamera.GetComponent<MonsterEye>().playSound();
         attachedEyeWall = reference;
         monsterEyeCamera.gameObject.transform.position = reference.transform.position;
         monsterEyeCamera.gameObject.transform.rotation = reference.transform.rotation;
@@ -229,14 +257,17 @@ public class GameManager : MonoBehaviour
         {
             if (Input.GetKeyDown("2"))
             {
+                MoveMonsterTail(monsterAttackPositions[0]);
                 monsterAttackPositions[0].GetComponent<AttackPoint>().OnHit();
             }
             else if (Input.GetKeyDown("3"))
             {
+                MoveMonsterTail(monsterAttackPositions[1]);
                 monsterAttackPositions[1].GetComponent<AttackPoint>().OnHit();
             }
             else if (Input.GetKeyDown("1"))
             {
+                MoveMonsterTail(monsterAttackPositions[2]);
                 monsterAttackPositions[2].GetComponent<AttackPoint>().OnHit();
             }
             else if (Input.GetKeyDown("4"))
@@ -244,6 +275,11 @@ public class GameManager : MonoBehaviour
 
             }
         }
+    }
+    void MoveMonsterTail(GameObject reference)
+    {
+        tail.transform.position = reference.transform.position;
+        tail.transform.rotation = reference.transform.rotation;
     }
 
     //Human block
