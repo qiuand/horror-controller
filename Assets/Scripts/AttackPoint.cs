@@ -96,7 +96,7 @@ public class AttackPoint : MonoBehaviour
     }
     private void Repair()
     {
-        if (repairing && timeUntilCanRepair <= 0 && health < maxHealth)
+        if (repairing && timeUntilCanRepair <= 0 && health < maxHealth && health>0)
         {
             Instantiate(gameManager.GetComponent<GameManager>().sparks, transform.position, transform.rotation);
             repairSource.enabled = true;

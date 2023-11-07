@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI petrifyText;
 
-    float timeToPetrify=5f;
+    public float timeToPetrify=5f;
     public float petrifyTimer;
 
     public GameObject board;
@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
     public float monsterDamage;
 
     public float minMonsterDamage = 0;
-    float maxMonsterDamage = 10;
+    public float maxMonsterDamage = 10;
 
     float temporaryHealthCalculation=0;
 
@@ -131,11 +131,11 @@ public class GameManager : MonoBehaviour
     {
         if (monsterDamage < maxMonsterDamage)
         {
-            monsterDamage += Time.deltaTime;
+            monsterDamage += Time.deltaTime*2;
         }
         stabTimer -= Time.deltaTime;
         gameTimer -= Time.deltaTime;
-        monsterAttackCooldownTimer -= Time.deltaTime * 1.5f;
+        monsterAttackCooldownTimer -= Time.deltaTime * 1f;
     }
     bool CalculateHouseDestroyed()
     {

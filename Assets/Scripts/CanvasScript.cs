@@ -6,7 +6,6 @@ using TMPro;
 
 public class CanvasScript : MonoBehaviour
 {
-
     [SerializeField] TextMeshProUGUI separateWeakPointText;
 
     [SerializeField] TextMeshProUGUI winText;
@@ -16,6 +15,8 @@ public class CanvasScript : MonoBehaviour
 
     [SerializeField] Image monsterHealthBar;
     [SerializeField] Image healthBar;
+    [SerializeField] Image petrifyBar;
+    [SerializeField] Image chargeBar;
 
     [SerializeField] TextMeshProUGUI integrityText
         ;
@@ -57,10 +58,12 @@ public class CanvasScript : MonoBehaviour
         {
             stabImage.enabled = false;
         }
+        chargeBar.fillAmount=gameManagerScript.monsterDamage/gameManagerScript.maxMonsterDamage;
+        petrifyBar.fillAmount=gameManagerScript.petrifyTimer/gameManagerScript.timeToPetrify;
         monsterHealthBar.fillAmount = gameManagerScript.monsterHealth / gameManagerScript.monsterMaxHealth;
         monsterAttackText.text = "Attack Strength: " + System.Math.Round(gameManagerScript.monsterDamage);
         integrityText.text = "House Integrity: " + System.Math.Round((gameManagerScript.houseHealth / gameManagerScript.maxHouseHealth)*100)+"%";
-        timerText.text = "" + System.Math.Round(gameManagerScript.gameTimer, 2)+" seconds left!";
+        timerText.text = "" + System.Math.Round(gameManagerScript.gameTimer, 0)+" seconds left!";
         healthBar.fillAmount = gameManagerScript.houseHealth / gameManagerScript.maxHouseHealth;
 
         if (gameManagerScript.playerIsVisible)

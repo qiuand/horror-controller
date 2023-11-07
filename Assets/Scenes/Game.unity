@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: efd1c33efd2d58340b88804268e6833f, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 2039a0ad0a9d05549928b70362f54902, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -387,7 +387,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh91978
+  m_Name: pb_Mesh80416
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1291,7 +1291,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29130
+  m_Name: pb_Mesh42076
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -31960,6 +31960,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall Point (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1952045988060480038, guid: 96a551b12e3e4314f885185ee66523c7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.23
+      objectReference: {fileID: 0}
+    - target: {fileID: 1952045988060480038, guid: 96a551b12e3e4314f885185ee66523c7, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 1.02
+      objectReference: {fileID: 0}
     - target: {fileID: 2319421771059274350, guid: 96a551b12e3e4314f885185ee66523c7, type: 3}
       propertyPath: m_text
       value: T
@@ -34439,8 +34447,8 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.6461374, g: 0.71306515, b: 0.8301887, a: 1}
-  m_Intensity: 1.01
+  m_Color: {r: 0.6065326, g: 0.69012374, b: 0.8867924, a: 1}
+  m_Intensity: 0.48
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -41992,7 +42000,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh91434
+  m_Name: pb_Mesh39948
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -43748,7 +43756,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 9.45
+  orthographic size: 12.2
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -43772,7 +43780,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1222814103}
   m_LocalRotation: {x: 0.0013790615, y: 0.70710295, z: -0.7071079, w: 0.0013831055}
-  m_LocalPosition: {x: -9.000179, y: 34.00068, z: 57.00114}
+  m_LocalPosition: {x: -9, y: 34.00068, z: 57.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -46043,7 +46051,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1589742176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46501,7 +46509,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1651334138}
   m_LocalRotation: {x: -0, y: 0.70710576, z: -0, w: 0.70710784}
-  m_LocalPosition: {x: -0.11304283, y: -0.000000029802322, z: -0.7572521}
+  m_LocalPosition: {x: 0.02673968, y: -0.025317369, z: -0.61752194}
   m_LocalScale: {x: 1.6747, y: 1, z: 0.5971219}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -46565,7 +46573,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1667396459}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.50011, y: 27.000542, z: 51.001022}
+  m_LocalPosition: {x: 4.307, y: 28.388, z: 49.04}
   m_LocalScale: {x: 4.4231906, y: 2.6411839, z: 2.6411839}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -48402,6 +48410,7 @@ MonoBehaviour:
   monsterAttackCooldownTimer: 0
   gameTimer: 120
   petrifyText: {fileID: 1333259128}
+  timeToPetrify: 5
   petrifyTimer: 0
   board: {fileID: 1688087715}
   player: {fileID: 157790798}
@@ -48411,6 +48420,7 @@ MonoBehaviour:
   houseHealth: 0
   monsterDamage: 10
   minMonsterDamage: 0
+  maxMonsterDamage: 10
   playerIsVisible: 0
   monsterEyepositions:
   - {fileID: 1995815056}
