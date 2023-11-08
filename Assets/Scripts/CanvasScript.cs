@@ -64,7 +64,7 @@ public class CanvasScript : MonoBehaviour
         monsterAttackText.text = "Attack Strength: " + System.Math.Round(gameManagerScript.monsterDamage);
         integrityText.text = "House Integrity: " + System.Math.Round((gameManagerScript.houseHealth / gameManagerScript.maxHouseHealth)*100)+"%";
         timerText.text = "" + System.Math.Round(gameManagerScript.gameTimer, 0)+" seconds left!";
-        healthBar.fillAmount = gameManagerScript.houseHealth / gameManagerScript.maxHouseHealth;
+        healthBar.fillAmount = (gameManagerScript.houseHealth / gameManagerScript.maxHouseHealth);
 
         if (gameManagerScript.playerIsVisible)
         {

@@ -7,6 +7,7 @@ using TMPro;
 public class AttackPoint : MonoBehaviour
 {
     [SerializeField] Image healthBar;
+    [SerializeField] Image humanHealthBar;
 
     float monsterDamage=50;
     public float monsterHealth;
@@ -53,6 +54,7 @@ public class AttackPoint : MonoBehaviour
             health = maxHealth;
         }
         healthBar.fillAmount = health / maxHealth;
+        humanHealthBar.fillAmount = health / maxHealth;
 
         if (timeUntilCanAttack <= 0 && health>0)
         {
