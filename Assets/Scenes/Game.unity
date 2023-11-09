@@ -3032,7 +3032,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &198366216
 Transform:
   m_ObjectHideFlags: 0
@@ -49680,7 +49680,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1015
+    m_Bits: 3063
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 7398a449ddf17ba4d8bee1ea2ecb7a39, type: 2}
   m_TargetDisplay: 0
@@ -61778,7 +61778,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1589742176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65786,7 +65786,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1775902479
 Transform:
   m_ObjectHideFlags: 0
