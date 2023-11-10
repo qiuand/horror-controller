@@ -56,6 +56,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject[] monsterEyepositions= new GameObject[4];
     public  GameObject[] monsterAttackPositions;
+    [SerializeField] GameObject monsterEyeCamUI;
 
     [SerializeField] GameObject defaultBarricadePoint;
 
@@ -66,6 +67,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        monsterEyeCamUI.SetActive(false);
         monsterDamage = minMonsterDamage;
         monsterHealth = monsterMaxHealth;
 
@@ -232,22 +234,36 @@ public class GameManager : MonoBehaviour
     {
             if (Input.GetKeyDown("5"))
             {
+                monsterEyeCamUI.SetActive(true);
                 MoveEyeCameraToLocation(monsterEyepositions[0]);
             }
             else if (Input.GetKeyDown("7"))
             {
+                monsterEyeCamUI.SetActive(true);
                 MoveEyeCameraToLocation(monsterEyepositions[1]);
             }
             else if (Input.GetKeyDown("6"))
             {
+                monsterEyeCamUI.SetActive(true);
                 MoveEyeCameraToLocation(monsterEyepositions[2]);
             }
             else if (Input.GetKeyDown("8"))
             {
+                monsterEyeCamUI.SetActive(true);
                 MoveEyeCameraToLocation(monsterEyepositions[3]);
             }
-            else if (Input.GetKeyDown("9"))
+            /*else if (Input.GetKeyDown("9"))
             {
+                MoveEyeCameraToLocation(monsterEyepositions[4]);
+            }*/
+            else if (
+                Input.GetKeyUp("5")||
+                Input.GetKeyUp("6")||
+                Input.GetKeyUp("7")||
+                Input.GetKeyUp("8")
+            )
+            {
+                monsterEyeCamUI.SetActive(false);
                 MoveEyeCameraToLocation(monsterEyepositions[4]);
             }
     }
