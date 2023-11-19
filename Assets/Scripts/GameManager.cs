@@ -9,12 +9,17 @@ public class GameManager : MonoBehaviour
 {
     public GameObject monsterHUD;
 
+    [SerializeField] AudioSource heartbeat;
+
+    float elapsedLerpTime;
+
     string currentPlayerPosition = null;
     public static string whoWon = "";
     public GameObject tail;
     public GameObject sparks;
     public GameObject monsterExplosion;
 
+    Vector3 startLerpPosition;
 /*    [SerializeField] GameObject monsterLight;*/
 
     GameObject attachedEyeWall;
@@ -103,6 +108,8 @@ public class GameManager : MonoBehaviour
         ChargeMonsterDamage();
         MonsterInput();
         HumanBlockInput();
+        LerpMonsterPosition();
+
         if (timeUntilNextAttack <= 0)
         {
             MonsterAttackInput();
@@ -181,16 +188,18 @@ public class GameManager : MonoBehaviour
     {
         if (playerIsVisible)
         {
-            if (!visibleFlag)
-            {
-                player.GetComponent<Player>().playSound();
-            }
-            visibleFlag = true;
+            heartbeat.enabled = true;
+            /*            if (!visibleFlag)
+                        {
+                            player.GetComponent<Player>().playSound();
+                        }
+                        visibleFlag = true;*/
             petrifyTimer -= Time.deltaTime;
         }
         else if (petrifyTimer < timeToPetrify)
         {
-            visibleFlag = false;
+            heartbeat.enabled = false;
+            /*            visibleFlag = false;*/
             petrifyTimer += Time.deltaTime;
         }
         if (petrifyTimer <= 0)
@@ -224,6 +233,7 @@ public class GameManager : MonoBehaviour
     }
     void MoveHumanRepair(GameObject reference)
     {
+        player.GetComponent<Player>().Move();
         for (int i = 0; i < monsterAttackPositions.Length; i++)
         {
             monsterAttackPositions[i].GetComponent<AttackPoint>().isDefended = false;
@@ -249,29 +259,34 @@ public class GameManager : MonoBehaviour
             if (Input.GetKeyDown("5"))
             {
                 monsterHUD.SetActive(true);
-                MoveEyeCameraToLocation(monsterEyepositions[0]);
+                changeLerpTarget(monsterEyepositions[0]);
+/*              MoveEyeCameraToLocation(monsterEyepositions[0]);*/
             }
             else if (Input.GetKeyDown("9"))
             {
                 monsterHUD.SetActive(true);
-                MoveEyeCameraToLocation(monsterEyepositions[1]);
+                changeLerpTarget(monsterEyepositions[1]);
+                /*MoveEyeCameraToLocation(monsterEyepositions[1]);*/
             }
             else if (Input.GetKeyDown("7"))
             {
                 monsterHUD.SetActive(true);
-                MoveEyeCameraToLocation(monsterEyepositions[2]);
+                changeLerpTarget(monsterEyepositions[2]);
+                /*MoveEyeCameraToLocation(monsterEyepositions[2]);*/
             }
             else if (Input.GetKeyDown("6"))
             {
                 monsterHUD.SetActive(true);
-                MoveEyeCameraToLocation(monsterEyepositions[3]);
+                changeLerpTarget(monsterEyepositions[3]);
+            /*                MoveEyeCameraToLocation(monsterEyepositions[3]);*/
             }
             else if (Input.GetKeyDown("8"))
             {
-                monsterHUD.SetActive(false);
-                MoveEyeCameraToLocation(monsterEyepositions[4]);
+                monsterHUD.SetActive(true);
+                changeLerpTarget(monsterEyepositions[4]);
+            /*                MoveEyeCameraToLocation(monsterEyepositions[4]);*/
             }
-    }
+        }
     void MonsterAttackInput()
     {
         if (/*monsterAttackCooldownTimer <= 0*/ true)
@@ -357,5 +372,24 @@ public class GameManager : MonoBehaviour
         {
 
         }
+    }
+    void changeLerpTarget(GameObject reference)
+    {
+        monsterEyeCamera.GetComponent<MonsterEye>().playSound();
+        if (attachedEyeWall)
+        {
+            attachedEyeWall.GetComponent<Window>().windowLight.SetActive(false);
+        }
+        elapsedLerpTime = 0;
+        startLerpPosition = monsterEyeCamera.transform.position;
+        attachedEyeWall = reference;
+        attachedEyeWall.GetComponent<Window>().windowLight.SetActive(true);
+    }
+    void LerpMonsterPosition()
+    {
+        elapsedLerpTime += Time.deltaTime;
+        float percentageComplete = elapsedLerpTime / 0.5f;
+        monsterEyeCamera.transform.position = Vector3.Lerp(monsterEyeCamera.transform.position, attachedEyeWall.transform.position, (Mathf.SmoothStep(0, 1, percentageComplete)));
+        monsterEyeCamera.transform.rotation = Quaternion.Lerp(monsterEyeCamera.transform.rotation, attachedEyeWall.transform.rotation, (Mathf.SmoothStep(0, 1, percentageComplete)));
     }
 }
