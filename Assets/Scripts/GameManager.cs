@@ -7,13 +7,15 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public GameObject monsterHUD;
+
     string currentPlayerPosition = null;
     public static string whoWon = "";
     public GameObject tail;
     public GameObject sparks;
     public GameObject monsterExplosion;
 
-    [SerializeField] GameObject monsterLight;
+/*    [SerializeField] GameObject monsterLight;*/
 
     GameObject attachedEyeWall;
 
@@ -24,7 +26,7 @@ public class GameManager : MonoBehaviour
 
     public float monsterMaxHealth = 100;
     public float monsterHealth;
-    public float monsterAttackTimer = 2.0f;
+    public float monsterAttackTimer = 0.5f;
     public float monsterAttackCooldownTimer;
 
     bool visibleFlag;
@@ -58,6 +60,9 @@ public class GameManager : MonoBehaviour
     public GameObject[] monsterEyepositions= new GameObject[4];
     public  GameObject[] monsterAttackPositions;
 
+    float originalTimeUntilNextAttack=0.5f;
+    float timeUntilNextAttack;
+
     [SerializeField] GameObject defaultBarricadePoint;
 
     private void Awake()
@@ -67,6 +72,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        timeUntilNextAttack = originalTimeUntilNextAttack;
+
         monsterDamage = minMonsterDamage;
         monsterHealth = monsterMaxHealth;
 
@@ -86,6 +93,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        timeUntilNextAttack -= Time.deltaTime;
 
         CheckWin();
         houseDestroyed = CalculateHouseDestroyed();
@@ -95,7 +103,10 @@ public class GameManager : MonoBehaviour
         ChargeMonsterDamage();
         MonsterInput();
         HumanBlockInput();
-        MonsterAttackInput();
+        if (timeUntilNextAttack <= 0)
+        {
+            MonsterAttackInput();
+        }
         PlayerRepairInput();
         PetrifyTimer();
 
@@ -121,11 +132,11 @@ public class GameManager : MonoBehaviour
     {
         if (attachedEyeWall && attachedEyeWall.GetComponent<Window>().isBoarded)
         {
-            monsterLight.SetActive(false);
+            attachedEyeWall.GetComponent<Window>().windowLight.SetActive(false);
         }
         else
         {
-            monsterLight.SetActive(true);
+            attachedEyeWall.GetComponent<Window>().windowLight.SetActive(true);
         }
     }
     void ChargeMonsterDamage()
@@ -189,6 +200,10 @@ public class GameManager : MonoBehaviour
     }
     void MoveEyeCameraToLocation(GameObject reference)
     {
+        if (attachedEyeWall)
+        {
+            attachedEyeWall.GetComponent<Window>().windowLight.SetActive(false);
+        }
         monsterEyeCamera.GetComponent<MonsterEye>().playSound();
         attachedEyeWall = reference;
         monsterEyeCamera.gameObject.transform.position = reference.transform.position;
@@ -233,22 +248,27 @@ public class GameManager : MonoBehaviour
     {
             if (Input.GetKeyDown("5"))
             {
+                monsterHUD.SetActive(true);
                 MoveEyeCameraToLocation(monsterEyepositions[0]);
             }
             else if (Input.GetKeyDown("9"))
             {
+                monsterHUD.SetActive(true);
                 MoveEyeCameraToLocation(monsterEyepositions[1]);
             }
             else if (Input.GetKeyDown("7"))
             {
+                monsterHUD.SetActive(true);
                 MoveEyeCameraToLocation(monsterEyepositions[2]);
             }
             else if (Input.GetKeyDown("6"))
             {
+                monsterHUD.SetActive(true);
                 MoveEyeCameraToLocation(monsterEyepositions[3]);
             }
             else if (Input.GetKeyDown("8"))
             {
+                monsterHUD.SetActive(false);
                 MoveEyeCameraToLocation(monsterEyepositions[4]);
             }
     }
@@ -279,6 +299,7 @@ public class GameManager : MonoBehaviour
     }
     void MoveMonsterTail(GameObject reference)
     {
+        timeUntilNextAttack = originalTimeUntilNextAttack;
         tail.transform.position = reference.transform.position;
         tail.transform.rotation = reference.transform.rotation;
     }
