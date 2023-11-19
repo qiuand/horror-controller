@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    string currentPlayerPosition = null;
     public static string whoWon = "";
     public GameObject tail;
     public GameObject sparks;
@@ -308,17 +309,26 @@ public class GameManager : MonoBehaviour
         }
     }
     //Player repair
+    bool ValidatePlayerPosition(string current)
+    {
+        if (currentPlayerPosition != current)
+        {
+            currentPlayerPosition = current;
+            return true;
+        }
+        return false;
+    }
     void PlayerRepairInput()
     {
-        if (Input.GetKeyDown("u"))
+        if (Input.GetKeyDown("u") && ValidatePlayerPosition("u"))
         {
             MoveHumanRepair(monsterAttackPositions[0]);
         }
-        else if (Input.GetKeyDown("t"))
+        else if (Input.GetKeyDown("t") && ValidatePlayerPosition("t"))
         {
             MoveHumanRepair(monsterAttackPositions[1]);
         }
-        else if (Input.GetKeyDown("y"))
+        else if (Input.GetKeyDown("y") && ValidatePlayerPosition("y"))
         {
             MoveHumanRepair(monsterAttackPositions[2]);
         }
