@@ -234,19 +234,19 @@ public class GameManager : MonoBehaviour
             {
                 MoveEyeCameraToLocation(monsterEyepositions[0]);
             }
-            else if (Input.GetKeyDown("7"))
+            else if (Input.GetKeyDown("9"))
             {
                 MoveEyeCameraToLocation(monsterEyepositions[1]);
             }
-            else if (Input.GetKeyDown("6"))
+            else if (Input.GetKeyDown("7"))
             {
                 MoveEyeCameraToLocation(monsterEyepositions[2]);
             }
-            else if (Input.GetKeyDown("8"))
+            else if (Input.GetKeyDown("6"))
             {
                 MoveEyeCameraToLocation(monsterEyepositions[3]);
             }
-            else if (Input.GetKeyDown("9"))
+            else if (Input.GetKeyDown("8"))
             {
                 MoveEyeCameraToLocation(monsterEyepositions[4]);
             }
@@ -260,12 +260,12 @@ public class GameManager : MonoBehaviour
                 MoveMonsterTail(monsterAttackPositions[0]);
                 monsterAttackPositions[0].GetComponent<AttackPoint>().OnHit();
             }
-            else if (Input.GetKeyDown("3"))
+            else if (Input.GetKeyDown("1"))
             {
                 MoveMonsterTail(monsterAttackPositions[1]);
                 monsterAttackPositions[1].GetComponent<AttackPoint>().OnHit();
             }
-            else if (Input.GetKeyDown("1"))
+            else if (Input.GetKeyDown("3"))
             {
                 MoveMonsterTail(monsterAttackPositions[2]);
                 monsterAttackPositions[2].GetComponent<AttackPoint>().OnHit();
@@ -285,23 +285,23 @@ public class GameManager : MonoBehaviour
     //Human block
     void HumanBlockInput()
     {
-        if (Input.GetKeyDown("w"))
+        if (Input.GetKeyDown("q"))
         {
             MoveHumanBlock(monsterEyepositions[0]);
         }
-        else if (Input.GetKeyDown("q"))
+        else if (Input.GetKeyDown(KeyCode.Tab))
         {
             MoveHumanBlock(monsterEyepositions[1]);
         }
-        else if (Input.GetKeyDown("e"))
+        else if (Input.GetKeyDown("w"))
         {
             MoveHumanBlock(monsterEyepositions[2]);
         }
-        else if (Input.GetKeyDown("r"))
+        else if (Input.GetKeyDown("e"))
         {
             MoveHumanBlock(monsterEyepositions[3]);
         }
-        else if (Input.GetKeyDown("a"))
+        else if (Input.GetKeyDown("r"))
         {
             board.gameObject.transform.position = defaultBarricadePoint.transform.position;
             board.gameObject.transform.rotation = defaultBarricadePoint.transform.rotation;
@@ -310,15 +310,15 @@ public class GameManager : MonoBehaviour
     //Player repair
     void PlayerRepairInput()
     {
-        if (Input.GetKeyDown("y"))
+        if (Input.GetKeyDown("u"))
         {
             MoveHumanRepair(monsterAttackPositions[0]);
         }
-        else if (Input.GetKeyDown("u"))
+        else if (Input.GetKeyDown("t"))
         {
             MoveHumanRepair(monsterAttackPositions[1]);
         }
-        else if (Input.GetKeyDown("t"))
+        else if (Input.GetKeyDown("y"))
         {
             MoveHumanRepair(monsterAttackPositions[2]);
         }
