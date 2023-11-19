@@ -340,6 +340,10 @@ public class GameManager : MonoBehaviour
         }
         else if (Input.GetKeyDown("r"))
         {
+            for (int i = 0; i < monsterEyepositions.Length; i++)
+            {
+                monsterEyepositions[i].GetComponent<Window>().isBoarded = false;
+            }
             board.gameObject.transform.position = defaultBarricadePoint.transform.position;
             board.gameObject.transform.rotation = defaultBarricadePoint.transform.rotation;
         }
