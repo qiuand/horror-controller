@@ -166,7 +166,7 @@ public class GameManager : MonoBehaviour
                 destroyedPoints++;
             }
         }
-        if (destroyedPoints >= 2)
+        if (destroyedPoints >= 1)
         {
             return true;
         }
