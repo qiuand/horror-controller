@@ -143,7 +143,7 @@ public class GameManager : MonoBehaviour
             whoWon = "Monster Victory";
             SceneManager.LoadScene(1);
         }
-        else if (gameTimer <= 0)
+        else if (gameTimer >= gameTimerMax)
         {
             whoWon = "Human Victory";
             SceneManager.LoadScene(1);

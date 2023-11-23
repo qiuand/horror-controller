@@ -18,7 +18,7 @@ public class AttackPoint : MonoBehaviour
     float attackCooldownTime = 1f;
 
     float timeUntilCanRepair = 0f;
-    float repairCooldownTime = 2f;
+    float repairCooldownTime = 1f;
 
     float repairAmount=5;
     float repairAmountDebuffed = 5f;

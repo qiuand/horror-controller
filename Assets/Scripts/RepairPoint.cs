@@ -16,17 +16,17 @@ public class RepairPoint : MonoBehaviour
     {
         
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
         print(1);
-        if (collision.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player")
         {
             parent.GetComponent<AttackPoint>().repairing = true;
         }
     }
-    private void OnCollisionExit(Collision collision)
+    private void OnTriggerExit(Collider other)
     {
-        if (collision.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player")
         {
             parent.GetComponent<AttackPoint>().repairing = false;
             parent.GetComponent<AttackPoint>().repairSource.enabled = false;
