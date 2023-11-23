@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
 
     string currentPlayerPosition = null;
     public static string whoWon = "";
+    public static string cause = "";
     public GameObject tail;
     public GameObject sparks;
     public GameObject monsterExplosion;
@@ -141,12 +142,21 @@ public class GameManager : MonoBehaviour
         if (petrifyTimer <= 0 || CalculateHouseDestroyed())
         {
             whoWon = "Monster Victory";
-            SceneManager.LoadScene(1);
+            if (CalculateHouseDestroyed())
+            {
+                cause = "Cause: House Obliterated";
+            }
+            else
+            {
+                cause = "Cause: Lethal Gaze";
+            }
+            StartCoroutine(LoadGameOver());
         }
         else if (gameTimer >= gameTimerMax)
         {
+            cause = "Cause: Monster Ran Out of Time";
             whoWon = "Human Victory";
-            SceneManager.LoadScene(1);
+            StartCoroutine(LoadGameOver());
         }
     }
     void CheckIfBoarded()
@@ -169,7 +179,7 @@ public class GameManager : MonoBehaviour
         stabTimer -= Time.deltaTime;
         monsterAttackCooldownTimer -= Time.deltaTime * 1f;
     }
-    bool CalculateHouseDestroyed()
+    public bool CalculateHouseDestroyed()
     {
         int destroyedPoints = 0;
         for (int i = 0; i < monsterAttackPositions.Length; i++)
@@ -408,5 +418,10 @@ public class GameManager : MonoBehaviour
         float percentageComplete = elapsedLerpTime / 0.5f;
         monsterEyeCamera.transform.position = Vector3.Lerp(monsterEyeCamera.transform.position, attachedEyeWall.transform.position, (Mathf.SmoothStep(0, 1, percentageComplete)));
         monsterEyeCamera.transform.rotation = Quaternion.Lerp(monsterEyeCamera.transform.rotation, attachedEyeWall.transform.rotation, (Mathf.SmoothStep(0, 1, percentageComplete)));
+    }
+    IEnumerator LoadGameOver()
+    {
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene(1);
     }
 }

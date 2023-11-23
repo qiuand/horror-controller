@@ -43,7 +43,12 @@ public class CanvasScript : MonoBehaviour
         if (gameManagerScript.gameTimer >= 21600f)
         {
             winText.enabled = true;
-            winText.text = "Human won";
+            winText.text = "Human Won";
+        }
+        else if(gameManagerScript.petrifyTimer<=0 || gameManagerScript.CalculateHouseDestroyed())
+        {
+            winText.enabled = true;
+            winText.text = "Monster Won";
         }
         if (gameManagerScript.stabTimer > 0)
         {
@@ -60,11 +65,11 @@ public class CanvasScript : MonoBehaviour
         integrityText.text = "House Integrity: " + System.Math.Round((gameManagerScript.houseHealth / gameManagerScript.maxHouseHealth)*100)+"%";
 
         timerText.text = gameManagerScript.timerString+"AM";
-        if (gameManagerScript.gameTimer>=gameManagerScript.gameTimerMax/2){
-            timerText.color=new Color(255,255,0);
+        if (gameManagerScript.gameTimer >= (gameManagerScript.gameTimerMax * (5/6f))){
+            timerText.color = new Color(255, 0, 0);
         }
-        else if(gameManagerScript.gameTimer>=gameManagerScript.gameTimerMax/(2/3)){
-            timerText.color=new Color(255,0,0);
+        else if(gameManagerScript.gameTimer>=(gameManagerScript.gameTimerMax/2)){
+            timerText.color = new Color(255, 255, 0);
         }
         healthBar.fillAmount = (gameManagerScript.houseHealth / gameManagerScript.maxHouseHealth);
 

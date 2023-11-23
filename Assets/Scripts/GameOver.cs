@@ -13,8 +13,8 @@ public class GameOver : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        whoWonText.text = GameManager.whoWon;
-        if(string.Compare(whoWonText.text, "Monster Victory")==0){
+        whoWonText.text = GameManager.whoWon+"<br><size=16>" + GameManager.cause;
+        if(string.Compare(whoWonText.text, "Monster Victory")==1){
             monsterPicture.SetActive(true);
         }
         else
