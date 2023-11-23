@@ -39410,6 +39410,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1311641927833058806, guid: f6714174f8bb8184eb08e99354ed3c12, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1879008552520188209, guid: f6714174f8bb8184eb08e99354ed3c12, type: 3}
       propertyPath: m_Name
       value: Human Canvas
