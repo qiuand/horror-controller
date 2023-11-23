@@ -40,12 +40,7 @@ public class CanvasScript : MonoBehaviour
             "Weak point 2: " + gameManagerScript.monsterAttackPositions[1].GetComponent<AttackPoint>().health / gameManagerScript.monsterAttackPositions[1].GetComponent<AttackPoint>().maxHealth+ "<br>"+
             "Weak point 2: " + gameManagerScript.monsterAttackPositions[2].GetComponent<AttackPoint>().health / gameManagerScript.monsterAttackPositions[2].GetComponent<AttackPoint>().maxHealth + "<br>";
 
-        if (gameManagerScript.petrifyTimer <= 0 || gameManagerScript.houseDestroyed)
-        {
-            winText.enabled = true;
-            winText.text = "Monster killed the human";
-        }
-        else if (gameManagerScript.gameTimer <= 0)
+        if (gameManagerScript.gameTimer >= 21600f)
         {
             winText.enabled = true;
             winText.text = "Human won";
@@ -63,7 +58,14 @@ public class CanvasScript : MonoBehaviour
         monsterHealthBar.fillAmount = gameManagerScript.monsterHealth / gameManagerScript.monsterMaxHealth;
         monsterAttackText.text = "Attack Strength: " + System.Math.Round(gameManagerScript.monsterDamage);
         integrityText.text = "House Integrity: " + System.Math.Round((gameManagerScript.houseHealth / gameManagerScript.maxHouseHealth)*100)+"%";
-        timerText.text = "" + System.Math.Round(gameManagerScript.gameTimer, 0)+" seconds left!";
+
+        timerText.text = gameManagerScript.timerString+"AM";
+        if (gameManagerScript.gameTimer>=gameManagerScript.gameTimerMax/2){
+            timerText.color=new Color(255,255,0);
+        }
+        else if(gameManagerScript.gameTimer>=gameManagerScript.gameTimerMax/(2/3)){
+            timerText.color=new Color(255,0,0);
+        }
         healthBar.fillAmount = (gameManagerScript.houseHealth / gameManagerScript.maxHouseHealth);
 
         if (gameManagerScript.playerIsVisible)

@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
     float bufferTimer;
     float bufferTimerOriginal = 0.5f;
+
+    GameManager gameManagerScriptReference;
+    [SerializeField] Image petrifyBar;
 
     AudioSource src;
     [SerializeField] AudioClip move;
@@ -13,6 +17,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameManagerScriptReference =GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameManager>();
         bufferTimer = bufferTimerOriginal;
         src = GetComponent<AudioSource>();
     }
@@ -21,6 +26,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         bufferTimer -= Time.deltaTime;
+        petrifyBar.fillAmount = gameManagerScriptReference.petrifyTimer / gameManagerScriptReference.timeToPetrify;
     }
     public void playSound()
     {
@@ -33,5 +39,6 @@ public class Player : MonoBehaviour
             src.PlayOneShot(move);
             bufferTimer = bufferTimerOriginal;
         }
+
     }
 }

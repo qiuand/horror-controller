@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
 
     float elapsedLerpTime;
 
+
+    public string timerString;
+
     string currentPlayerPosition = null;
     public static string whoWon = "";
     public GameObject tail;
@@ -36,7 +39,8 @@ public class GameManager : MonoBehaviour
 
     bool visibleFlag;
 
-    public float gameTimer = 120f;
+    public float gameTimer = 0f;
+    public float gameTimerMax=21600f;
 
     [SerializeField] TextMeshProUGUI petrifyText;
 
@@ -109,6 +113,7 @@ public class GameManager : MonoBehaviour
         MonsterInput();
         HumanBlockInput();
         LerpMonsterPosition();
+        UpdateTimer();
 
         if (timeUntilNextAttack <= 0)
         {
@@ -121,6 +126,15 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene(0);
         }
+    }
+    void UpdateTimer()
+    {
+        gameTimer+=Time.deltaTime*180f;
+        int seconds = (int)(gameTimer % 60);
+        int minutes = (int)(gameTimer / 60) % 60;
+        int hours = (int)(gameTimer / 3600) % 24;
+        timerString = string.Format("{0:0}:{1:00}", hours, minutes);
+
     }
     void CheckWin()
     {
@@ -153,7 +167,6 @@ public class GameManager : MonoBehaviour
             monsterDamage += Time.deltaTime*2;
         }
         stabTimer -= Time.deltaTime;
-        gameTimer -= Time.deltaTime;
         monsterAttackCooldownTimer -= Time.deltaTime * 1f;
     }
     bool CalculateHouseDestroyed()
