@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Window : MonoBehaviour
 {
+    public GameObject eyeModelPosition;
     public GameObject windowLight;
     public bool isBoarded = false;
     // Start is called before the first frame update

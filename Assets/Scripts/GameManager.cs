@@ -7,7 +7,11 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    Material material;
+
     public GameObject monsterHUD;
+
+    [SerializeField] GameObject monsterEyeModel;
 
     [SerializeField] AudioSource heartbeat;
 
@@ -24,6 +28,8 @@ public class GameManager : MonoBehaviour
     public GameObject monsterExplosion;
 
     Vector3 startLerpPosition;
+    Vector3 startLerpRotation;
+
 /*    [SerializeField] GameObject monsterLight;*/
 
     GameObject attachedEyeWall;
@@ -82,6 +88,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        material = player.GetComponent<MeshRenderer>().sharedMaterial;
+
         timeUntilNextAttack = originalTimeUntilNextAttack;
 
         monsterDamage = minMonsterDamage;
@@ -92,7 +100,7 @@ public class GameManager : MonoBehaviour
         MoveEyeCameraToLocation(monsterEyepositions[monsterEyepositions.Length-1]);
         maxHouseHealth = weakPointHealth * numberOfWeakPoints;
         houseHealth = maxHouseHealth;
-        petrifyTimer = timeToPetrify;
+        petrifyTimer = 0;
 
         for (int i = 1; i < Display.displays.Length; i++)
         {
@@ -103,6 +111,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        material.SetFloat("_Float", 0+(petrifyTimer / 5f));
         timeUntilNextAttack -= Time.deltaTime;
 
         CheckWin();
@@ -139,7 +148,7 @@ public class GameManager : MonoBehaviour
     }
     void CheckWin()
     {
-        if (petrifyTimer <= 0 || CalculateHouseDestroyed())
+        if (petrifyTimer >= timeToPetrify || CalculateHouseDestroyed())
         {
             whoWon = "Monster Victory";
             if (CalculateHouseDestroyed())
@@ -217,13 +226,13 @@ public class GameManager : MonoBehaviour
                             player.GetComponent<Player>().playSound();
                         }
                         visibleFlag = true;*/
-            petrifyTimer -= Time.deltaTime;
+            petrifyTimer += Time.deltaTime;
         }
-        else if (petrifyTimer < timeToPetrify)
+        else
         {
             heartbeat.enabled = false;
             /*            visibleFlag = false;*/
-            petrifyTimer += Time.deltaTime;
+            petrifyTimer -= Time.deltaTime;
         }
         if (petrifyTimer <= 0)
         {
@@ -409,15 +418,20 @@ public class GameManager : MonoBehaviour
         }
         elapsedLerpTime = 0;
         startLerpPosition = monsterEyeCamera.transform.position;
+        startLerpRotation = monsterEyeCamera.transform.eulerAngles;
         attachedEyeWall = reference;
         attachedEyeWall.GetComponent<Window>().windowLight.SetActive(true);
     }
     void LerpMonsterPosition()
     {
         elapsedLerpTime += Time.deltaTime;
-        float percentageComplete = elapsedLerpTime / 0.5f;
-        monsterEyeCamera.transform.position = Vector3.Lerp(monsterEyeCamera.transform.position, attachedEyeWall.transform.position, (Mathf.SmoothStep(0, 1, percentageComplete)));
-        monsterEyeCamera.transform.rotation = Quaternion.Lerp(monsterEyeCamera.transform.rotation, attachedEyeWall.transform.rotation, (Mathf.SmoothStep(0, 1, percentageComplete)));
+        float percentageComplete = elapsedLerpTime / 0.25f;
+        monsterEyeCamera.transform.position = Vector3.Lerp(startLerpPosition, attachedEyeWall.transform.position, (Mathf.SmoothStep(0, 1, percentageComplete)));
+        monsterEyeCamera.transform.rotation = Quaternion.Lerp(Quaternion.Euler(startLerpRotation), attachedEyeWall.transform.rotation, (Mathf.SmoothStep(0, 1, percentageComplete)));
+
+        monsterEyeModel.transform.position = Vector3.Lerp(startLerpPosition, attachedEyeWall.GetComponent<Window>().eyeModelPosition.transform.position, (Mathf.SmoothStep(0, 1, percentageComplete)));
+        monsterEyeModel.transform.rotation = Quaternion.Lerp(Quaternion.Euler(startLerpRotation), attachedEyeWall.GetComponent<Window>().eyeModelPosition.transform.rotation, (Mathf.SmoothStep(0, 1, percentageComplete)));
+
     }
     IEnumerator LoadGameOver()
     {

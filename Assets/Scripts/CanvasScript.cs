@@ -45,7 +45,7 @@ public class CanvasScript : MonoBehaviour
             winText.enabled = true;
             winText.text = "Human Won";
         }
-        else if(gameManagerScript.petrifyTimer<=0 || gameManagerScript.CalculateHouseDestroyed())
+        else if(gameManagerScript.petrifyTimer>= gameManagerScript.timeToPetrify || gameManagerScript.CalculateHouseDestroyed())
         {
             winText.enabled = true;
             winText.text = "Monster Won";

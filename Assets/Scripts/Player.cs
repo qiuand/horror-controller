@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         bufferTimer -= Time.deltaTime;
-        petrifyBar.fillAmount = gameManagerScriptReference.petrifyTimer / gameManagerScriptReference.timeToPetrify;
+        petrifyBar.fillAmount = (gameManagerScriptReference.timeToPetrify-gameManagerScriptReference.petrifyTimer) / gameManagerScriptReference.timeToPetrify;
     }
     public void playSound()
     {
