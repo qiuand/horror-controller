@@ -111,7 +111,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        material.SetFloat("_Float", 0+(petrifyTimer / 5f));
+        material.SetFloat("_Float", 0+(petrifyTimer / 5f-0.3f));
         timeUntilNextAttack -= Time.deltaTime;
 
         CheckWin();
