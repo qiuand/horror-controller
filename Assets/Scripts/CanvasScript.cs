@@ -17,11 +17,14 @@ public class CanvasScript : MonoBehaviour
     [SerializeField] Image healthBar;
     [SerializeField] Image petrifyBar;
     [SerializeField] Image chargeBar;
+    [SerializeField] Image speedoNeedle;
 
     [SerializeField] TextMeshProUGUI integrityText
         ;
     [SerializeField] TextMeshProUGUI petrifyText;
     [SerializeField] TextMeshProUGUI timerText;
+
+    float needleCounter = 70;
 
     GameManager gameManagerScript;
 
@@ -32,9 +35,18 @@ public class CanvasScript : MonoBehaviour
         gameManagerScript =GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameManager>();
     }
 
+    void SetNeedle()
+    {
+    needleCounter -= 0.006f; // Increment the needle counter
+    speedoNeedle.transform.eulerAngles = new Vector3(0, 0, needleCounter);
+    }
+
+
+
     // Update is called once per frame
     void Update()
     {
+        SetNeedle();
         separateWeakPointText.text =
             "Weak point 1: " + gameManagerScript.monsterAttackPositions[0].GetComponent<AttackPoint>().health / gameManagerScript.monsterAttackPositions[0].GetComponent<AttackPoint>().maxHealth+"<br>"+
             "Weak point 2: " + gameManagerScript.monsterAttackPositions[1].GetComponent<AttackPoint>().health / gameManagerScript.monsterAttackPositions[1].GetComponent<AttackPoint>().maxHealth+ "<br>"+
