@@ -37,8 +37,8 @@ public class CanvasScript : MonoBehaviour
 
     void SetNeedle()
     {
-    needleCounter -= 0.006f; // Increment the needle counter
-    speedoNeedle.transform.eulerAngles = new Vector3(0, 0, needleCounter);
+    needleCounter -= 0.018f; // Increment the needle counter
+    speedoNeedle.transform.eulerAngles = new Vector3(0, 0, needleCounter); //transfrom needle incrementally 
     }
 
 
