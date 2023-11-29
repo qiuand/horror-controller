@@ -3467,7 +3467,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 157790798}
   m_LocalRotation: {x: 0, y: 0, z: 0.001954738, w: 0.9999981}
-  m_LocalPosition: {x: 0.29661, y: -2.19, z: 50.455}
+  m_LocalPosition: {x: 0.29661, y: 0.22333574, z: 50.455}
   m_LocalScale: {x: 0.028163763, y: 0.028163763, z: 0.028163763}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3623,7 +3623,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 1.18998
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -3699,8 +3699,8 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!136 &157790807
-CapsuleCollider:
+--- !u!65 &157790807
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -3709,9 +3709,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 26.435999
-  m_Height: 167.9815
-  m_Direction: 1
+  serializedVersion: 2
+  m_Size: {x: 52.871998, y: 218, z: 30.75438}
   m_Center: {x: -0.8186037, y: 85.01253, z: -0.10936357}
 --- !u!1001 &158925109
 PrefabInstance:
@@ -35411,7 +35410,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh31516
+  m_Name: pb_Mesh39014
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
