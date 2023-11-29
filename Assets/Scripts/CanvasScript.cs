@@ -13,11 +13,12 @@ public class CanvasScript : MonoBehaviour
 
     [SerializeField] RawImage stabImage;
 
+
     [SerializeField] Image monsterHealthBar;
     [SerializeField] Image healthBar;
     [SerializeField] Image petrifyBar;
     [SerializeField] Image chargeBar;
-    [SerializeField] Image speedoNeedle;
+    [SerializeField] RawImage speedoNeedle;
 
     [SerializeField] TextMeshProUGUI integrityText
         ;
@@ -37,7 +38,7 @@ public class CanvasScript : MonoBehaviour
 
     void SetNeedle()
     {
-    needleCounter -= 0.018f; // Increment the needle counter
+    needleCounter -= 0.020f; // Increment the needle counter
     speedoNeedle.transform.eulerAngles = new Vector3(0, 0, needleCounter); //transfrom needle incrementally 
     }
 
