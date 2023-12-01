@@ -25,7 +25,8 @@ public class CanvasScript : MonoBehaviour
     [SerializeField] TextMeshProUGUI petrifyText;
     [SerializeField] TextMeshProUGUI timerText;
 
-    float needleCounter = 70;
+    float needleCounter = 60;
+    float needleDecrementRate = 1.0f; // 1 unit per second
 
     GameManager gameManagerScript;
 
@@ -38,8 +39,8 @@ public class CanvasScript : MonoBehaviour
 
     void SetNeedle()
     {
-    needleCounter -= 0.020f; // Increment the needle counter
-    speedoNeedle.transform.eulerAngles = new Vector3(0, 0, needleCounter); //transfrom needle incrementally 
+        needleCounter -= needleDecrementRate * Time.deltaTime;
+        speedoNeedle.transform.eulerAngles = new Vector3(0, 0, needleCounter);
     }
 
 
