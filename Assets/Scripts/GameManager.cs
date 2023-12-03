@@ -276,7 +276,7 @@ public class GameManager : MonoBehaviour
         player.gameObject.transform.position = 
             new Vector3(
                 repairPoint.transform.position.x,
-                repairPoint.transform.position.y+1f,
+                repairPoint.transform.position.y,
                 repairPoint.transform.position.z);
         player.gameObject.transform.rotation =
             Quaternion.Euler(
