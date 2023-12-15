@@ -102,10 +102,10 @@ public class GameManager : MonoBehaviour
         houseHealth = maxHouseHealth;
         petrifyTimer = 0;
 
-        for (int i = 1; i < Display.displays.Length; i++)
+/*        for (int i = 1; i < Display.displays.Length; i++)
         {
             Display.displays[i].Activate();
-        }
+        }*/
     }
 
     // Update is called once per frame
