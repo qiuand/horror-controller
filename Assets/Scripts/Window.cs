@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Window : MonoBehaviour
 {
+    public int windowID;
     public GameObject eyeModelPosition;
     public GameObject windowLight;
     public bool isBoarded = false;

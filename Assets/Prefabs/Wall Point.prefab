@@ -196,7 +196,7 @@ MonoBehaviour:
   humanHealthBar: {fileID: 7174746215051910724}
   monsterHealth: 0
   isDefended: 0
-  maxHealth: 0
+  maxHealth: 8
   health: 0
   repairing: 0
   source: {fileID: 6003680805336271576}

@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
 
     Material material;
 
+    public float timeUntilCanRepair;
+    public float repairTimer;
+
     public GameObject monsterHUD;
 
     [SerializeField] GameObject monsterEyeModel;
@@ -25,8 +28,8 @@ public class GameManager : MonoBehaviour
     string currentPlayerPosition = null;
     public static string whoWon = "";
     public static string cause = "";
-    public GameObject tail;
-    public GameObject sparks;
+/*    public GameObject tail;
+*/    public GameObject sparks;
     public GameObject monsterExplosion;
 
     Vector3 startLerpPosition;
@@ -53,6 +56,8 @@ public class GameManager : MonoBehaviour
     public float monsterMaxHealth = 100;
     public float monsterHealth;
     public float monsterAttackTimer = 0.5f;
+
+    float monsterAttackOriginalCooldown = 2f;
     public float monsterAttackCooldownTimer;
 
     bool visibleFlag;
@@ -70,17 +75,17 @@ public class GameManager : MonoBehaviour
     public GameObject monsterEyeCamera;
 
     int numberOfWeakPoints = 3;
-    public float weakPointHealth = 20;
+    public int weakPointHealth = 20;
 
-    public float maxHouseHealth;
-    public float houseHealth;
+    public int maxHouseHealth;
+    public int houseHealth;
 
-    public float monsterDamage;
+    public int monsterDamage;
 
-    public float minMonsterDamage = 0;
-    public float maxMonsterDamage = 10;
+    public int minMonsterDamage = 0;
+    public int maxMonsterDamage = 10;
 
-    float temporaryHealthCalculation=0;
+    int temporaryHealthCalculation=0;
 
     public bool playerIsVisible = false;
 
@@ -99,12 +104,14 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        repairTimer = timeUntilCanRepair;
+
         material = player.GetComponent<MeshRenderer>().sharedMaterial;
 
         timeUntilNextAttack = originalTimeUntilNextAttack;
 
-        monsterDamage = minMonsterDamage;
-        monsterHealth = monsterMaxHealth;
+/*        monsterDamage = minMonsterDamage;
+*/        monsterHealth = monsterMaxHealth;
 
         monsterAttackCooldownTimer = monsterAttackTimer;
 
@@ -122,16 +129,23 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        repairTimer += Time.deltaTime;
+        Debug.Log(repairTimer);
+
+        LightUpLEDHealth(3, monsterAttackPositions[1].GetComponent<AttackPoint>().health);
+        LightUpLEDHealth(4, monsterAttackPositions[0].GetComponent<AttackPoint>().health);
+        LightUpLEDHealth(6, monsterAttackPositions[2].GetComponent<AttackPoint>().health);
+
         if (SerialCommunications.communicationReadyFlag)
         {
             validatedIncomingManager = SerialCommunications.validatedIncoming;
             SerialCommunications.communicationReadyFlag = false;
         }
-/*        Debug.Log("Game Manager: " + validatedIncomingManager[0] + " + " + validatedIncomingManager[1] + " + " + validatedIncomingManager[2] + " + " + validatedIncomingManager[3] + " + " + validatedIncomingManager[4] + " + " + validatedIncomingManager[5] + " + " + validatedIncomingManager[6]);
-*/
+        /*        Debug.Log("Game Manager: " + validatedIncomingManager[0] + " + " + validatedIncomingManager[1] + " + " + validatedIncomingManager[2] + " + " + validatedIncomingManager[3] + " + " + validatedIncomingManager[4] + " + " + validatedIncomingManager[5] + " + " + validatedIncomingManager[6]);
+        */
 
 
-
+        monsterAttackCooldownTimer -= Time.deltaTime;
 
         material.SetFloat("_Float", 0+(petrifyTimer / 5f-0.3f));
         timeUntilNextAttack -= Time.deltaTime;
@@ -150,7 +164,10 @@ public class GameManager : MonoBehaviour
         LerpMonsterPosition();
         UpdateTimer();
 
-        if (timeUntilNextAttack <= 0)
+        LightUpLEDWindow(attachedEyeWall.GetComponent<Window>().windowID);
+
+
+        if (monsterDamage>=1)
         {
             MonsterAttackInput();
         }
@@ -206,12 +223,11 @@ public class GameManager : MonoBehaviour
     }
     void ChargeMonsterDamage()
     {
-        if (monsterDamage < maxMonsterDamage)
+        if (monsterAttackCooldownTimer<=0 && monsterDamage<maxMonsterDamage)
         {
-            monsterDamage += Time.deltaTime*2;
+            monsterDamage += 1;
+            monsterAttackCooldownTimer = monsterAttackOriginalCooldown;
         }
-        stabTimer -= Time.deltaTime;
-        monsterAttackCooldownTimer -= Time.deltaTime * 1f;
     }
     public bool CalculateHouseDestroyed()
     {
@@ -232,7 +248,7 @@ public class GameManager : MonoBehaviour
             return false;
         }
     }
-    float CalculateHouseHealth()
+    int CalculateHouseHealth()
     {
         temporaryHealthCalculation = 0;
         for (int i = 0; i < monsterAttackPositions.Length; i++)
@@ -290,6 +306,7 @@ public class GameManager : MonoBehaviour
     }
     void MoveHumanRepair(GameObject reference)
     {
+        repairTimer = 0;
         player.GetComponent<Player>().Move();
         for (int i = 0; i < monsterAttackPositions.Length; i++)
         {
@@ -325,25 +342,25 @@ public class GameManager : MonoBehaviour
                     changeLerpTarget(monsterEyepositions[0]);
                     /*              MoveEyeCameraToLocation(monsterEyepositions[0]);*/
                 }
-                else if (Input.GetKeyDown("9") || validatedIncomingManager[3] == 2)
-                {
-                    monsterHUD.SetActive(true);
-                    changeLerpTarget(monsterEyepositions[1]);
-                    /*MoveEyeCameraToLocation(monsterEyepositions[1]);*/
-                }
-                else if (Input.GetKeyDown("7") || validatedIncomingManager[3] == 3)
-                {
-                    monsterHUD.SetActive(true);
-                    changeLerpTarget(monsterEyepositions[2]);
-                    /*MoveEyeCameraToLocation(monsterEyepositions[2]);*/
-                }
-                else if (Input.GetKeyDown("6") || validatedIncomingManager[3] == 4)
-                {
-                    monsterHUD.SetActive(true);
-                    changeLerpTarget(monsterEyepositions[3]);
-                    /*                MoveEyeCameraToLocation(monsterEyepositions[3]);*/
-                }
-                else if (Input.GetKeyDown("8") || validatedIncomingManager[3] == 0)
+            else if (Input.GetKeyDown("9") || validatedIncomingManager[3] == 4)
+            {
+                monsterHUD.SetActive(true);
+                changeLerpTarget(monsterEyepositions[1]);
+                MoveEyeCameraToLocation(monsterEyepositions[1]);
+            }
+            else if (Input.GetKeyDown("7") || validatedIncomingManager[3] == 3)
+            {
+                monsterHUD.SetActive(true);
+                changeLerpTarget(monsterEyepositions[2]);
+                MoveEyeCameraToLocation(monsterEyepositions[2]);
+            }
+            else if (Input.GetKeyDown("6") || validatedIncomingManager[3] == 2)
+            {
+                monsterHUD.SetActive(true);
+                changeLerpTarget(monsterEyepositions[3]);
+                MoveEyeCameraToLocation(monsterEyepositions[3]);
+            }
+            else if (Input.GetKeyDown("8") || validatedIncomingManager[3] == 0)
                 {
                     monsterHUD.SetActive(true);
                     changeLerpTarget(monsterEyepositions[4]);
@@ -379,8 +396,8 @@ public class GameManager : MonoBehaviour
     void MoveMonsterTail(GameObject reference)
     {
         timeUntilNextAttack = originalTimeUntilNextAttack;
-        tail.transform.position = reference.transform.position;
-        tail.transform.rotation = reference.transform.rotation;
+/*        tail.transform.position = reference.transform.position;
+        tail.transform.rotation = reference.transform.rotation;*/
     }
 
     //Human block
@@ -394,15 +411,15 @@ public class GameManager : MonoBehaviour
             {
                 MoveHumanBlock(monsterEyepositions[0]);
             }
-            else if (Input.GetKeyDown(KeyCode.Tab) || validatedIncomingManager[4] == 2)
+            else if (Input.GetKeyDown(KeyCode.Tab) || validatedIncomingManager[4] == 4)
             {
                 MoveHumanBlock(monsterEyepositions[1]);
             }
-            else if (Input.GetKeyDown("w") || validatedIncomingManager[4] == 3)
+            else if (Input.GetKeyDown("w") || validatedIncomingManager[4] == 2)
             {
                 MoveHumanBlock(monsterEyepositions[2]);
             }
-            else if (Input.GetKeyDown("e") || validatedIncomingManager[4] == 4)
+            else if (Input.GetKeyDown("e") || validatedIncomingManager[4] == 3)
             {
                 MoveHumanBlock(monsterEyepositions[3]);
             }
@@ -479,5 +496,51 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         SceneManager.LoadScene(1);
+    }
+
+    void LightUpLEDHealth(int ID, int health)
+    {
+        SerialCommunications.outgoing[ID] = 0b00000000;
+        for (int i=0; i<health; i++)
+        {
+            SerialCommunications.outgoing[ID] = (byte)(SerialCommunications.outgoing[ID] | 1<<i);
+        }
+
+    }
+    void LightUpLEDWindow(int ID)
+    {
+        /*        SerialCommunications.outgoing[5] = (byte)(SerialCommunications.outgoing[5] & 0b00000000);
+                if (ID == 99)
+                {
+                    return;
+                }
+                byte temporaryByte = SerialCommunications.outgoing[5];
+                SerialCommunications.outgoing[5] = (byte)(temporaryByte | (1 << ID));*/
+/*        Debug.Log(ID);
+*/        if (attachedEyeWall)
+        {
+            switch (ID)
+            {
+                case 0:
+                    SerialCommunications.outgoing[5] = 0b01000000;
+                    break;
+                case 1:
+                    SerialCommunications.outgoing[5] = 0b00010000;
+                    break;
+                case 2:
+                    SerialCommunications.outgoing[5] = 0b10000000;
+                    break;
+                case 3:
+                    SerialCommunications.outgoing[5] = 0b00100000;
+                    break;
+                case 4:
+                    SerialCommunications.outgoing[5] = 0b00000000;
+                    break;
+            }
+        }
+        else
+        {
+            SerialCommunications.outgoing[5] = 0b00000000;
+        }
     }
 }

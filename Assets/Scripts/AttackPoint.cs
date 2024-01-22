@@ -20,11 +20,11 @@ public class AttackPoint : MonoBehaviour
     float timeUntilCanRepair = 0f;
     float repairCooldownTime = 1f;
 
-    float repairAmount=5;
-    float repairAmountDebuffed = 5f;
+    int repairAmount=1;
+    int repairAmountDebuffed = 5;
 
-    public float maxHealth;
-    public float health;
+    public int maxHealth;
+    public int health;
 
     public bool repairing = false;
 
@@ -53,8 +53,8 @@ public class AttackPoint : MonoBehaviour
         {
             health = maxHealth;
         }
-        healthBar.fillAmount = health / maxHealth;
-        humanHealthBar.fillAmount = health / maxHealth;
+        healthBar.fillAmount = (float)health / (float)maxHealth;
+        humanHealthBar.fillAmount = (float)health / (float)maxHealth;
 
         if (timeUntilCanAttack <= 0 && health>0)
         {
@@ -98,24 +98,28 @@ public class AttackPoint : MonoBehaviour
     }
     private void Repair()
     {
-        if (repairing && timeUntilCanRepair <= 0 && health < maxHealth && health>0)
+        if (repairing && health < maxHealth && health>0)
         {
-            Instantiate(gameManager.GetComponent<GameManager>().sparks, transform.position, transform.rotation);
             repairSource.enabled = true;
-            timeUntilCanRepair = repairCooldownTime;
-            if (gameManager.GetComponent<GameManager>().playerIsVisible)
+
+            if (gameManager.GetComponent<GameManager>().repairTimer >= gameManager.GetComponent<GameManager>().timeUntilCanRepair)
             {
-                gameManager.GetComponent<GameManager>().houseHealth += repairAmountDebuffed;
-                health += repairAmountDebuffed;
-            }
-            else
-            {
-                gameManager.GetComponent<GameManager>().houseHealth += repairAmount;
-                health += repairAmount;
+                Instantiate(gameManager.GetComponent<GameManager>().sparks, transform.position, transform.rotation);
+                gameManager.GetComponent<GameManager>().repairTimer = 0;
+                if (gameManager.GetComponent<GameManager>().playerIsVisible)
+                {
+                    gameManager.GetComponent<GameManager>().houseHealth += repairAmountDebuffed;
+                    health += repairAmountDebuffed;
+                }
+                else
+                {
+                    gameManager.GetComponent<GameManager>().houseHealth += repairAmount;
+                    health += repairAmount;
+                }
             }
 
-            print(health + " out of " + maxHealth);
-        }
+/*            print(health + " out of " + maxHealth);
+*/        }
         else if (health==maxHealth)
         {
             repairSource.enabled = false;

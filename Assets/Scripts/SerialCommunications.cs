@@ -12,14 +12,11 @@ public class SerialCommunications : MonoBehaviour
     Thread IOThread = new Thread(DataThread);
 
     private static SerialPort sp = new SerialPort("COM6", 9600);
-    private static string incomingMsg = "";
-    private static string outgoingMsg = "";
 
-    
     int variable;
 
     private static byte[] incoming = new byte[7];
-    private static byte[] outgoing = new byte[7];
+    public static byte[] outgoing = new byte[7];
 
     public static byte[] validatedIncoming = new byte[7];
 
@@ -36,8 +33,9 @@ public class SerialCommunications : MonoBehaviour
 
         while (true)
         {
-/*            sp.Write(outgoing, 0, 7);
-*/            sp.Read(incoming, 0, 7);
+            sp.Write(outgoing, 0, 7);
+
+            sp.Read(incoming, 0, 7);
 
             if (incoming[0] == 'P' && incoming[1] == 'C')
             {
@@ -50,8 +48,8 @@ public class SerialCommunications : MonoBehaviour
                     communicationReadyFlag = true;
                 }
             }
-            Debug.Log("Serial Script: " + validatedIncoming[0] + " + " + validatedIncoming[1] + " + " + validatedIncoming[2] + " + " + validatedIncoming[3] + " + " + validatedIncoming[4] + " + " + validatedIncoming[5] + " + " + validatedIncoming[6]);
-
+/*            Debug.Log("Serial Script: " + validatedIncoming[0] + " + " + validatedIncoming[1] + " + " + validatedIncoming[2] + " + " + validatedIncoming[3] + " + " + validatedIncoming[4] + " + " + validatedIncoming[5] + " + " + validatedIncoming[6]);
+*/
 
 
             Thread.Sleep(20);
@@ -87,7 +85,7 @@ public class SerialCommunications : MonoBehaviour
         outgoing[2] = (byte)'4';
         outgoing[3] = 0b11111111;
         outgoing[4] = 0b11111111;
-        outgoing[5] = 0x00;
+        outgoing[5] = 0b11111111;
         outgoing[6] = 0b11111111;
 
     }

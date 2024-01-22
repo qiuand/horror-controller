@@ -6,6 +6,8 @@ using TMPro;
 
 public class CanvasScript : MonoBehaviour
 {
+    [SerializeField] RawImage[] strengthBar;
+
     [SerializeField] TextMeshProUGUI separateWeakPointText;
 
     [SerializeField] TextMeshProUGUI winText;
@@ -13,6 +15,7 @@ public class CanvasScript : MonoBehaviour
 
     [SerializeField] RawImage stabImage;
 
+    [SerializeField] Image repairBar;
 
     [SerializeField] Image monsterHealthBar;
     [SerializeField] Image healthBar;
@@ -48,6 +51,14 @@ public class CanvasScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        for (int i = 0; i < strengthBar.Length; i++)
+        {
+            strengthBar[i].gameObject.SetActive(false);
+        }
+        for (int i=0; i<gameManagerScript.monsterDamage; i++)
+        {
+            strengthBar[i].gameObject.SetActive(true);
+        }
         SetNeedle();
         separateWeakPointText.text =
             "Weak point 1: " + gameManagerScript.monsterAttackPositions[0].GetComponent<AttackPoint>().health / gameManagerScript.monsterAttackPositions[0].GetComponent<AttackPoint>().maxHealth+"<br>"+
@@ -72,11 +83,12 @@ public class CanvasScript : MonoBehaviour
         {
             stabImage.enabled = false;
         }
+        repairBar.fillAmount = gameManagerScript.repairTimer / gameManagerScript.timeUntilCanRepair;
         chargeBar.fillAmount=gameManagerScript.monsterDamage/gameManagerScript.maxMonsterDamage;
         petrifyBar.fillAmount=gameManagerScript.petrifyTimer/gameManagerScript.timeToPetrify;
         monsterHealthBar.fillAmount = gameManagerScript.monsterHealth / gameManagerScript.monsterMaxHealth;
-        monsterAttackText.text = "Attack Strength: " + System.Math.Round(gameManagerScript.monsterDamage);
-        integrityText.text = "House Integrity: " + System.Math.Round((gameManagerScript.houseHealth / gameManagerScript.maxHouseHealth)*100)+"%";
+        monsterAttackText.text = "Attack Strength: " + gameManagerScript.monsterDamage;
+        integrityText.text = "House Integrity: " + gameManagerScript.houseHealth / gameManagerScript.maxHouseHealth+"%";
 
         timerText.text = gameManagerScript.timerString+"AM";
         if (gameManagerScript.gameTimer >= (gameManagerScript.gameTimerMax * (5/6f))){
