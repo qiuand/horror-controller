@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
 
     Material material;
 
+    public GameObject hiddenPlayerPosition;
+
     public float timeUntilCanRepair;
     public float repairTimer;
 
@@ -464,7 +466,7 @@ public class GameManager : MonoBehaviour
             }
             else if (Input.GetKeyDown("i") || validatedIncomingManager[6] == 0)
             {
-
+/*                MoveHumanRepair(hiddenPlayerPosition);*/
             }
         }
     }
