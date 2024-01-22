@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+
     Material material;
 
     public GameObject monsterHUD;
@@ -17,6 +18,7 @@ public class GameManager : MonoBehaviour
 
     float elapsedLerpTime;
 
+    byte[] validatedIncomingManager = new byte[7];
 
     public string timerString;
 
@@ -30,7 +32,16 @@ public class GameManager : MonoBehaviour
     Vector3 startLerpPosition;
     Vector3 startLerpRotation;
 
-/*    [SerializeField] GameObject monsterLight;*/
+    int currentEyePosition;
+    int previousEyePosition;
+
+    int currentBoardPosition;
+    int previousBoardPosition;
+
+    int currentHumanPosition;
+    int previousHumanPosition;
+
+    /*    [SerializeField] GameObject monsterLight;*/
 
     GameObject attachedEyeWall;
 
@@ -111,6 +122,17 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (SerialCommunications.communicationReadyFlag)
+        {
+            validatedIncomingManager = SerialCommunications.validatedIncoming;
+            SerialCommunications.communicationReadyFlag = false;
+        }
+/*        Debug.Log("Game Manager: " + validatedIncomingManager[0] + " + " + validatedIncomingManager[1] + " + " + validatedIncomingManager[2] + " + " + validatedIncomingManager[3] + " + " + validatedIncomingManager[4] + " + " + validatedIncomingManager[5] + " + " + validatedIncomingManager[6]);
+*/
+
+
+
+
         material.SetFloat("_Float", 0+(petrifyTimer / 5f-0.3f));
         timeUntilNextAttack -= Time.deltaTime;
 
@@ -119,9 +141,12 @@ public class GameManager : MonoBehaviour
         houseHealth = CalculateHouseHealth();
 
         CheckIfBoarded();
+
         ChargeMonsterDamage();
+
         MonsterInput();
         HumanBlockInput();
+
         LerpMonsterPosition();
         UpdateTimer();
 
@@ -288,52 +313,59 @@ public class GameManager : MonoBehaviour
     //Monster eye
     void MonsterInput()
     {
-            if (Input.GetKeyDown("5"))
+        previousEyePosition = currentEyePosition;
+        currentEyePosition = validatedIncomingManager[3];
+/*        print("Previous: " + previousEyePosition+" Current: " + currentEyePosition);
+*/        
+        if (previousEyePosition != currentEyePosition)
             {
-                monsterHUD.SetActive(true);
-                changeLerpTarget(monsterEyepositions[0]);
-/*              MoveEyeCameraToLocation(monsterEyepositions[0]);*/
-            }
-            else if (Input.GetKeyDown("9"))
-            {
-                monsterHUD.SetActive(true);
-                changeLerpTarget(monsterEyepositions[1]);
-                /*MoveEyeCameraToLocation(monsterEyepositions[1]);*/
-            }
-            else if (Input.GetKeyDown("7"))
-            {
-                monsterHUD.SetActive(true);
-                changeLerpTarget(monsterEyepositions[2]);
-                /*MoveEyeCameraToLocation(monsterEyepositions[2]);*/
-            }
-            else if (Input.GetKeyDown("6"))
-            {
-                monsterHUD.SetActive(true);
-                changeLerpTarget(monsterEyepositions[3]);
-            /*                MoveEyeCameraToLocation(monsterEyepositions[3]);*/
-            }
-            else if (Input.GetKeyDown("8"))
-            {
-                monsterHUD.SetActive(true);
-                changeLerpTarget(monsterEyepositions[4]);
-            /*                MoveEyeCameraToLocation(monsterEyepositions[4]);*/
+                if (Input.GetKeyDown("5") || validatedIncomingManager[3] == 1)
+                {
+                    monsterHUD.SetActive(true);
+                    changeLerpTarget(monsterEyepositions[0]);
+                    /*              MoveEyeCameraToLocation(monsterEyepositions[0]);*/
+                }
+                else if (Input.GetKeyDown("9") || validatedIncomingManager[3] == 2)
+                {
+                    monsterHUD.SetActive(true);
+                    changeLerpTarget(monsterEyepositions[1]);
+                    /*MoveEyeCameraToLocation(monsterEyepositions[1]);*/
+                }
+                else if (Input.GetKeyDown("7") || validatedIncomingManager[3] == 3)
+                {
+                    monsterHUD.SetActive(true);
+                    changeLerpTarget(monsterEyepositions[2]);
+                    /*MoveEyeCameraToLocation(monsterEyepositions[2]);*/
+                }
+                else if (Input.GetKeyDown("6") || validatedIncomingManager[3] == 4)
+                {
+                    monsterHUD.SetActive(true);
+                    changeLerpTarget(monsterEyepositions[3]);
+                    /*                MoveEyeCameraToLocation(monsterEyepositions[3]);*/
+                }
+                else if (Input.GetKeyDown("8") || validatedIncomingManager[3] == 0)
+                {
+                    monsterHUD.SetActive(true);
+                    changeLerpTarget(monsterEyepositions[4]);
+                    /*                MoveEyeCameraToLocation(monsterEyepositions[4]);*/
+                }
             }
         }
     void MonsterAttackInput()
     {
         if (/*monsterAttackCooldownTimer <= 0*/ true)
         {
-            if (Input.GetKeyDown("2"))
+            if (Input.GetKeyDown("2") || validatedIncomingManager[5] == 4)
             {
                 MoveMonsterTail(monsterAttackPositions[0]);
                 monsterAttackPositions[0].GetComponent<AttackPoint>().OnHit();
             }
-            else if (Input.GetKeyDown("1"))
+            else if (Input.GetKeyDown("1") || validatedIncomingManager[5] == 2)
             {
                 MoveMonsterTail(monsterAttackPositions[1]);
                 monsterAttackPositions[1].GetComponent<AttackPoint>().OnHit();
             }
-            else if (Input.GetKeyDown("3"))
+            else if (Input.GetKeyDown("3") || validatedIncomingManager[5] == 3)
             {
                 MoveMonsterTail(monsterAttackPositions[2]);
                 monsterAttackPositions[2].GetComponent<AttackPoint>().OnHit();
@@ -354,30 +386,35 @@ public class GameManager : MonoBehaviour
     //Human block
     void HumanBlockInput()
     {
-        if (Input.GetKeyDown("q"))
+        previousBoardPosition = currentBoardPosition;
+        currentBoardPosition = validatedIncomingManager[4];
+        if (currentBoardPosition != previousBoardPosition)
         {
-            MoveHumanBlock(monsterEyepositions[0]);
-        }
-        else if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            MoveHumanBlock(monsterEyepositions[1]);
-        }
-        else if (Input.GetKeyDown("w"))
-        {
-            MoveHumanBlock(monsterEyepositions[2]);
-        }
-        else if (Input.GetKeyDown("e"))
-        {
-            MoveHumanBlock(monsterEyepositions[3]);
-        }
-        else if (Input.GetKeyDown("r"))
-        {
-            for (int i = 0; i < monsterEyepositions.Length; i++)
+            if (Input.GetKeyDown("q") || validatedIncomingManager[4] == 1)
             {
-                monsterEyepositions[i].GetComponent<Window>().isBoarded = false;
+                MoveHumanBlock(monsterEyepositions[0]);
             }
-            board.gameObject.transform.position = defaultBarricadePoint.transform.position;
-            board.gameObject.transform.rotation = defaultBarricadePoint.transform.rotation;
+            else if (Input.GetKeyDown(KeyCode.Tab) || validatedIncomingManager[4] == 2)
+            {
+                MoveHumanBlock(monsterEyepositions[1]);
+            }
+            else if (Input.GetKeyDown("w") || validatedIncomingManager[4] == 3)
+            {
+                MoveHumanBlock(monsterEyepositions[2]);
+            }
+            else if (Input.GetKeyDown("e") || validatedIncomingManager[4] == 4)
+            {
+                MoveHumanBlock(monsterEyepositions[3]);
+            }
+            else if (Input.GetKeyDown("r") || validatedIncomingManager[4] == 0)
+            {
+                for (int i = 0; i < monsterEyepositions.Length; i++)
+                {
+                    monsterEyepositions[i].GetComponent<Window>().isBoarded = false;
+                }
+                board.gameObject.transform.position = defaultBarricadePoint.transform.position;
+                board.gameObject.transform.rotation = defaultBarricadePoint.transform.rotation;
+            }
         }
     }
     //Player repair
@@ -392,21 +429,26 @@ public class GameManager : MonoBehaviour
     }
     void PlayerRepairInput()
     {
-        if (Input.GetKeyDown("u") && ValidatePlayerPosition("u"))
+        previousHumanPosition = currentHumanPosition;
+        currentHumanPosition = validatedIncomingManager[6];
+        if (currentHumanPosition != previousHumanPosition)
         {
-            MoveHumanRepair(monsterAttackPositions[0]);
-        }
-        else if (Input.GetKeyDown("t") && ValidatePlayerPosition("t"))
-        {
-            MoveHumanRepair(monsterAttackPositions[1]);
-        }
-        else if (Input.GetKeyDown("y") && ValidatePlayerPosition("y"))
-        {
-            MoveHumanRepair(monsterAttackPositions[2]);
-        }
-        else if (Input.GetKeyDown("i"))
-        {
+            if (Input.GetKeyDown("u") && ValidatePlayerPosition("u") || validatedIncomingManager[6] == 4)
+            {
+                MoveHumanRepair(monsterAttackPositions[0]);
+            }
+            else if (Input.GetKeyDown("t") && ValidatePlayerPosition("t") || validatedIncomingManager[6] == 2)
+            {
+                MoveHumanRepair(monsterAttackPositions[1]);
+            }
+            else if (Input.GetKeyDown("y") && ValidatePlayerPosition("y") || validatedIncomingManager[6] == 3)
+            {
+                MoveHumanRepair(monsterAttackPositions[2]);
+            }
+            else if (Input.GetKeyDown("i") || validatedIncomingManager[6] == 0)
+            {
 
+            }
         }
     }
     void changeLerpTarget(GameObject reference)
