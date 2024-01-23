@@ -970,7 +970,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
   m_SortingOrder: -88
-  m_TargetDisplay: 0
+  m_TargetDisplay: 1
 --- !u!224 &33766779
 RectTransform:
   m_ObjectHideFlags: 0
@@ -86416,6 +86416,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1879008552520188213, guid: f6714174f8bb8184eb08e99354ed3c12, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1879008552520188214, guid: f6714174f8bb8184eb08e99354ed3c12, type: 3}
+      propertyPath: m_TargetDisplay
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1879008553360415010, guid: f6714174f8bb8184eb08e99354ed3c12, type: 3}
