@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public bool playerAbsent = true;
 
     Material material;
 
@@ -121,6 +122,9 @@ public class GameManager : MonoBehaviour
         maxHouseHealth = weakPointHealth * numberOfWeakPoints;
         houseHealth = maxHouseHealth;
         petrifyTimer = 0;
+
+        player.GetComponent<BoxCollider>().enabled = false;
+        player.GetComponent<MeshRenderer>().enabled = false;
 
         for (int i = 1; i < Display.displays.Length; i++)
         {
@@ -306,15 +310,24 @@ public class GameManager : MonoBehaviour
         Instantiate(sparks, boardPoint.transform.position, boardPoint.transform.rotation);
         board.GetComponent<Board>().PlaySound();
     }
+    void InvalidateAllDefendedPoints()
+    {
+        for (int i = 0; i < monsterAttackPositions.Length; i++)
+        {
+            monsterAttackPositions[i].GetComponent<AttackPoint>().repairing = false;
+            monsterAttackPositions[i].GetComponent<AttackPoint>().isDefended = false;
+        }
+    }
     void MoveHumanRepair(GameObject reference)
     {
         repairTimer = 0;
         player.GetComponent<Player>().Move();
-        for (int i = 0; i < monsterAttackPositions.Length; i++)
-        {
-            monsterAttackPositions[i].GetComponent<AttackPoint>().isDefended = false;
-        }
+
+        InvalidateAllDefendedPoints();
+
         reference.GetComponent<AttackPoint>().isDefended = true;
+        reference.GetComponent<AttackPoint>().repairing = true;
+
 
         GameObject repairPoint = reference.transform.Find("Repair Point").gameObject;
         player.gameObject.transform.position = 
@@ -452,6 +465,13 @@ public class GameManager : MonoBehaviour
         currentHumanPosition = validatedIncomingManager[6];
         if (currentHumanPosition != previousHumanPosition)
         {
+            if (validatedIncomingManager[6] != 0)
+            {
+                player.GetComponent<BoxCollider>().enabled = true;
+                player.GetComponent<MeshRenderer>().enabled = true;
+                playerAbsent = false;
+            }
+
             if (Input.GetKeyDown("u") && ValidatePlayerPosition("u") || validatedIncomingManager[6] == 4)
             {
                 MoveHumanRepair(monsterAttackPositions[0]);
@@ -466,7 +486,12 @@ public class GameManager : MonoBehaviour
             }
             else if (Input.GetKeyDown("i") || validatedIncomingManager[6] == 0)
             {
-/*                MoveHumanRepair(hiddenPlayerPosition);*/
+                playerAbsent = true;
+                InvalidateAllDefendedPoints();
+                player.GetComponent<Player>().PlayMoveCue();
+                player.GetComponent<BoxCollider>().enabled=false;
+                player.GetComponent<MeshRenderer>().enabled = false;
+                /*                MoveHumanRepair(hiddenPlayerPosition);*/
             }
         }
     }

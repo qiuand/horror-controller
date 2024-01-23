@@ -36,9 +36,13 @@ public class Player : MonoBehaviour
     {
         if (bufferTimer <= 0)
         {
-            src.PlayOneShot(move);
+            PlayMoveCue();
             bufferTimer = bufferTimerOriginal;
         }
 
+    }
+    public void PlayMoveCue()
+    {
+        src.PlayOneShot(move);
     }
 }

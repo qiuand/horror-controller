@@ -33,7 +33,7 @@ public class MonsterEye : MonoBehaviour
         if(Physics.Raycast(transform.position, player.transform.position-transform.position, out hit))
         {
 /*            print(hit.collider.gameObject);
-*/            if (hit.collider.gameObject.tag == "Player")
+*/            if (hit.collider.gameObject.tag == "Player" && !gameManager.GetComponent<GameManager>().playerAbsent)
             {
                 gameManager.GetComponent<GameManager>().playerIsVisible = true; 
             }

@@ -132,6 +132,7 @@ public class AttackPoint : MonoBehaviour
                 }
                 else
                 {
+                    repairSource.enabled = false;
                     gameManager.GetComponent<GameManager>().houseHealth += repairAmount;
                     health += repairAmount;
                 }
