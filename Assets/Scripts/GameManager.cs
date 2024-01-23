@@ -98,6 +98,8 @@ public class GameManager : MonoBehaviour
     float originalTimeUntilNextAttack=0.5f;
     float timeUntilNextAttack;
 
+    [SerializeField] AudioSource collapse;
+
     AudioSource GameManagerSource;
 
     [SerializeField] GameObject defaultBarricadePoint;
@@ -141,11 +143,12 @@ public class GameManager : MonoBehaviour
     {
         for(int i=0; i<monsterAttackPositions.Length; i++)
         {
-            float greatestDamage = weakPointHealth;
-
-            if (monsterAttackPositions[i].GetComponent<AttackPoint>().health < greatestDamage)
+            float greatestDamage = 0;
+            if (8-monsterAttackPositions[i].GetComponent<AttackPoint>().health > greatestDamage)
             {
-                GameManagerSource.volume = (weakPointHealth-greatestDamage)*0.1f;
+                greatestDamage = 8 - monsterAttackPositions[i].GetComponent<AttackPoint>().health;
+                Debug.Log(greatestDamage);
+                GameManagerSource.volume = greatestDamage*0.17f;
             }
         }
         repairTimer += Time.deltaTime;
@@ -534,7 +537,8 @@ public class GameManager : MonoBehaviour
     }
     IEnumerator LoadGameOver()
     {
-        yield return new WaitForSeconds(2f);
+        collapse.enabled=true;
+        yield return new WaitForSeconds(6f);
         SceneManager.LoadScene(1);
     }
 
