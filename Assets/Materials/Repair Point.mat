@@ -133,6 +133,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_01e25cad0b484c29a0f690e2bb1836b3_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 45d7780aa9a6a514f9f34d4a472ee935, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_276d8d2527f44aba9c55da18fa22da0e_Texture_1:
         m_Texture: {fileID: 2800000, guid: a870142cb66b1de42a5f087cbd54557a, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -145,8 +149,20 @@ Material:
         m_Texture: {fileID: 2800000, guid: a420ad5c354808b4f94bc35faff0d5ae, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_b2a2001796a8470bb737f5e82154734d_Texture_1:
+        m_Texture: {fileID: 2800000, guid: e07e6e13cf232e349a573d655e67a4c3, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_b99bed2a00c0431ea44460dd70a358f5_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 448e7e5042301fe449b242921610e4e7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_c1c06ad1b3a64d70a6932a5ba13027e3_Texture_1:
         m_Texture: {fileID: 2800000, guid: acf5a4651756ee64baeca46d96d9e371, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_e025f9e323bb40b6af3c9a28a1d2e6d5_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 03b86688852bf90408f8d67fff821796, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
@@ -241,7 +257,7 @@ Material:
     - _EnableGeometricSpecularAA: 0
     - _EnergyConservingSpecularColor: 1
     - _EnvironmentReflections: 1
-    - _Float: -0.3
+    - _Float: 0.516827
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
