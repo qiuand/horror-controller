@@ -98,6 +98,8 @@ public class GameManager : MonoBehaviour
     float originalTimeUntilNextAttack=0.5f;
     float timeUntilNextAttack;
 
+    AudioSource GameManagerSource;
+
     [SerializeField] GameObject defaultBarricadePoint;
 
     private void Awake()
@@ -107,6 +109,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameManagerSource = GetComponent<AudioSource>();
+
         repairTimer = timeUntilCanRepair;
 
         material = player.GetComponent<MeshRenderer>().sharedMaterial;
@@ -135,9 +139,18 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        repairTimer += Time.deltaTime;
-        Debug.Log(repairTimer);
+        for(int i=0; i<monsterAttackPositions.Length; i++)
+        {
+            float greatestDamage = weakPointHealth;
 
+            if (monsterAttackPositions[i].GetComponent<AttackPoint>().health < greatestDamage)
+            {
+                GameManagerSource.volume = (weakPointHealth-greatestDamage)*0.1f;
+            }
+        }
+        repairTimer += Time.deltaTime;
+/*        Debug.Log(repairTimer);
+*/
         LightUpLEDHealth(3, monsterAttackPositions[1].GetComponent<AttackPoint>().health);
         LightUpLEDHealth(4, monsterAttackPositions[0].GetComponent<AttackPoint>().health);
         LightUpLEDHealth(6, monsterAttackPositions[2].GetComponent<AttackPoint>().health);
@@ -265,7 +278,7 @@ public class GameManager : MonoBehaviour
     }
     void PetrifyTimer()
     {
-        if (playerIsVisible)
+        if (playerIsVisible && !playerAbsent)
         {
             heartbeat.enabled = true;
             /*            if (!visibleFlag)
@@ -488,7 +501,7 @@ public class GameManager : MonoBehaviour
             {
                 playerAbsent = true;
                 InvalidateAllDefendedPoints();
-                player.GetComponent<Player>().PlayMoveCue();
+                player.GetComponent<Player>().Move();
                 player.GetComponent<BoxCollider>().enabled=false;
                 player.GetComponent<MeshRenderer>().enabled = false;
                 /*                MoveHumanRepair(hiddenPlayerPosition);*/

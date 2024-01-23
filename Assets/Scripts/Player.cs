@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     float bufferTimer;
-    float bufferTimerOriginal = 0.5f;
+    float bufferTimerOriginal = 0.3f;
 
     GameManager gameManagerScriptReference;
     [SerializeField] Image petrifyBar;
@@ -36,13 +36,13 @@ public class Player : MonoBehaviour
     {
         if (bufferTimer <= 0)
         {
-            PlayMoveCue();
+            src.PlayOneShot(move);
             bufferTimer = bufferTimerOriginal;
         }
 
     }
     public void PlayMoveCue()
     {
-        src.PlayOneShot(move);
+ 
     }
 }

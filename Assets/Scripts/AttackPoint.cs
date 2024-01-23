@@ -91,10 +91,10 @@ public class AttackPoint : MonoBehaviour
                         source.PlayOneShot(weak, 0.3f);
                         break;
                     case 2:
-                        source.PlayOneShot(normal);
+                        source.PlayOneShot(strong, 0.2f);
                         break;
                     case 3:
-                        source.PlayOneShot(strong, 0.3f);
+                        source.PlayOneShot(normal);
                         break;
                     case 4:
                         source.PlayOneShot(veryStrong);
