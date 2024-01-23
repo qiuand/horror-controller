@@ -201,6 +201,10 @@ MonoBehaviour:
   repairing: 0
   source: {fileID: 6003680805336271576}
   shatter: {fileID: 8300000, guid: c4b5e58c1c1c7114fba260011615f8b4, type: 3}
+  weak: {fileID: 8300000, guid: e4a2e3eac7e4ab14ea688f4496c5bfa1, type: 3}
+  normal: {fileID: 8300000, guid: ece74e0bd17de934c83fe55c18094109, type: 3}
+  strong: {fileID: 8300000, guid: 7e1872a075a6fa74faf1adab922a386b, type: 3}
+  veryStrong: {fileID: 8300000, guid: 652e5f481bc862b4fb5bb4641af367f7, type: 3}
   roar: {fileID: 8300000, guid: ab080071119d76d4cac390434c7ece32, type: 3}
   sprite: {fileID: 7875721011021007106}
   repairSource: {fileID: 6186227453690881458}
@@ -213,10 +217,10 @@ AudioSource:
   m_GameObject: {fileID: 1289555421862755808}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 219478175167709690, guid: 75705c6c83de746448eb583328c0a01e, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.1
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -309,10 +313,10 @@ AudioSource:
   m_GameObject: {fileID: 1289555421862755808}
   m_Enabled: 0
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: e231e070d43b7934a806e498616df57d, type: 3}
+  OutputAudioMixerGroup: {fileID: -7761428110016895893, guid: 75705c6c83de746448eb583328c0a01e, type: 2}
+  m_audioClip: {fileID: 8300000, guid: d54ec413636f38e4d805a39b55ec2e63, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.1
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1382,7 +1386,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 22d6740d92b108043b1248ffdd3f9775, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1390,7 +1394,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &8377297969237322431

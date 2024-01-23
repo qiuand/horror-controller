@@ -342,8 +342,8 @@ public class GameManager : MonoBehaviour
                 {
                     monsterHUD.SetActive(true);
                     changeLerpTarget(monsterEyepositions[0]);
-                    /*              MoveEyeCameraToLocation(monsterEyepositions[0]);*/
-                }
+/*                    MoveEyeCameraToLocation(monsterEyepositions[0]);
+*/            }
             else if (Input.GetKeyDown("9") || validatedIncomingManager[3] == 4)
             {
                 monsterHUD.SetActive(true);
