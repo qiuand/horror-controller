@@ -32,7 +32,7 @@ public class AttackPoint : MonoBehaviour
 
     [SerializeField] AudioClip shatter;
 
-    [SerializeField] AudioClip weak, normal, strong, veryStrong;
+    [SerializeField] AudioClip weak, normal, strong, veryStrong, error;
 
     [SerializeField] AudioClip roar;
 
@@ -85,28 +85,36 @@ public class AttackPoint : MonoBehaviour
             }
             else*/
             {
-                switch (gameManager.GetComponent<GameManager>().monsterDamage)
+                if (isDefended)
                 {
-                    case 1:
-                        source.PlayOneShot(weak, 0.3f);
-                        break;
-                    case 2:
-                        source.PlayOneShot(strong, 0.2f);
-                        break;
-                    case 3:
-                        source.PlayOneShot(normal);
-                        break;
-                    case 4:
-                        source.PlayOneShot(veryStrong);
-                        break;
+                    source.PlayOneShot(error);
                 }
+                else
+                {
+                    switch (gameManager.GetComponent<GameManager>().monsterDamage)
+                    {
+                        case 1:
+                            source.PlayOneShot(weak, 0.3f);
+                            break;
+                        case 2:
+                            source.PlayOneShot(strong, 0.2f);
+                            break;
+                        case 3:
+                            source.PlayOneShot(normal);
+                            break;
+                        case 4:
+                            source.PlayOneShot(veryStrong);
+                            break;
+                    }
+                    health -= gameManager.GetComponent<GameManager>().monsterDamage;
+                }
+
                 gameManager.GetComponent<GameManager>().monsterAttackCooldownTimer = gameManager.GetComponent<GameManager>().monsterAttackTimer;
                 sprite.gameObject.GetComponent<SpriteRenderer>().enabled = true;
                 //gameObject.GetComponent<MeshRenderer>().enabled = false;
 
                 timeUntilCanAttack = attackCooldownTime;
 
-                health -= gameManager.GetComponent<GameManager>().monsterDamage;
                 gameManager.GetComponent<GameManager>().monsterDamage = gameManager.GetComponent<GameManager>().minMonsterDamage;
             }
         }

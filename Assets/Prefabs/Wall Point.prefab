@@ -205,6 +205,7 @@ MonoBehaviour:
   normal: {fileID: 8300000, guid: ece74e0bd17de934c83fe55c18094109, type: 3}
   strong: {fileID: 8300000, guid: 7e1872a075a6fa74faf1adab922a386b, type: 3}
   veryStrong: {fileID: 8300000, guid: 652e5f481bc862b4fb5bb4641af367f7, type: 3}
+  error: {fileID: 8300000, guid: cfa78c68692313e418525fa566b4ccd3, type: 3}
   roar: {fileID: 8300000, guid: ab080071119d76d4cac390434c7ece32, type: 3}
   sprite: {fileID: 7875721011021007106}
   repairSource: {fileID: 6186227453690881458}
