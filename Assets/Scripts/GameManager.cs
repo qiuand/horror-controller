@@ -462,6 +462,8 @@ public class GameManager : MonoBehaviour
                 }
                 board.gameObject.transform.position = defaultBarricadePoint.transform.position;
                 board.gameObject.transform.rotation = defaultBarricadePoint.transform.rotation;
+                board.GetComponent<Board>().PlaySound();
+
             }
         }
     }
