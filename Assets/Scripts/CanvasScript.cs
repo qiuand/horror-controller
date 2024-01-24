@@ -68,12 +68,12 @@ public class CanvasScript : MonoBehaviour
         if (gameManagerScript.gameTimer >= 21600f)
         {
             winText.enabled = true;
-            winText.text = "Human Won";
+            winText.text = "THE HUMAN SURVIVED";
         }
         else if(gameManagerScript.petrifyTimer>= gameManagerScript.timeToPetrify || gameManagerScript.CalculateHouseDestroyed())
         {
             winText.enabled = true;
-            winText.text = "Monster Won";
+            winText.text = "THE HUMAN DIED";
         }
         if (gameManagerScript.stabTimer > 0)
         {
@@ -88,8 +88,8 @@ public class CanvasScript : MonoBehaviour
 
         float petrifyRatio = gameManagerScript.petrifyTimer/gameManagerScript.timeToPetrify;
 
-        petrifyBar.GetComponent<Image>(). = new Color(255f*petrifyRatio, 255f-255f* petrifyRatio*2, 0);
-        petrifyBar.fillAmount= (gameManagerScript.timeToPetrify-gameManagerScript.petrifyTimer)/gameManagerScript.timeToPetrify;
+/*        petrifyBar.GetComponent<Image>(). = new Color(255f*petrifyRatio, 255f-255f* petrifyRatio*2, 0);
+*/        petrifyBar.fillAmount= (gameManagerScript.timeToPetrify-gameManagerScript.petrifyTimer)/gameManagerScript.timeToPetrify;
         
         monsterHealthBar.fillAmount = gameManagerScript.monsterHealth / gameManagerScript.monsterMaxHealth;
         monsterAttackText.text = "Attack Strength: " + gameManagerScript.monsterDamage;

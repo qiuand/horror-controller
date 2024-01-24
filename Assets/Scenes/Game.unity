@@ -40737,7 +40737,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 03cc90df57b7daa4eb027ca19878bf9c, type: 3}
     - target: {fileID: 8622554549132689324, guid: f6714174f8bb8184eb08e99354ed3c12, type: 3}
       propertyPath: m_Color.b
-      value: 1
+      value: 0.12460303
       objectReference: {fileID: 0}
     - target: {fileID: 8622554549132689324, guid: f6714174f8bb8184eb08e99354ed3c12, type: 3}
       propertyPath: m_Color.g
@@ -40745,7 +40745,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8622554549132689324, guid: f6714174f8bb8184eb08e99354ed3c12, type: 3}
       propertyPath: m_Color.r
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8622554549132689324, guid: f6714174f8bb8184eb08e99354ed3c12, type: 3}
       propertyPath: m_FillAmount
@@ -77731,6 +77731,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAbsent: 1
+  scream: {fileID: 0}
   hiddenPlayerPosition: {fileID: 2090064654}
   timeUntilCanRepair: 1
   repairTimer: 0
@@ -77750,7 +77751,7 @@ MonoBehaviour:
   gameTimer: 120
   gameTimerMax: 21600
   petrifyText: {fileID: 1333259128}
-  timeToPetrify: 5
+  timeToPetrify: 3.5
   petrifyTimer: 0
   board: {fileID: 1688087715}
   player: {fileID: 157790798}
@@ -77904,11 +77905,11 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1801125531}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 25ddb2a4d0c96a04f99525d0aff89830, type: 3}
-  m_PlayOnAwake: 0
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

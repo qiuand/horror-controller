@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
 {
     public bool playerAbsent = true;
 
+    [SerializeField] AudioSource scream;
+
     Material material;
 
     public GameObject hiddenPlayerPosition;
@@ -539,7 +541,15 @@ public class GameManager : MonoBehaviour
     }
     IEnumerator LoadGameOver()
     {
-        collapse.enabled=true;
+        if (houseDestroyed)
+        {
+            collapse.enabled = true;
+
+        }
+        else
+        {
+            scream.enabled = true;
+        }
         yield return new WaitForSeconds(6f);
         SceneManager.LoadScene(1);
     }
