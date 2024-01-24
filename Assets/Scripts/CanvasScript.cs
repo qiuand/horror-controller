@@ -85,7 +85,12 @@ public class CanvasScript : MonoBehaviour
         }
         repairBar.fillAmount = gameManagerScript.repairTimer / gameManagerScript.timeUntilCanRepair;
         chargeBar.fillAmount=gameManagerScript.monsterDamage/gameManagerScript.maxMonsterDamage;
-        petrifyBar.fillAmount=gameManagerScript.petrifyTimer/gameManagerScript.timeToPetrify;
+
+        float petrifyRatio = gameManagerScript.petrifyTimer/gameManagerScript.timeToPetrify;
+
+        petrifyBar.GetComponent<Image>().color = new Color(255f*petrifyRatio, 255f-255f* petrifyRatio*2, 0);
+        petrifyBar.fillAmount= (gameManagerScript.timeToPetrify-gameManagerScript.petrifyTimer)/gameManagerScript.timeToPetrify;
+        
         monsterHealthBar.fillAmount = gameManagerScript.monsterHealth / gameManagerScript.monsterMaxHealth;
         monsterAttackText.text = "Attack Strength: " + gameManagerScript.monsterDamage;
         integrityText.text = "House Integrity: " + gameManagerScript.houseHealth / gameManagerScript.maxHouseHealth+"%";
