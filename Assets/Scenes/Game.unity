@@ -77745,7 +77745,7 @@ MonoBehaviour:
   stabTimer: 0
   monsterMaxHealth: 100
   monsterHealth: 100
-  monsterAttackTimer: 2
+  monsterAttackTimer: 1
   monsterAttackCooldownTimer: 0
   gameTimer: 120
   gameTimerMax: 21600
