@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+
+    public bool serialFlag = false;
+
     public bool playerAbsent = true;
 
     [SerializeField] AudioSource scream;
@@ -367,33 +370,33 @@ public class GameManager : MonoBehaviour
         currentEyePosition = validatedIncomingManager[3];
 /*        print("Previous: " + previousEyePosition+" Current: " + currentEyePosition);
 */        
-        if (previousEyePosition != currentEyePosition)
+        if (previousEyePosition != currentEyePosition || !serialFlag)
             {
-                if (Input.GetKeyDown("5") || validatedIncomingManager[3] == 1)
+                if (Input.GetKeyDown("5") /*|| validatedIncomingManager[3] == 1*/)
                 {
                     monsterHUD.SetActive(true);
                     changeLerpTarget(monsterEyepositions[0]);
 /*                    MoveEyeCameraToLocation(monsterEyepositions[0]);
 */            }
-            else if (Input.GetKeyDown("9") || validatedIncomingManager[3] == 4)
+            else if (Input.GetKeyDown("9") /*|| validatedIncomingManager[3] == 4*/)
             {
                 monsterHUD.SetActive(true);
                 changeLerpTarget(monsterEyepositions[1]);
                 MoveEyeCameraToLocation(monsterEyepositions[1]);
             }
-            else if (Input.GetKeyDown("7") || validatedIncomingManager[3] == 3)
+            else if (Input.GetKeyDown("7") /*|| validatedIncomingManager[3] == 3*/)
             {
                 monsterHUD.SetActive(true);
                 changeLerpTarget(monsterEyepositions[2]);
                 MoveEyeCameraToLocation(monsterEyepositions[2]);
             }
-            else if (Input.GetKeyDown("6") || validatedIncomingManager[3] == 2)
+            else if (Input.GetKeyDown("6") /*|| validatedIncomingManager[3] == 2*/)
             {
                 monsterHUD.SetActive(true);
                 changeLerpTarget(monsterEyepositions[3]);
                 MoveEyeCameraToLocation(monsterEyepositions[3]);
             }
-            else if (Input.GetKeyDown("8") || validatedIncomingManager[3] == 0)
+            else if (Input.GetKeyDown("8") /*|| validatedIncomingManager[3] == 0*/)
                 {
                     monsterHUD.SetActive(true);
                     changeLerpTarget(monsterEyepositions[4]);
@@ -438,25 +441,25 @@ public class GameManager : MonoBehaviour
     {
         previousBoardPosition = currentBoardPosition;
         currentBoardPosition = validatedIncomingManager[4];
-        if (currentBoardPosition != previousBoardPosition)
+        if (currentBoardPosition != previousBoardPosition || !serialFlag)
         {
-            if (Input.GetKeyDown("q") || validatedIncomingManager[4] == 1)
+            if (Input.GetKeyDown("q") /*|| validatedIncomingManager[4] == 1*/)
             {
                 MoveHumanBlock(monsterEyepositions[0]);
             }
-            else if (Input.GetKeyDown(KeyCode.Tab) || validatedIncomingManager[4] == 4)
+            else if (Input.GetKeyDown(KeyCode.Tab) /*|| validatedIncomingManager[4] == 4*/)
             {
                 MoveHumanBlock(monsterEyepositions[1]);
             }
-            else if (Input.GetKeyDown("w") || validatedIncomingManager[4] == 2)
+            else if (Input.GetKeyDown("w") /*|| validatedIncomingManager[4] == 2*/)
             {
                 MoveHumanBlock(monsterEyepositions[2]);
             }
-            else if (Input.GetKeyDown("e") || validatedIncomingManager[4] == 3)
+            else if (Input.GetKeyDown("e") /*|| validatedIncomingManager[4] == 3*/)
             {
                 MoveHumanBlock(monsterEyepositions[3]);
             }
-            else if (Input.GetKeyDown("r") || validatedIncomingManager[4] == 0)
+            else if (Input.GetKeyDown("r") /*|| validatedIncomingManager[4] == 0*/)
             {
                 for (int i = 0; i < monsterEyepositions.Length; i++)
                 {
@@ -483,7 +486,7 @@ public class GameManager : MonoBehaviour
     {
         previousHumanPosition = currentHumanPosition;
         currentHumanPosition = validatedIncomingManager[6];
-        if (currentHumanPosition != previousHumanPosition)
+        if (currentHumanPosition != previousHumanPosition || !serialFlag)
         {
             if (validatedIncomingManager[6] != 0)
             {
@@ -492,19 +495,19 @@ public class GameManager : MonoBehaviour
                 playerAbsent = false;
             }
 
-            if (Input.GetKeyDown("u") && ValidatePlayerPosition("u") || validatedIncomingManager[6] == 4)
+            if (Input.GetKeyDown("u") && ValidatePlayerPosition("u") /*|| validatedIncomingManager[6] == 4*/)
             {
                 MoveHumanRepair(monsterAttackPositions[0]);
             }
-            else if (Input.GetKeyDown("t") && ValidatePlayerPosition("t") || validatedIncomingManager[6] == 2)
+            else if (Input.GetKeyDown("t") && ValidatePlayerPosition("t") /*|| validatedIncomingManager[6] == 2*/)
             {
                 MoveHumanRepair(monsterAttackPositions[1]);
             }
-            else if (Input.GetKeyDown("y") && ValidatePlayerPosition("y") || validatedIncomingManager[6] == 3)
+            else if (Input.GetKeyDown("y") && ValidatePlayerPosition("y") /*|| validatedIncomingManager[6] == 3*/)
             {
                 MoveHumanRepair(monsterAttackPositions[2]);
             }
-            else if (Input.GetKeyDown("i") || validatedIncomingManager[6] == 0)
+            else if (Input.GetKeyDown("i") /*|| validatedIncomingManager[6] == 0*/)
             {
                 playerAbsent = true;
                 InvalidateAllDefendedPoints();
