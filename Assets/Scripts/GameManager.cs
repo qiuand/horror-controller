@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
     public float monsterHealth;
     public float monsterAttackTimer = 0.5f;
 
-    float monsterAttackOriginalCooldown = 2f;
+    public float monsterAttackOriginalCooldown = 2f;
     public float monsterAttackCooldownTimer;
 
     bool visibleFlag;

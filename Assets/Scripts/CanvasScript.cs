@@ -75,14 +75,14 @@ public class CanvasScript : MonoBehaviour
             winText.enabled = true;
             winText.text = "THE HUMAN DIED";
         }
-        if (gameManagerScript.stabTimer > 0)
+/*        if (gameManagerScript.stabTimer > 0)
         {
             stabImage.enabled = true;
         }
         else
         {
             stabImage.enabled = false;
-        }
+        }*/
         repairBar.fillAmount = gameManagerScript.repairTimer / gameManagerScript.timeUntilCanRepair;
         chargeBar.fillAmount=gameManagerScript.monsterDamage/gameManagerScript.maxMonsterDamage;
 
