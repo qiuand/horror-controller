@@ -1126,10 +1126,9 @@ RectTransform:
   - {fileID: 1141660632843398676}
   - {fileID: 5124502389280177042}
   - {fileID: 6651793564806574154}
-  - {fileID: 8695838108114539734}
   - {fileID: 3712220832890052913}
-  - {fileID: 2984138824945957611}
   - {fileID: 9040407971199499253}
+  - {fileID: 8695838108114539734}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1665,7 +1664,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 16
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -1980,7 +1979,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 4.579733, y: 24.325325}
+  m_AnchoredPosition: {x: 4.579733, y: 36}
   m_SizeDelta: {x: 452.4831, y: 140.92}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2441908833294943415
@@ -2046,11 +2045,11 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 4096
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: -12.5
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -2352,37 +2351,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!1 &4183129742340840744
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2984138824945957611}
-  m_Layer: 0
-  m_Name: GameUI
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2984138824945957611
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4183129742340840744}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 49.55445, y: 75.715675, z: -3.37996}
-  m_LocalScale: {x: 1.305057, y: 1.305057, z: 1.305057}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1879008552520188213}
-  m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4281171285449852050
 GameObject:
   m_ObjectHideFlags: 0
@@ -2625,7 +2593,7 @@ GameObject:
   - component: {fileID: 3909459651090029321}
   - component: {fileID: 7426993307132174882}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Subtitle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3295,7 +3263,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8695838108114539734
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3314,7 +3282,7 @@ RectTransform:
   - {fileID: 5301285046374678009}
   - {fileID: 6114706879033782959}
   m_Father: {fileID: 1879008552520188213}
-  m_RootOrder: 8
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3671,12 +3639,12 @@ GameObject:
   - component: {fileID: 273805130419674714}
   - component: {fileID: 1307840203565259550}
   m_Layer: 5
-  m_Name: Night Blackout
+  m_Name: Blackout Inform Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &9040407971199499253
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3693,7 +3661,7 @@ RectTransform:
   - {fileID: 519915325172278145}
   - {fileID: 8475248052394650643}
   m_Father: {fileID: 1879008552520188213}
-  m_RootOrder: 11
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3885,7 +3853,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3712220832890052913
 Transform:
   m_ObjectHideFlags: 0
@@ -3901,7 +3869,7 @@ Transform:
   - {fileID: 8758698496074130801}
   - {fileID: 6596451131097517614}
   m_Father: {fileID: 1879008552520188213}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7809496587580762087
 GameObject:
