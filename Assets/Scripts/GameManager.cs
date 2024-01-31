@@ -760,7 +760,7 @@ public class GameManager : MonoBehaviour
 
     public void shakeCameras(float strength)
     {
-        StartCoroutine(shaker1.startShake(1f));
-
+/*        StartCoroutine(shaker1.startShake(1f));
+*/
     }
 }
