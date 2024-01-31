@@ -4,16 +4,23 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {
-    int nightCounter = 0;
+    float monsterStrengthIncrement=0.15f;
+    float monsterPetrifyIncrement = 0.25f;
+
+    public int nightCounter = 1;
+    public int maxNights = 6;
 
     public int tutorialIndex=99;
 
     public bool paused = false;
     public bool inTutorial = false;
     public bool gameLocked = true;
+    public bool tutorialCompleted = false;
+    public bool introSlideVisible = false;
 
     public bool serialFlag = false;
 
@@ -77,12 +84,12 @@ public class GameManager : MonoBehaviour
 
     bool visibleFlag;
 
-    float originalGameTimer = 5f;
+    float originalGameTimer = 30f;
     public float gameTimer;
 
     [SerializeField] TextMeshProUGUI petrifyText;
 
-    public float timeToPetrify=5f;
+    public float timeToPetrify=20f;
     public float petrifyTimer;
 
     public GameObject board;
@@ -156,9 +163,24 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown("a") && paused && !inTutorial && !tutorialCompleted && !introSlideVisible)
+        {
+            tutorialIndex = -1;
+            inTutorial = true;
+            humanCanvas.GetComponent<CanvasScript>().FadeInfo(null, null, null);
+            monsterCanvas.GetComponent<CanvasScript>().FadeInfo(null, null, null);
+        }
 
         if (Input.GetKeyDown("a"))
         {
+            if (introSlideVisible)
+            {
+                introSlideVisible = false;
+                gameLocked = false;
+                tutorialCompleted = true;
+                humanCanvas.GetComponent<CanvasScript>().FadeInfo(null, null, null);
+                monsterCanvas.GetComponent<CanvasScript>().FadeInfo(null, null, null);
+            }
             if (inTutorial && tutorialIndex < 2)
             {
                 tutorialIndex++;
@@ -166,10 +188,17 @@ public class GameManager : MonoBehaviour
             else if (inTutorial && tutorialIndex >= 2)
             {
                 inTutorial = false;
-                gameLocked = false;
+                introSlideVisible = true;
+                humanCanvas.GetComponent<CanvasScript>().FadeInfo("Night "+nightCounter+"/"+maxNights, "Survive.", null);
+                monsterCanvas.GetComponent<CanvasScript>().FadeInfo("Night " + nightCounter + "/" + maxNights, "Kill.", null);
             }
-            else if (paused)
+            if (paused && tutorialCompleted)
             {
+                if (gameTimer <= 0)
+                {
+                    humanCanvas.GetComponent<CanvasScript>().FadeInfo(null, null, null);
+                    monsterCanvas.GetComponent<CanvasScript>().FadeInfo(null, null, null);
+                }
                 paused = false;
                 ResetStats();
             }
@@ -178,19 +207,24 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown("a") && gameLocked && !inTutorial)
         {
+            gameLocked = false;
+            paused = true;
+
             humanCanvas.GetComponent<CanvasScript>().FadeMenu();
             monsterCanvas.GetComponent<CanvasScript>().FadeMenu();
 
-            gameLocked = false;
-            inTutorial = true;
-            tutorialIndex = 0;
+            humanCanvas.GetComponent<CanvasScript>().FadeInfo("You Are A Brutal Monster,","Hunting down a puny human in their home.","Kill the human in the next 6 nights.");
+            monsterCanvas.GetComponent<CanvasScript>().FadeInfo("You Are A Desperate Human,", "Trying to protect your home against a brutal monster.", "Survive for the next 6 nights.");
+
         }
 
+        Debug.Log(tutorialIndex);
 
+        CheckHouseSound();
 
         if (!gameLocked && !paused)
         {
-            CheckHouseSound();
+
 
             repairTimer += Time.deltaTime;
 
@@ -284,9 +318,9 @@ public class GameManager : MonoBehaviour
         }
         else if (gameTimer <= 0)
         {
-            cause = "Cause: Monster Ran Out of Time";
-            whoWon = "Human Victory";
             nightCounter++;
+            humanCanvas.GetComponent<CanvasScript>().FadeInfo("You Live to See Another Day.", "Night " + nightCounter + "/" + maxNights, "The monster grows angrier...<br>+15% faster attack charge<br>+25% deadlier gaze");
+            monsterCanvas.GetComponent<CanvasScript>().FadeInfo("The Human Lives to See Another Day.", "Night " + nightCounter+"/"+maxNights, "You grow angrier...<br>+15% faster attack charge<br>+25% deadlier gaze");
             paused = true;
 /*            StartCoroutine(LoadGameOver());
 */        }
@@ -348,14 +382,14 @@ public class GameManager : MonoBehaviour
                             player.GetComponent<Player>().playSound();
                         }
                         visibleFlag = true;*/
-            petrifyTimer += Time.deltaTime;
+            petrifyTimer += Time.deltaTime * monsterPetrifyIncrement ;
         }
         else
         {
             heartbeat.enabled = false;
             /*            visibleFlag = false;*/
-            petrifyTimer -= Time.deltaTime;
-        }
+/*            petrifyTimer -= Time.deltaTime;
+*/        }
         if (petrifyTimer <= 0)
         {
             petrifyTimer = 0;
@@ -659,14 +693,23 @@ public class GameManager : MonoBehaviour
 
     public void ResetStats()
     {
+        EmpowerMonster();
+
         gameTimer = originalGameTimer;
         for(int i=0;i<monsterAttackPositions.Length; i++)
         {
             monsterAttackPositions[i].GetComponent<AttackPoint>().health = weakPointHealth;
         }
-        petrifyTimer = timeToPetrify;
+        petrifyTimer = 0;
         monsterDamage = 0;
+        petrifyTimer = 0;
         monsterAttackTimer = monsterAttackOriginalCooldown;
 
+    }
+
+    public void EmpowerMonster()
+    {
+        monsterAttackOriginalCooldown -= monsterStrengthIncrement;
+        monsterPetrifyIncrement += 0.25f;
     }
 }

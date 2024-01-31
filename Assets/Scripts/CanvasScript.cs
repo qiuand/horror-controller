@@ -33,6 +33,7 @@ public class CanvasScript : MonoBehaviour
     TutorialManager tutManager;
 
     [SerializeField] GameObject BlackoutInfo;
+    [SerializeField] TextMeshProUGUI infoTitle, infoBody, infoTip;
 
     float needleCounter = 60;
     float needleDecrementRate = 1.0f; // 1 unit per second
@@ -58,15 +59,6 @@ public class CanvasScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!BlackoutInfo.activeInHierarchy && gameManagerScript.paused)
-        {
-            BlackoutInfo.SetActive(true);
-        }
-        else if (!gameManagerScript.paused && BlackoutInfo.activeInHierarchy)
-        {
-            BlackoutInfo.SetActive(false);
-        }
-
         if (gameManagerScript.inTutorial && gameManagerScript.tutorialIndex != 99)
         {
             tutManager.DisplaySlide(gameManagerScript.tutorialIndex, canvasID);
@@ -103,7 +95,7 @@ public class CanvasScript : MonoBehaviour
         monsterAttackText.text = "Attack Strength: " + gameManagerScript.monsterDamage;
         integrityText.text = "House Integrity: " + gameManagerScript.houseHealth / gameManagerScript.maxHouseHealth+"%";
 
-        timerText.text = gameManagerScript.timerString;
+        timerText.text = "Night "+gameManagerScript.nightCounter+"/"+gameManagerScript.maxNights+"<br>"+System.Math.Round(gameManagerScript.gameTimer,2);
 
         healthBar.fillAmount = (gameManagerScript.houseHealth / gameManagerScript.maxHouseHealth);
 
@@ -119,9 +111,19 @@ public class CanvasScript : MonoBehaviour
         }
     }
     
-    public void FadeInfo()
+    public void FadeInfo(string title, string body, string tip)
     {
-
+        if (!BlackoutInfo.activeInHierarchy)
+        {
+            BlackoutInfo.SetActive(true);
+        }
+        else if (BlackoutInfo.activeInHierarchy)
+        {
+            BlackoutInfo.SetActive(false);
+        }
+        infoTitle.text = title;
+        infoBody.text = body;
+        infoTip.text = tip;
     }
     public void FadeMenu()
     {
