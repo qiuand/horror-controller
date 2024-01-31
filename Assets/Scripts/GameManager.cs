@@ -15,8 +15,8 @@ public class GameManager : MonoBehaviour
     bool gameWon = false;
     bool countDownEnabled = false;
 
-    float monsterStrengthIncrement=0.15f;
-    float monsterPetrifyIncrement = 0.25f;
+    public float monsterStrengthIncrement=0.15f;
+    public float monsterPetrifyIncrement = 1f;
 
     public int nightCounter = 1;
     public int maxNights = 6;
@@ -91,7 +91,7 @@ public class GameManager : MonoBehaviour
 
     bool visibleFlag;
 
-    float originalGameTimer = 30f;
+    float originalGameTimer = 4f;
     public float gameTimer;
 
     [SerializeField] TextMeshProUGUI petrifyText;
@@ -222,12 +222,12 @@ public class GameManager : MonoBehaviour
             }
             if (paused && tutorialCompleted)
             {
+                ResetStats();
                 if (gameTimer <= 0)
                 {
                     countDownEnabled = true;
                 }
                 paused = false;
-                ResetStats();
             }
         }
         Debug.Log(tutorialIndex);
