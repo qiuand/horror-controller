@@ -6,6 +6,8 @@ public class CanvasScript : MonoBehaviour
 {
     public int canvasID;
 
+    [SerializeField] TextMeshProUGUI timer;
+
     [SerializeField] RawImage[] strengthBar;
 
     [SerializeField] TextMeshProUGUI separateWeakPointText;
@@ -59,6 +61,8 @@ public class CanvasScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        timer.text = ""+System.Math.Round(gameManagerScript.countdownTimer, 2);
+
         if (gameManagerScript.inTutorial && gameManagerScript.tutorialIndex != 99)
         {
             tutManager.DisplaySlide(gameManagerScript.tutorialIndex, canvasID);

@@ -8,7 +8,12 @@ using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {
+
+    float originalCountdown=5f;
+    public float countdownTimer;
+
     bool gameWon = false;
+    bool countDownEnabled = false;
 
     float monsterStrengthIncrement=0.15f;
     float monsterPetrifyIncrement = 0.25f;
@@ -134,6 +139,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        countdownTimer = originalCountdown;
+
         gameTimer = originalGameTimer;
 
         GameManagerSource = GetComponent<AudioSource>();
@@ -165,6 +172,20 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (countDownEnabled)
+        {
+            countdownTimer -= Time.deltaTime;
+            if (countdownTimer <= 0)
+            {
+                countdownTimer = originalCountdown;
+                countDownEnabled = false;
+                gameLocked = false;
+                paused = false;
+                tutorialCompleted = true;
+                humanCanvas.GetComponent<CanvasScript>().FadeInfo(null, null, null);
+                monsterCanvas.GetComponent<CanvasScript>().FadeInfo(null, null, null);
+            }
+        }
         if(Input.GetKeyDown("a") && gameWon)
         {
             SceneManager.LoadScene(0);
@@ -186,10 +207,7 @@ public class GameManager : MonoBehaviour
             if (introSlideVisible)
             {
                 introSlideVisible = false;
-                gameLocked = false;
-                tutorialCompleted = true;
-                humanCanvas.GetComponent<CanvasScript>().FadeInfo(null, null, null);
-                monsterCanvas.GetComponent<CanvasScript>().FadeInfo(null, null, null);
+                countDownEnabled = true;
             }
             if (inTutorial && tutorialIndex < 2)
             {
@@ -206,8 +224,7 @@ public class GameManager : MonoBehaviour
             {
                 if (gameTimer <= 0)
                 {
-                    humanCanvas.GetComponent<CanvasScript>().FadeInfo(null, null, null);
-                    monsterCanvas.GetComponent<CanvasScript>().FadeInfo(null, null, null);
+                    countDownEnabled = true;
                 }
                 paused = false;
                 ResetStats();
