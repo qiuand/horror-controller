@@ -132,6 +132,9 @@ public class CanvasScript : MonoBehaviour
     public void FadeMenu()
     {
         MenuObject.SetActive(false);
+    }
+    public void FadeGameUI()
+    {
         GameUI.SetActive(true);
     }
 }

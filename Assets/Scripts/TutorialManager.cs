@@ -51,7 +51,7 @@ public class TutorialManager : MonoBehaviour
             (
             "Attacking",
             "Smash your tail against weak points to damage the cabin. The human will move to the weak points to repair them.",
-            "Note: You cannot damage weak points the human is.",
+            "Note: You cannot damage weak points where the human stands.",
             monsterVideoArray[0],
             monsterImageArray[0]
             );

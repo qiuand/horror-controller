@@ -177,6 +177,8 @@ public class GameManager : MonoBehaviour
             inTutorial = true;
             humanCanvas.GetComponent<CanvasScript>().FadeInfo(null, null, null);
             monsterCanvas.GetComponent<CanvasScript>().FadeInfo(null, null, null);
+            humanCanvas.GetComponent<CanvasScript>().FadeGameUI();
+            monsterCanvas.GetComponent<CanvasScript>().FadeGameUI();
         }
 
         if (Input.GetKeyDown("a"))
@@ -221,8 +223,8 @@ public class GameManager : MonoBehaviour
             humanCanvas.GetComponent<CanvasScript>().FadeMenu();
             monsterCanvas.GetComponent<CanvasScript>().FadeMenu();
 
-            humanCanvas.GetComponent<CanvasScript>().FadeInfo("You Are A Brutal Monster,","Hunting down a puny human in their home.","Kill the human in the next 6 nights.");
-            monsterCanvas.GetComponent<CanvasScript>().FadeInfo("You Are A Desperate Human,", "Trying to protect your home against a brutal monster.", "Survive for the next 6 nights.");
+            humanCanvas.GetComponent<CanvasScript>().FadeInfo("You Are A <color=red>Brutal Monster</color>,","Hunting down a puny human in their home.","Kill the human in the next 6 nights.");
+            monsterCanvas.GetComponent<CanvasScript>().FadeInfo("You Are A <color=red>Desperate Human</color>,", "Trying to protect your home against a brutal monster.", "Survive for the next 6 nights.");
 
         }
 
@@ -323,7 +325,9 @@ public class GameManager : MonoBehaviour
                 cause = "Cause: Lethal Gaze";
             }
             gameWon = true;
-/*            StartCoroutine(LoadGameOver());*/
+            collapse.enabled = true;
+            scream.enabled = true;
+            /*            StartCoroutine(LoadGameOver());*/
         }
         else if (gameTimer <= 0)
         {
@@ -338,7 +342,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                humanCanvas.GetComponent<CanvasScript>().FadeInfo("GAME OVER", "Night " + nightCounter + "/" + maxNights, "The monster grows angrier...<br>+15% faster attack charge<br>+25% deadlier gaze");
+                humanCanvas.GetComponent<CanvasScript>().FadeInfo("GAME OVER", "Night " + nightCounter + "/" + maxNights, "But the monster grows angrier...<br>+15% faster attack charge<br>+25% deadlier gaze");
                 monsterCanvas.GetComponent<CanvasScript>().FadeInfo("The Human Lives to See Another Day.", "Night " + nightCounter + "/" + maxNights, "You grow angrier...<br>+15% faster attack charge<br>+25% deadlier gaze");
             }
             
