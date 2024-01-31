@@ -8,6 +8,8 @@ using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {
+    bool gameWon = false;
+
     float monsterStrengthIncrement=0.15f;
     float monsterPetrifyIncrement = 0.25f;
 
@@ -163,9 +165,15 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetKeyDown("a") && gameWon)
+        {
+            SceneManager.LoadScene(0);
+        }
+
         if (Input.GetKeyDown("a") && paused && !inTutorial && !tutorialCompleted && !introSlideVisible)
         {
             tutorialIndex = -1;
+            gameLocked = false;
             inTutorial = true;
             humanCanvas.GetComponent<CanvasScript>().FadeInfo(null, null, null);
             monsterCanvas.GetComponent<CanvasScript>().FadeInfo(null, null, null);
@@ -222,7 +230,7 @@ public class GameManager : MonoBehaviour
 
         CheckHouseSound();
 
-        if (!gameLocked && !paused)
+        if (!gameLocked)
         {
 
 
@@ -243,7 +251,7 @@ public class GameManager : MonoBehaviour
             material.SetFloat("_Float", 0 + (petrifyTimer / 5f - 0.3f));
             timeUntilNextAttack -= Time.deltaTime;
 
-            if (!inTutorial)
+            if (!inTutorial && !paused)
             {
                 UpdateTimer();
                 CheckWin();
@@ -314,13 +322,26 @@ public class GameManager : MonoBehaviour
             {
                 cause = "Cause: Lethal Gaze";
             }
+            gameWon = true;
 /*            StartCoroutine(LoadGameOver());*/
         }
         else if (gameTimer <= 0)
         {
             nightCounter++;
-            humanCanvas.GetComponent<CanvasScript>().FadeInfo("You Live to See Another Day.", "Night " + nightCounter + "/" + maxNights, "The monster grows angrier...<br>+15% faster attack charge<br>+25% deadlier gaze");
-            monsterCanvas.GetComponent<CanvasScript>().FadeInfo("The Human Lives to See Another Day.", "Night " + nightCounter+"/"+maxNights, "You grow angrier...<br>+15% faster attack charge<br>+25% deadlier gaze");
+            if (nightCounter > maxNights)
+            {
+                humanCanvas.GetComponent<CanvasScript>().FadeInfo("GAME OVER", "The human has survived.", "Press button to play again");
+                monsterCanvas.GetComponent<CanvasScript>().FadeInfo("GAME OVER", "The human has survived.", "Press button to play again");
+                paused = true;
+                gameLocked = true;
+                gameWon = true;
+            }
+            else
+            {
+                humanCanvas.GetComponent<CanvasScript>().FadeInfo("GAME OVER", "Night " + nightCounter + "/" + maxNights, "The monster grows angrier...<br>+15% faster attack charge<br>+25% deadlier gaze");
+                monsterCanvas.GetComponent<CanvasScript>().FadeInfo("The Human Lives to See Another Day.", "Night " + nightCounter + "/" + maxNights, "You grow angrier...<br>+15% faster attack charge<br>+25% deadlier gaze");
+            }
+            
             paused = true;
 /*            StartCoroutine(LoadGameOver());
 */        }

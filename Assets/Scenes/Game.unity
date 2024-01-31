@@ -40905,7 +40905,7 @@ PrefabInstance:
       objectReference: {fileID: 2800000, guid: e1d7e091f735c2b4d890851815c93154, type: 3}
     - target: {fileID: 6546476698436229668, guid: f6714174f8bb8184eb08e99354ed3c12, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6651793564806574154, guid: f6714174f8bb8184eb08e99354ed3c12, type: 3}
       propertyPath: m_RootOrder
@@ -87574,7 +87574,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2488581558560728796, guid: f6714174f8bb8184eb08e99354ed3c12, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 53.5731
+      value: 98.5894
       objectReference: {fileID: 0}
     - target: {fileID: 2488581558560728796, guid: f6714174f8bb8184eb08e99354ed3c12, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -87582,7 +87582,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2488581558560728796, guid: f6714174f8bb8184eb08e99354ed3c12, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 210
+      value: 191.21004
       objectReference: {fileID: 0}
     - target: {fileID: 2586921844181789535, guid: f6714174f8bb8184eb08e99354ed3c12, type: 3}
       propertyPath: m_RootOrder
@@ -87654,15 +87654,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5203506896988037480, guid: f6714174f8bb8184eb08e99354ed3c12, type: 3}
       propertyPath: m_fontSize
-      value: 29.79
+      value: 22.89
       objectReference: {fileID: 0}
     - target: {fileID: 5203506896988037480, guid: f6714174f8bb8184eb08e99354ed3c12, type: 3}
       propertyPath: m_fontSizeBase
-      value: 29.79
+      value: 22.89
       objectReference: {fileID: 0}
     - target: {fileID: 5203506896988037480, guid: f6714174f8bb8184eb08e99354ed3c12, type: 3}
       propertyPath: m_enableAutoSizing
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5203506896988037480, guid: f6714174f8bb8184eb08e99354ed3c12, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 256
       objectReference: {fileID: 0}
     - target: {fileID: 5203506896988037480, guid: f6714174f8bb8184eb08e99354ed3c12, type: 3}
       propertyPath: m_HorizontalAlignment

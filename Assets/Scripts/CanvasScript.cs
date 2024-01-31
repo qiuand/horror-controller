@@ -74,17 +74,21 @@ public class CanvasScript : MonoBehaviour
         }
         SetNeedle();
 
-        if (gameManagerScript.gameTimer >= 21600f)
+        if (gameManagerScript.gameTimer <=0 && gameManagerScript.nightCounter>gameManagerScript.maxNights)
         {
             winText.enabled = true;
             winText.text = "THE HUMAN SURVIVED";
         }
-        else if(gameManagerScript.petrifyTimer>= gameManagerScript.timeToPetrify || gameManagerScript.CalculateHouseDestroyed())
+        else if(gameManagerScript.petrifyTimer>= gameManagerScript.timeToPetrify)
         {
             winText.enabled = true;
-            winText.text = "THE HUMAN DIED";
+            winText.text = "THE HUMAN WAS KILLED";
         }
-
+        else if (gameManagerScript.CalculateHouseDestroyed())
+        {
+            winText.enabled = true;
+            winText.text = "THE HOUSE WAS DESTROYED";
+        }
         repairBar.fillAmount = gameManagerScript.repairTimer / gameManagerScript.timeUntilCanRepair;
         chargeBar.fillAmount=gameManagerScript.monsterDamage/gameManagerScript.maxMonsterDamage;
 
