@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
     public bool tutorialCompleted = false;
     public bool introSlideVisible = false;
 
-    public bool serialFlag = false;
+    bool serialFlag = true;
 
     public bool playerAbsent = true;
 
@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
 
     bool visibleFlag;
 
-    float originalGameTimer = 4f;
+    float originalGameTimer = 60f;
     public float gameTimer;
 
     [SerializeField] TextMeshProUGUI petrifyText;
@@ -226,15 +226,12 @@ public class GameManager : MonoBehaviour
             {
                 ResetStats();
                 countDownEnabled = true;
-
-                paused = false;
             }
         }
         Debug.Log(tutorialIndex);
 
         if (Input.GetKeyDown("a") && gameLocked && !inTutorial)
         {
-            gameLocked = false;
             paused = true;
 
             humanCanvas.GetComponent<CanvasScript>().FadeMenu();
@@ -249,26 +246,30 @@ public class GameManager : MonoBehaviour
 
         CheckHouseSound();
 
+
+        LightUpLEDHealth(3, monsterAttackPositions[1].GetComponent<AttackPoint>().health);
+        LightUpLEDHealth(4, monsterAttackPositions[0].GetComponent<AttackPoint>().health);
+        LightUpLEDHealth(6, monsterAttackPositions[2].GetComponent<AttackPoint>().health);
+
+        LightUpLEDWindow(attachedEyeWall.GetComponent<Window>().windowID);
+
+        if (SerialCommunications.communicationReadyFlag)
+        {
+            validatedIncomingManager = SerialCommunications.validatedIncoming;
+            SerialCommunications.communicationReadyFlag = false;
+        }
+
         if (!gameLocked)
         {
 
 
             repairTimer += Time.deltaTime;
 
-            LightUpLEDHealth(3, monsterAttackPositions[1].GetComponent<AttackPoint>().health);
-            LightUpLEDHealth(4, monsterAttackPositions[0].GetComponent<AttackPoint>().health);
-            LightUpLEDHealth(6, monsterAttackPositions[2].GetComponent<AttackPoint>().health);
-
-            if (SerialCommunications.communicationReadyFlag)
-            {
-                validatedIncomingManager = SerialCommunications.validatedIncoming;
-                SerialCommunications.communicationReadyFlag = false;
-            }
 
             monsterAttackCooldownTimer -= Time.deltaTime;
 
-            material.SetFloat("_Float", 0 + (petrifyTimer / 5f - 0.3f));
-            timeUntilNextAttack -= Time.deltaTime;
+/*            material.SetFloat("_Float", 0 + (petrifyTimer / 5f - 0.3f));
+*/            timeUntilNextAttack -= Time.deltaTime;
 
             if (!inTutorial && !paused)
             {
@@ -287,7 +288,6 @@ public class GameManager : MonoBehaviour
             PlayerRepairInput();
 
             LerpMonsterPosition();
-            LightUpLEDWindow(attachedEyeWall.GetComponent<Window>().windowID);
 
 
             if (monsterDamage >= 1)
@@ -349,13 +349,14 @@ public class GameManager : MonoBehaviour
         else if (gameTimer <= 0)
         {
             nightCounter++;
+            paused = true;
+            gameLocked = true;
+            gameWon = true;
             if (nightCounter > maxNights)
             {
                 humanCanvas.GetComponent<CanvasScript>().FadeInfo("GAME OVER", "The human has survived.", "Press button to play again");
                 monsterCanvas.GetComponent<CanvasScript>().FadeInfo("GAME OVER", "The human has survived.", "Press button to play again");
-                paused = true;
-                gameLocked = true;
-                gameWon = true;
+
             }
             else
             {
@@ -500,33 +501,33 @@ public class GameManager : MonoBehaviour
         currentEyePosition = validatedIncomingManager[3];
 /*        print("Previous: " + previousEyePosition+" Current: " + currentEyePosition);
 */        
-        if (previousEyePosition != currentEyePosition || !serialFlag)
+        if (previousEyePosition != currentEyePosition)
             {
-                if (Input.GetKeyDown("5") /*|| validatedIncomingManager[3] == 1*/)
+                if (Input.GetKeyDown("5") || validatedIncomingManager[3] == 1)
                 {
                     monsterHUD.SetActive(true);
                     changeLerpTarget(monsterEyepositions[0]);
 /*                    MoveEyeCameraToLocation(monsterEyepositions[0]);
 */            }
-            else if (Input.GetKeyDown("9") /*|| validatedIncomingManager[3] == 4*/)
+            else if (Input.GetKeyDown("9") || validatedIncomingManager[3] == 4)
             {
                 monsterHUD.SetActive(true);
                 changeLerpTarget(monsterEyepositions[1]);
                 MoveEyeCameraToLocation(monsterEyepositions[1]);
             }
-            else if (Input.GetKeyDown("7") /*|| validatedIncomingManager[3] == 3*/)
+            else if (Input.GetKeyDown("7") || validatedIncomingManager[3] == 3)
             {
                 monsterHUD.SetActive(true);
                 changeLerpTarget(monsterEyepositions[2]);
                 MoveEyeCameraToLocation(monsterEyepositions[2]);
             }
-            else if (Input.GetKeyDown("6") /*|| validatedIncomingManager[3] == 2*/)
+            else if (Input.GetKeyDown("6") || validatedIncomingManager[3] == 2)
             {
                 monsterHUD.SetActive(true);
                 changeLerpTarget(monsterEyepositions[3]);
                 MoveEyeCameraToLocation(monsterEyepositions[3]);
             }
-            else if (Input.GetKeyDown("8") /*|| validatedIncomingManager[3] == 0*/)
+            else if (Input.GetKeyDown("8") || validatedIncomingManager[3] == 0)
                 {
                     monsterHUD.SetActive(true);
                     changeLerpTarget(monsterEyepositions[4]);
@@ -536,7 +537,7 @@ public class GameManager : MonoBehaviour
         }
     void MonsterAttackInput()
     {
-        if (/*monsterAttackCooldownTimer <= 0*/ true)
+        if (true)
         {
             if (Input.GetKeyDown("2") || validatedIncomingManager[5] == 4)
             {
@@ -576,23 +577,23 @@ public class GameManager : MonoBehaviour
         currentBoardPosition = validatedIncomingManager[4];
         if (currentBoardPosition != previousBoardPosition || !serialFlag)
         {
-            if (Input.GetKeyDown("q") /*|| validatedIncomingManager[4] == 1*/)
+            if (Input.GetKeyDown("q") || validatedIncomingManager[4] == 1)
             {
                 MoveHumanBlock(monsterEyepositions[0]);
             }
-            else if (Input.GetKeyDown(KeyCode.Tab) /*|| validatedIncomingManager[4] == 4*/)
+            else if (Input.GetKeyDown(KeyCode.Tab) || validatedIncomingManager[4] == 4)
             {
                 MoveHumanBlock(monsterEyepositions[1]);
             }
-            else if (Input.GetKeyDown("w") /*|| validatedIncomingManager[4] == 2*/)
+            else if (Input.GetKeyDown("w") || validatedIncomingManager[4] == 2)
             {
                 MoveHumanBlock(monsterEyepositions[2]);
             }
-            else if (Input.GetKeyDown("e") /*|| validatedIncomingManager[4] == 3*/)
+            else if (Input.GetKeyDown("e") || validatedIncomingManager[4] == 3)
             {
                 MoveHumanBlock(monsterEyepositions[3]);
             }
-            else if (Input.GetKeyDown("r") /*|| validatedIncomingManager[4] == 0*/)
+            else if (Input.GetKeyDown("r") || validatedIncomingManager[4] == 0)
             {
                 for (int i = 0; i < monsterEyepositions.Length; i++)
                 {
@@ -628,19 +629,19 @@ public class GameManager : MonoBehaviour
                 playerAbsent = false;
             }
 
-            if (Input.GetKeyDown("u") && ValidatePlayerPosition("u") /*|| validatedIncomingManager[6] == 4*/)
+            if (Input.GetKeyDown("u") && ValidatePlayerPosition("u") || validatedIncomingManager[6] == 4)
             {
                 MoveHumanRepair(monsterAttackPositions[0]);
             }
-            else if (Input.GetKeyDown("t") && ValidatePlayerPosition("t") /*|| validatedIncomingManager[6] == 2*/)
+            else if (Input.GetKeyDown("t") && ValidatePlayerPosition("t") || validatedIncomingManager[6] == 2)
             {
                 MoveHumanRepair(monsterAttackPositions[1]);
             }
-            else if (Input.GetKeyDown("y") && ValidatePlayerPosition("y") /*|| validatedIncomingManager[6] == 3*/)
+            else if (Input.GetKeyDown("y") && ValidatePlayerPosition("y") || validatedIncomingManager[6] == 3)
             {
                 MoveHumanRepair(monsterAttackPositions[2]);
             }
-            else if (Input.GetKeyDown("i") /*|| validatedIncomingManager[6] == 0*/)
+            else if (Input.GetKeyDown("i") || validatedIncomingManager[6] == 0)
             {
                 playerAbsent = true;
                 InvalidateAllDefendedPoints();

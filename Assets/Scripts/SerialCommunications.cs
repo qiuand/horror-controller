@@ -7,7 +7,7 @@ using System.Threading;
 public class SerialCommunications : MonoBehaviour
 {
 
-    public static bool communicationReadyFlag=false;
+    public static bool communicationReadyFlag=true;
 
     Thread IOThread = new Thread(DataThread);
 
@@ -33,8 +33,6 @@ public class SerialCommunications : MonoBehaviour
 
         while (true)
         {
-            sp.Write(outgoing, 0, 7);
-
             sp.Read(incoming, 0, 7);
 
             if (incoming[0] == 'P' && incoming[1] == 'C')
@@ -48,11 +46,15 @@ public class SerialCommunications : MonoBehaviour
                     communicationReadyFlag = true;
                 }
             }
-/*            Debug.Log("Serial Script: " + validatedIncoming[0] + " + " + validatedIncoming[1] + " + " + validatedIncoming[2] + " + " + validatedIncoming[3] + " + " + validatedIncoming[4] + " + " + validatedIncoming[5] + " + " + validatedIncoming[6]);
-*/
+            else
+            {
+                sp.Write(outgoing, 0, 7);
+            }
+            /*            Debug.Log("Serial Script: " + validatedIncoming[0] + " + " + validatedIncoming[1] + " + " + validatedIncoming[2] + " + " + validatedIncoming[3] + " + " + validatedIncoming[4] + " + " + validatedIncoming[5] + " + " + validatedIncoming[6]);
+            */
 
 
-            Thread.Sleep(20);
+            Thread.Sleep(10);
         }
     }
 

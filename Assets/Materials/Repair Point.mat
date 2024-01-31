@@ -257,7 +257,7 @@ Material:
     - _EnableGeometricSpecularAA: 0
     - _EnergyConservingSpecularColor: 1
     - _EnvironmentReflections: 1
-    - _Float: -0.3
+    - _Float: 1.0181167
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1

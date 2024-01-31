@@ -125,7 +125,7 @@ public class AttackPoint : MonoBehaviour
     }
     private void Repair()
     {
-        if (repairing && health < maxHealth && health>0)
+        if (repairing && health < maxHealth /*&& health>=0*/)
         {
             repairSource.enabled = true;
 

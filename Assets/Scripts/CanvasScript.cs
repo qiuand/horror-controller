@@ -83,12 +83,12 @@ public class CanvasScript : MonoBehaviour
             winText.enabled = true;
             winText.text = "THE HUMAN SURVIVED";
         }
-        else if(gameManagerScript.petrifyTimer>= gameManagerScript.timeToPetrify)
+        else if(gameManagerScript.petrifyTimer>= gameManagerScript.timeToPetrify && !gameManagerScript.paused && !gameManagerScript.inTutorial)
         {
             winText.enabled = true;
             winText.text = "THE HUMAN WAS KILLED";
         }
-        else if (gameManagerScript.CalculateHouseDestroyed())
+        else if (gameManagerScript.CalculateHouseDestroyed() && !gameManagerScript.paused && !gameManagerScript.inTutorial)
         {
             winText.enabled = true;
             winText.text = "THE HOUSE WAS DESTROYED";

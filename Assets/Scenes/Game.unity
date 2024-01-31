@@ -1166,7 +1166,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh36324
+  m_Name: pb_Mesh35312
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -78512,6 +78512,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a0ebd3905bdec14d8106c7c598005dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shaker1: {fileID: 0}
+  shaker2: {fileID: 0}
   countdownTimer: 0
   monsterStrengthIncrement: 0.15
   monsterPetrifyIncrement: 1
@@ -78523,7 +78525,6 @@ MonoBehaviour:
   gameLocked: 1
   tutorialCompleted: 0
   introSlideVisible: 0
-  serialFlag: 0
   playerAbsent: 1
   scream: {fileID: 1801125537}
   hiddenPlayerPosition: {fileID: 2090064654}
@@ -78543,9 +78544,9 @@ MonoBehaviour:
   monsterAttackTimer: 1
   monsterAttackOriginalCooldown: 1
   monsterAttackCooldownTimer: 0
-  gameTimer: 80
+  gameTimer: 5
   petrifyText: {fileID: 1333259128}
-  timeToPetrify: 3.5
+  timeToPetrify: 25
   petrifyTimer: 0
   board: {fileID: 1688087715}
   player: {fileID: 157790798}
