@@ -9,6 +9,8 @@ using UnityEngine.UIElements;
 public class GameManager : MonoBehaviour
 {
 
+    public Shake shaker1, shaker2;
+
     float originalCountdown=5f;
     public float countdownTimer;
 
@@ -223,10 +225,8 @@ public class GameManager : MonoBehaviour
             if (paused && tutorialCompleted)
             {
                 ResetStats();
-                if (gameTimer <= 0)
-                {
-                    countDownEnabled = true;
-                }
+                countDownEnabled = true;
+
                 paused = false;
             }
         }
@@ -542,16 +542,19 @@ public class GameManager : MonoBehaviour
             {
                 MoveMonsterTail(monsterAttackPositions[0]);
                 monsterAttackPositions[0].GetComponent<AttackPoint>().OnHit();
+                shakeCameras(1f);
             }
             else if (Input.GetKeyDown("1") || validatedIncomingManager[5] == 2)
             {
                 MoveMonsterTail(monsterAttackPositions[1]);
                 monsterAttackPositions[1].GetComponent<AttackPoint>().OnHit();
+                shakeCameras(1f);
             }
             else if (Input.GetKeyDown("3") || validatedIncomingManager[5] == 3)
             {
                 MoveMonsterTail(monsterAttackPositions[2]);
                 monsterAttackPositions[2].GetComponent<AttackPoint>().OnHit();
+                shakeCameras(1f);     
             }
             else if (Input.GetKeyDown("4"))
             {
@@ -753,5 +756,11 @@ public class GameManager : MonoBehaviour
     {
         monsterAttackOriginalCooldown -= monsterStrengthIncrement;
         monsterPetrifyIncrement += 0.25f;
+    }
+
+    public void shakeCameras(float strength)
+    {
+        StartCoroutine(shaker1.startShake(1f));
+
     }
 }
