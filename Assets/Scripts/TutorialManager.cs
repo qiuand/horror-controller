@@ -9,11 +9,12 @@ public class TutorialManager : MonoBehaviour
 {
     public class TutorialObject : MonoBehaviour
     {
+
         public string title, body, tippie;
         public VideoClip video;
-        public RawImage illustration;
+        public Texture illustration;
 
-        public TutorialObject(string tit, string bod, string tip, VideoClip vid, RawImage illus)
+        public TutorialObject(string tit, string bod, string tip, VideoClip vid, Texture illus)
         {
             this.title = tit;
             this.body = bod;
@@ -23,11 +24,15 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
+    GameManager gameManagerScript;
+
+    public GameObject TutorialFrame;
+
     public VideoClip[] monsterVideoArray = new VideoClip[3];
-    public RawImage[] monsterImageArray = new RawImage[3];
+    public Texture[] monsterImageArray = new Texture[3];
 
     public VideoClip[] humanVideoArray = new VideoClip[3];
-    public RawImage[] humanImageArray = new RawImage[3];
+    public Texture[] humanImageArray = new Texture[3];
 
     public TutorialObject[] monsterTutorialArray= new TutorialObject[3];
     public TutorialObject[] humanTutorialArray = new TutorialObject[3];
@@ -36,11 +41,12 @@ public class TutorialManager : MonoBehaviour
     public VideoPlayer videoUI;
     public RawImage illusUI;
 
-    public int canvasID;
-
     // Start is called before the first frame update
     void Start()
     {
+
+        gameManagerScript = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameManager>();
+
         monsterTutorialArray[0] = new TutorialObject
             (
             "Attacking",
@@ -77,8 +83,8 @@ public class TutorialManager : MonoBehaviour
         humanTutorialArray[1] = new TutorialObject
             (
             "Lethal Gaze",
-            "The monster can peer through your windows, and slowly kill you with their lethal gaze.\r\nPlace your barricade piece on a window to block the monster’s vision.\r\nNote: You can also poke the barricade off the window.\r\n",
-            "Note: You can also poke the barricade off the window.",
+            "The monster can peer through your windows, and slowly kill you with their lethal gaze.\r\nPlace your barricade piece on a window to block the monster’s vision.",
+            "Note: You can also poke the eye off the window.",
             humanVideoArray[1],
             humanImageArray[1]
             );
@@ -96,6 +102,35 @@ public class TutorialManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (!TutorialFrame.activeInHierarchy && gameManagerScript.inTutorial)
+        {
+            TutorialFrame.SetActive(true);
+        }
+        else if (!gameManagerScript.inTutorial)
+        {
+            TutorialFrame.SetActive(false);
+        }
+    }
+
+    public void DisplaySlide(int index, int canvasID)
+    {
+        switch (canvasID)
+        {
+            case 0:
+                titleUI.text = monsterTutorialArray[index].title;
+                bodyUI.text = monsterTutorialArray[index].body;
+                tipUI.text = monsterTutorialArray[index].tippie;
+/*                videoUI.GetComponent<VideoPlayer>().clip = monsterTutorialArray[index].video;
+                illusUI.GetComponent<RawImage>().texture = monsterTutorialArray[index].illustration;*/
+                break;
+            case 1:
+                titleUI.text = humanTutorialArray[index].title;
+                bodyUI.text = humanTutorialArray[index].body;
+                tipUI.text = humanTutorialArray[index].tippie;
+/*                videoUI.GetComponent<VideoPlayer>().clip = humanTutorialArray[index].video;
+                illusUI.GetComponent<RawImage>().texture = humanTutorialArray[index].illustration;*/
+                break;
+
+        }
     }
 }

@@ -1,11 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class CanvasScript : MonoBehaviour
 {
+    public int canvasID;
+
     [SerializeField] RawImage[] strengthBar;
 
     [SerializeField] TextMeshProUGUI separateWeakPointText;
@@ -23,10 +23,16 @@ public class CanvasScript : MonoBehaviour
     [SerializeField] Image chargeBar;
     [SerializeField] RawImage speedoNeedle;
 
-    [SerializeField] TextMeshProUGUI integrityText
-        ;
+    [SerializeField] TextMeshProUGUI integrityText;
     [SerializeField] TextMeshProUGUI petrifyText;
     [SerializeField] TextMeshProUGUI timerText;
+
+    [SerializeField] GameObject MenuObject;
+    [SerializeField] GameObject GameUI;
+
+    TutorialManager tutManager;
+
+    [SerializeField] GameObject BlackoutInfo;
 
     float needleCounter = 60;
     float needleDecrementRate = 1.0f; // 1 unit per second
@@ -37,6 +43,7 @@ public class CanvasScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        tutManager = GetComponent<TutorialManager>();
         gameManagerScript =GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameManager>();
     }
 
@@ -51,6 +58,20 @@ public class CanvasScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!BlackoutInfo.activeInHierarchy && gameManagerScript.paused)
+        {
+            BlackoutInfo.SetActive(true);
+        }
+        else if (!gameManagerScript.paused && BlackoutInfo.activeInHierarchy)
+        {
+            BlackoutInfo.SetActive(false);
+        }
+
+        if (gameManagerScript.inTutorial && gameManagerScript.tutorialIndex != 99)
+        {
+            tutManager.DisplaySlide(gameManagerScript.tutorialIndex, canvasID);
+        }
+
         for (int i = 0; i < strengthBar.Length; i++)
         {
             strengthBar[i].gameObject.SetActive(false);
@@ -60,10 +81,6 @@ public class CanvasScript : MonoBehaviour
             strengthBar[i].gameObject.SetActive(true);
         }
         SetNeedle();
-        separateWeakPointText.text =
-            "Weak point 1: " + gameManagerScript.monsterAttackPositions[0].GetComponent<AttackPoint>().health / gameManagerScript.monsterAttackPositions[0].GetComponent<AttackPoint>().maxHealth+"<br>"+
-            "Weak point 2: " + gameManagerScript.monsterAttackPositions[1].GetComponent<AttackPoint>().health / gameManagerScript.monsterAttackPositions[1].GetComponent<AttackPoint>().maxHealth+ "<br>"+
-            "Weak point 2: " + gameManagerScript.monsterAttackPositions[2].GetComponent<AttackPoint>().health / gameManagerScript.monsterAttackPositions[2].GetComponent<AttackPoint>().maxHealth + "<br>";
 
         if (gameManagerScript.gameTimer >= 21600f)
         {
@@ -75,33 +92,19 @@ public class CanvasScript : MonoBehaviour
             winText.enabled = true;
             winText.text = "THE HUMAN DIED";
         }
-/*        if (gameManagerScript.stabTimer > 0)
-        {
-            stabImage.enabled = true;
-        }
-        else
-        {
-            stabImage.enabled = false;
-        }*/
+
         repairBar.fillAmount = gameManagerScript.repairTimer / gameManagerScript.timeUntilCanRepair;
         chargeBar.fillAmount=gameManagerScript.monsterDamage/gameManagerScript.maxMonsterDamage;
 
         float petrifyRatio = gameManagerScript.petrifyTimer/gameManagerScript.timeToPetrify;
-
-/*        petrifyBar.GetComponent<Image>(). = new Color(255f*petrifyRatio, 255f-255f* petrifyRatio*2, 0);
-*/        petrifyBar.fillAmount= (gameManagerScript.timeToPetrify-gameManagerScript.petrifyTimer)/gameManagerScript.timeToPetrify;
+        petrifyBar.fillAmount= (gameManagerScript.timeToPetrify-gameManagerScript.petrifyTimer)/gameManagerScript.timeToPetrify;
         
         monsterHealthBar.fillAmount = gameManagerScript.monsterHealth / gameManagerScript.monsterMaxHealth;
         monsterAttackText.text = "Attack Strength: " + gameManagerScript.monsterDamage;
         integrityText.text = "House Integrity: " + gameManagerScript.houseHealth / gameManagerScript.maxHouseHealth+"%";
 
-        timerText.text = gameManagerScript.timerString+"AM";
-        if (gameManagerScript.gameTimer >= (gameManagerScript.gameTimerMax * (5/6f))){
-            timerText.color = new Color(255, 0, 0);
-        }
-        else if(gameManagerScript.gameTimer>=(gameManagerScript.gameTimerMax/2)){
-            timerText.color = new Color(255, 255, 0);
-        }
+        timerText.text = gameManagerScript.timerString;
+
         healthBar.fillAmount = (gameManagerScript.houseHealth / gameManagerScript.maxHouseHealth);
 
         if (gameManagerScript.playerIsVisible)
@@ -114,6 +117,15 @@ public class CanvasScript : MonoBehaviour
             petrifyText.color = Color.white;
             petrifyText.text = "Not visible: " + System.Math.Round(gameManagerScript.petrifyTimer) + " seconds to death";
         }
-/*        petrifyText.text = "Time to petrification: " + System.Math.Round(gameManagerScript.petrifyTimer, 2) + " seconds";*/
+    }
+    
+    public void FadeInfo()
+    {
+
+    }
+    public void FadeMenu()
+    {
+        MenuObject.SetActive(false);
+        GameUI.SetActive(true);
     }
 }

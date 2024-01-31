@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+
     float bufferTimer;
     float bufferTimerOriginal = 0.3f;
 

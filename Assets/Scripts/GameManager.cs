@@ -7,6 +7,13 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    int nightCounter = 0;
+
+    public int tutorialIndex=99;
+
+    public bool paused = false;
+    public bool inTutorial = false;
+    public bool gameLocked = true;
 
     public bool serialFlag = false;
 
@@ -65,13 +72,13 @@ public class GameManager : MonoBehaviour
     public float monsterHealth;
     public float monsterAttackTimer = 0.5f;
 
-    public float monsterAttackOriginalCooldown = 2f;
+    public float monsterAttackOriginalCooldown = 1f;
     public float monsterAttackCooldownTimer;
 
     bool visibleFlag;
 
-    public float gameTimer = 0f;
-    public float gameTimerMax=21600f;
+    float originalGameTimer = 5f;
+    public float gameTimer;
 
     [SerializeField] TextMeshProUGUI petrifyText;
 
@@ -109,6 +116,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] GameObject defaultBarricadePoint;
 
+    [SerializeField] GameObject monsterCanvas, humanCanvas;
+
     private void Awake()
     {
 
@@ -116,6 +125,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameTimer = originalGameTimer;
+
         GameManagerSource = GetComponent<AudioSource>();
 
         repairTimer = timeUntilCanRepair;
@@ -124,8 +135,7 @@ public class GameManager : MonoBehaviour
 
         timeUntilNextAttack = originalTimeUntilNextAttack;
 
-/*        monsterDamage = minMonsterDamage;
-*/        monsterHealth = monsterMaxHealth;
+        monsterHealth = monsterMaxHealth;
 
         monsterAttackCooldownTimer = monsterAttackTimer;
 
@@ -146,73 +156,115 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        for(int i=0; i<monsterAttackPositions.Length; i++)
+
+        if (Input.GetKeyDown("a"))
+        {
+            if (inTutorial && tutorialIndex < 2)
+            {
+                tutorialIndex++;
+            }
+            else if (inTutorial && tutorialIndex >= 2)
+            {
+                inTutorial = false;
+                gameLocked = false;
+            }
+            else if (paused)
+            {
+                paused = false;
+                ResetStats();
+            }
+        }
+        Debug.Log(tutorialIndex);
+
+        if (Input.GetKeyDown("a") && gameLocked && !inTutorial)
+        {
+            humanCanvas.GetComponent<CanvasScript>().FadeMenu();
+            monsterCanvas.GetComponent<CanvasScript>().FadeMenu();
+
+            gameLocked = false;
+            inTutorial = true;
+            tutorialIndex = 0;
+        }
+
+
+
+        if (!gameLocked && !paused)
+        {
+            CheckHouseSound();
+
+            repairTimer += Time.deltaTime;
+
+            LightUpLEDHealth(3, monsterAttackPositions[1].GetComponent<AttackPoint>().health);
+            LightUpLEDHealth(4, monsterAttackPositions[0].GetComponent<AttackPoint>().health);
+            LightUpLEDHealth(6, monsterAttackPositions[2].GetComponent<AttackPoint>().health);
+
+            if (SerialCommunications.communicationReadyFlag)
+            {
+                validatedIncomingManager = SerialCommunications.validatedIncoming;
+                SerialCommunications.communicationReadyFlag = false;
+            }
+
+            monsterAttackCooldownTimer -= Time.deltaTime;
+
+            material.SetFloat("_Float", 0 + (petrifyTimer / 5f - 0.3f));
+            timeUntilNextAttack -= Time.deltaTime;
+
+            if (!inTutorial)
+            {
+                UpdateTimer();
+                CheckWin();
+                houseDestroyed = CalculateHouseDestroyed();
+                houseHealth = CalculateHouseHealth();
+            }
+
+            CheckIfBoarded();
+
+            ChargeMonsterDamage();
+
+            MonsterInput();
+            HumanBlockInput();
+            PlayerRepairInput();
+
+            LerpMonsterPosition();
+            LightUpLEDWindow(attachedEyeWall.GetComponent<Window>().windowID);
+
+
+            if (monsterDamage >= 1)
+            {
+                MonsterAttackInput();
+            }
+
+            PetrifyTimer();
+
+            if (Input.GetKeyDown("b"))
+            {
+                SceneManager.LoadScene(0);
+            }
+        }
+
+    }
+
+    void CheckHouseSound()
+    {
+        for (int i = 0; i < monsterAttackPositions.Length; i++)
         {
             float greatestDamage = 0;
-            if (8-monsterAttackPositions[i].GetComponent<AttackPoint>().health > greatestDamage)
+            if (8 - monsterAttackPositions[i].GetComponent<AttackPoint>().health > greatestDamage)
             {
                 greatestDamage = 8 - monsterAttackPositions[i].GetComponent<AttackPoint>().health;
                 Debug.Log(greatestDamage);
-                GameManagerSource.volume = greatestDamage*0.17f;
+                GameManagerSource.volume = greatestDamage * 0.17f;
             }
-        }
-        repairTimer += Time.deltaTime;
-/*        Debug.Log(repairTimer);
-*/
-        LightUpLEDHealth(3, monsterAttackPositions[1].GetComponent<AttackPoint>().health);
-        LightUpLEDHealth(4, monsterAttackPositions[0].GetComponent<AttackPoint>().health);
-        LightUpLEDHealth(6, monsterAttackPositions[2].GetComponent<AttackPoint>().health);
-
-        if (SerialCommunications.communicationReadyFlag)
-        {
-            validatedIncomingManager = SerialCommunications.validatedIncoming;
-            SerialCommunications.communicationReadyFlag = false;
-        }
-        /*        Debug.Log("Game Manager: " + validatedIncomingManager[0] + " + " + validatedIncomingManager[1] + " + " + validatedIncomingManager[2] + " + " + validatedIncomingManager[3] + " + " + validatedIncomingManager[4] + " + " + validatedIncomingManager[5] + " + " + validatedIncomingManager[6]);
-        */
-
-
-        monsterAttackCooldownTimer -= Time.deltaTime;
-
-        material.SetFloat("_Float", 0+(petrifyTimer / 5f-0.3f));
-        timeUntilNextAttack -= Time.deltaTime;
-
-        CheckWin();
-        houseDestroyed = CalculateHouseDestroyed();
-        houseHealth = CalculateHouseHealth();
-
-        CheckIfBoarded();
-
-        ChargeMonsterDamage();
-
-        MonsterInput();
-        HumanBlockInput();
-
-        LerpMonsterPosition();
-        UpdateTimer();
-
-        LightUpLEDWindow(attachedEyeWall.GetComponent<Window>().windowID);
-
-
-        if (monsterDamage>=1)
-        {
-            MonsterAttackInput();
-        }
-        PlayerRepairInput();
-        PetrifyTimer();
-
-        if (Input.GetKeyDown("b"))
-        {
-            SceneManager.LoadScene(0);
         }
     }
     void UpdateTimer()
     {
-        gameTimer+=Time.deltaTime*180f;
+        gameTimer -= Time.deltaTime;
+/*        gameTimer+=Time.deltaTime*180f;
         int seconds = (int)(gameTimer % 60);
         int minutes = (int)(gameTimer / 60) % 60;
         int hours = (int)(gameTimer / 3600) % 24;
-        timerString = string.Format("{0:0}:{1:00}", hours, minutes);
+        timerString = string.Format("{0:0}:{1:00}", hours, minutes);*/
 
     }
     void CheckWin()
@@ -228,14 +280,16 @@ public class GameManager : MonoBehaviour
             {
                 cause = "Cause: Lethal Gaze";
             }
-            StartCoroutine(LoadGameOver());
+/*            StartCoroutine(LoadGameOver());*/
         }
-        else if (gameTimer >= gameTimerMax)
+        else if (gameTimer <= 0)
         {
             cause = "Cause: Monster Ran Out of Time";
             whoWon = "Human Victory";
-            StartCoroutine(LoadGameOver());
-        }
+            nightCounter++;
+            paused = true;
+/*            StartCoroutine(LoadGameOver());
+*/        }
     }
     void CheckIfBoarded()
     {
@@ -601,5 +655,18 @@ public class GameManager : MonoBehaviour
         {
             SerialCommunications.outgoing[5] = 0b00000000;
         }
+    }
+
+    public void ResetStats()
+    {
+        gameTimer = originalGameTimer;
+        for(int i=0;i<monsterAttackPositions.Length; i++)
+        {
+            monsterAttackPositions[i].GetComponent<AttackPoint>().health = weakPointHealth;
+        }
+        petrifyTimer = timeToPetrify;
+        monsterDamage = 0;
+        monsterAttackTimer = monsterAttackOriginalCooldown;
+
     }
 }
