@@ -15,10 +15,10 @@ public class SerialCommunications : MonoBehaviour
 
     int variable;
 
-    private static byte[] incoming = new byte[8];
+    private static byte[] incoming = new byte[7];
     public static byte[] outgoing = new byte[7];
 
-    public static byte[] validatedIncoming = new byte[8];
+    public static byte[] validatedIncoming = new byte[7];
 
 
     float lightTimer;
@@ -33,18 +33,17 @@ public class SerialCommunications : MonoBehaviour
 
         while (true)
         {
-            sp.Read(incoming, 0, 8);
+            sp.Read(incoming, 0, 7);
 
             if (incoming[0] == 'P' && incoming[1] == 'C')
             {
                 if (!communicationReadyFlag)
                 { 
-                    for(int i = 0; i < 8; i++)
+                    for(int i = 0; i < 7; i++)
                     {
                         validatedIncoming[i] = incoming[i];
                     }
                     communicationReadyFlag = true;
-                    Debug.Log(validatedIncoming[7]);
                 }
             }
             else

@@ -18,6 +18,7 @@ public class RepairPoint : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+        print(1);
         if (other.gameObject.tag == "Player")
         {
             parent.GetComponent<AttackPoint>().repairing = true;

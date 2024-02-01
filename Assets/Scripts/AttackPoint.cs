@@ -93,7 +93,7 @@ public class AttackPoint : MonoBehaviour
                 {
                     switch (gameManager.GetComponent<GameManager>().monsterDamage)
                     {
-/*                        case 1:
+                        case 1:
                             source.PlayOneShot(weak, 0.3f);
                             break;
                         case 2:
@@ -104,12 +104,9 @@ public class AttackPoint : MonoBehaviour
                             break;
                         case 4:
                             source.PlayOneShot(veryStrong);
-                            break;*/
-                        default:
-                            source.PlayOneShot(veryStrong);
                             break;
                     }
-                    health -= gameManager.GetComponent<GameManager>().monsterDamagePerHit;
+                    health -= gameManager.GetComponent<GameManager>().monsterDamage;
                 }
 
                 gameManager.GetComponent<GameManager>().monsterAttackCooldownTimer = gameManager.GetComponent<GameManager>().monsterAttackTimer;
@@ -118,7 +115,7 @@ public class AttackPoint : MonoBehaviour
 
                 timeUntilCanAttack = attackCooldownTime;
 
-                gameManager.GetComponent<GameManager>().monsterDamage -= gameManager.GetComponent<GameManager>().monsterDamagePerHit;
+                gameManager.GetComponent<GameManager>().monsterDamage = gameManager.GetComponent<GameManager>().minMonsterDamage;
             }
         }
         if (health <= 0)
