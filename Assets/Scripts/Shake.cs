@@ -7,7 +7,7 @@ public class Shake : MonoBehaviour
     Vector3 originalPos;
     public bool startShake = false;
     float shakeyStrengthMulti = 1.0f;
-    float duration = 0.25f;
+    float duration = 0.5f;
     public AnimationCurve curve;
     // Start is called before the first frame update
     void Start()

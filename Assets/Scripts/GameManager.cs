@@ -543,19 +543,19 @@ public class GameManager : MonoBehaviour
             {
                 MoveMonsterTail(monsterAttackPositions[0]);
                 monsterAttackPositions[0].GetComponent<AttackPoint>().OnHit();
-                shakeCameras(1f);
+                shakeCameras(monsterDamage/maxMonsterDamage);
             }
             else if (Input.GetKeyDown("1") || validatedIncomingManager[5] == 2)
             {
                 MoveMonsterTail(monsterAttackPositions[1]);
                 monsterAttackPositions[1].GetComponent<AttackPoint>().OnHit();
-                shakeCameras(1f);
+                shakeCameras(monsterDamage / maxMonsterDamage);
             }
             else if (Input.GetKeyDown("3") || validatedIncomingManager[5] == 3)
             {
                 MoveMonsterTail(monsterAttackPositions[2]);
                 monsterAttackPositions[2].GetComponent<AttackPoint>().OnHit();
-                shakeCameras(1f);     
+                shakeCameras(monsterDamage / maxMonsterDamage);     
             }
             else if (Input.GetKeyDown("4"))
             {
@@ -761,7 +761,8 @@ public class GameManager : MonoBehaviour
 
     public void shakeCameras(float strength)
     {
-/*        StartCoroutine(shaker1.startShake(1f));
-*/
+        shaker1.StartCoroutine(shaker1.ShakeCam(1));
+        shaker2.StartCoroutine(shaker2.ShakeCam(1));
+
     }
 }
