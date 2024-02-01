@@ -44,8 +44,8 @@ public class AttackPoint : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        repairSource.enabled = false;
-        gameManager = GameObject.FindGameObjectWithTag("Game Manager");
+/*        repairSource.enabled = false;
+*/        gameManager = GameObject.FindGameObjectWithTag("Game Manager");
         maxHealth = gameManager.GetComponent<GameManager>().weakPointHealth;
         health = maxHealth;
     }
