@@ -1166,7 +1166,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh35312
+  m_Name: pb_Mesh1364620
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -40569,7 +40569,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1141660632843398676, guid: f6714174f8bb8184eb08e99354ed3c12, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 44.2553
+      value: 47.29819
       objectReference: {fileID: 0}
     - target: {fileID: 1141660632843398676, guid: f6714174f8bb8184eb08e99354ed3c12, type: 3}
       propertyPath: m_SizeDelta.y
@@ -40589,7 +40589,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1141660632843398676, guid: f6714174f8bb8184eb08e99354ed3c12, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 15.7
+      value: 24.527243
       objectReference: {fileID: 0}
     - target: {fileID: 1141660632843398676, guid: f6714174f8bb8184eb08e99354ed3c12, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -40985,7 +40985,7 @@ PrefabInstance:
       objectReference: {fileID: 2800000, guid: e1d7e091f735c2b4d890851815c93154, type: 3}
     - target: {fileID: 6546476698436229668, guid: f6714174f8bb8184eb08e99354ed3c12, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6651793564806574154, guid: f6714174f8bb8184eb08e99354ed3c12, type: 3}
       propertyPath: m_RootOrder
@@ -41084,8 +41084,32 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9124941882959893125, guid: f6714174f8bb8184eb08e99354ed3c12, type: 3}
+      propertyPath: m_text
+      value: THE HOUSE HWASDF SDNOSSADF
+      objectReference: {fileID: 0}
+    - target: {fileID: 9124941882959893125, guid: f6714174f8bb8184eb08e99354ed3c12, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9124941882959893125, guid: f6714174f8bb8184eb08e99354ed3c12, type: 3}
+      propertyPath: m_fontSize
+      value: 3.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9124941882959893125, guid: f6714174f8bb8184eb08e99354ed3c12, type: 3}
       propertyPath: m_lineSpacing
       value: -4.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 9124941882959893125, guid: f6714174f8bb8184eb08e99354ed3c12, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 3.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9124941882959893125, guid: f6714174f8bb8184eb08e99354ed3c12, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9124941882959893125, guid: f6714174f8bb8184eb08e99354ed3c12, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6714174f8bb8184eb08e99354ed3c12, type: 3}
@@ -44681,6 +44705,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 626959805}
+  - component: {fileID: 626959806}
   m_Layer: 0
   m_Name: Eye
   m_TagString: Untagged
@@ -44704,6 +44729,43 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &626959806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 626959804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b101088b9a93514ea0776e49a8d2049, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startShake: 0
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.008333333
+      value: 1.0094341
+      inSlope: -0.042720202
+      outSlope: -0.042720202
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.22083378
+    - serializedVersion: 3
+      time: 1.0083313
+      value: 0.009433746
+      inSlope: -3.315605
+      outSlope: -3.315605
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.029164672
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &629505154 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: a352fed32b442554598a533ecb0fc9e2, type: 3}
@@ -57074,6 +57136,7 @@ GameObject:
   - component: {fileID: 963194231}
   - component: {fileID: 963194232}
   - component: {fileID: 963194233}
+  - component: {fileID: 963194235}
   - component: {fileID: 963194234}
   m_Layer: 6
   m_Name: Eye Camera
@@ -57362,6 +57425,43 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &963194235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b101088b9a93514ea0776e49a8d2049, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startShake: 0
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.008333337
+      value: 1.0377359
+      inSlope: -0.07351157
+      outSlope: -0.07351157
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.3031496
+    - serializedVersion: 3
+      time: 1.0291748
+      value: -0.025943756
+      inSlope: -3.0719316
+      outSlope: -3.0719316
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.028579172
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &966539931
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -64878,6 +64978,48 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 53af41ac13bd07f42b5ab9140dd82979, type: 3}
   m_PrefabInstance: {fileID: 1163771172}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1245695603 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6546476698436229668, guid: f6714174f8bb8184eb08e99354ed3c12, type: 3}
+  m_PrefabInstance: {fileID: 450288923}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1245695605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1245695603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b101088b9a93514ea0776e49a8d2049, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startShake: 0
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.016666666
+      value: 1.0471756
+      inSlope: 0.110960566
+      outSlope: 0.110960566
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.1939178
+    - serializedVersion: 3
+      time: 0.9708252
+      value: -0.021224976
+      inSlope: -1.9005108
+      outSlope: -1.9005108
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.053224888
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &1253415099
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -78512,13 +78654,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a0ebd3905bdec14d8106c7c598005dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shaker1: {fileID: 0}
-  shaker2: {fileID: 0}
+  attackPerHit: 1
+  shaker1: {fileID: 963194235}
+  shaker2: {fileID: 1245695605}
   countdownTimer: 0
   monsterStrengthIncrement: 0.15
   monsterPetrifyIncrement: 1
   nightCounter: 1
-  maxNights: 6
+  maxNights: 1
   tutorialIndex: 0
   paused: 0
   inTutorial: 0
@@ -78542,7 +78685,7 @@ MonoBehaviour:
   monsterMaxHealth: 100
   monsterHealth: 100
   monsterAttackTimer: 1
-  monsterAttackOriginalCooldown: 1
+  monsterAttackOriginalCooldown: 1.5
   monsterAttackCooldownTimer: 0
   gameTimer: 5
   petrifyText: {fileID: 1333259128}

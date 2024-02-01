@@ -93,6 +93,10 @@ public class CanvasScript : MonoBehaviour
             winText.enabled = true;
             winText.text = "THE HOUSE WAS DESTROYED";
         }
+        else
+        {
+            winText.enabled = false;
+        }
         repairBar.fillAmount = gameManagerScript.repairTimer / gameManagerScript.timeUntilCanRepair;
         chargeBar.fillAmount=gameManagerScript.monsterDamage/gameManagerScript.maxMonsterDamage;
 
@@ -135,10 +139,24 @@ public class CanvasScript : MonoBehaviour
     }
     public void FadeMenu()
     {
-        MenuObject.SetActive(false);
+        if (MenuObject.activeInHierarchy)
+        {
+            MenuObject.SetActive(false);
+        }
+        else
+        {
+            MenuObject.SetActive(true);
+        }
     }
     public void FadeGameUI()
     {
-        GameUI.SetActive(true);
+        if (GameUI.activeInHierarchy)
+        {
+            GameUI.SetActive(false);
+        }
+        else
+        {
+            GameUI.SetActive(true); ;
+        }
     }
 }

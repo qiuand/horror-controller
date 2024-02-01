@@ -5,9 +5,14 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
+using UnityEngine.Rendering.UI;
 
 public class GameManager : MonoBehaviour
 {
+
+    public int attackPerHit = 1;
+
+    bool isButtonDown=false;
 
     public Shake shaker1, shaker2;
 
@@ -52,7 +57,7 @@ public class GameManager : MonoBehaviour
 
     float elapsedLerpTime;
 
-    byte[] validatedIncomingManager = new byte[7];
+    byte[] validatedIncomingManager = new byte[8];
 
     public string timerString;
 
@@ -124,7 +129,9 @@ public class GameManager : MonoBehaviour
     public  GameObject[] monsterAttackPositions;
 
     float originalTimeUntilNextAttack=0.5f;
-    float timeUntilNextAttack;
+
+    float timeUntilNextAttack = 0.25f;
+    float attackTimer;
 
     [SerializeField] AudioSource collapse;
 
@@ -141,6 +148,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        attackTimer = timeUntilNextAttack;
+
         countdownTimer = originalCountdown;
 
         gameTimer = originalGameTimer;
@@ -188,61 +197,7 @@ public class GameManager : MonoBehaviour
                 monsterCanvas.GetComponent<CanvasScript>().FadeInfo(null, null, null);
             }
         }
-        if(Input.GetKeyDown("a") && gameWon)
-        {
-            SceneManager.LoadScene(0);
-        }
 
-        if (Input.GetKeyDown("a") && paused && !inTutorial && !tutorialCompleted && !introSlideVisible)
-        {
-            tutorialIndex = -1;
-            gameLocked = false;
-            inTutorial = true;
-            humanCanvas.GetComponent<CanvasScript>().FadeInfo(null, null, null);
-            monsterCanvas.GetComponent<CanvasScript>().FadeInfo(null, null, null);
-            humanCanvas.GetComponent<CanvasScript>().FadeGameUI();
-            monsterCanvas.GetComponent<CanvasScript>().FadeGameUI();
-        }
-
-        if (Input.GetKeyDown("a"))
-        {
-            if (introSlideVisible)
-            {
-                introSlideVisible = false;
-                countDownEnabled = true;
-            }
-            if (inTutorial && tutorialIndex < 2)
-            {
-                tutorialIndex++;
-            }
-            else if (inTutorial && tutorialIndex >= 2)
-            {
-                inTutorial = false;
-                introSlideVisible = true;
-                humanCanvas.GetComponent<CanvasScript>().FadeInfo("Night "+nightCounter+"/"+maxNights, "Survive.", null);
-                monsterCanvas.GetComponent<CanvasScript>().FadeInfo("Night " + nightCounter + "/" + maxNights, "Kill.", null);
-            }
-            if (paused && tutorialCompleted)
-            {
-                ResetStats();
-                countDownEnabled = true;
-            }
-        }
-        Debug.Log(tutorialIndex);
-
-        if (Input.GetKeyDown("a") && gameLocked && !inTutorial)
-        {
-            paused = true;
-
-            humanCanvas.GetComponent<CanvasScript>().FadeMenu();
-            monsterCanvas.GetComponent<CanvasScript>().FadeMenu();
-
-            humanCanvas.GetComponent<CanvasScript>().FadeInfo("You Are A <color=red>Brutal Monster</color>,","Hunting down a puny human in their home.","Kill the human in the next 6 nights.");
-            monsterCanvas.GetComponent<CanvasScript>().FadeInfo("You Are A <color=red>Desperate Human</color>,", "Trying to protect your home against a brutal monster.", "Survive for the next 6 nights.");
-
-        }
-
-        Debug.Log(tutorialIndex);
 
         CheckHouseSound();
 
@@ -257,11 +212,23 @@ public class GameManager : MonoBehaviour
         {
             validatedIncomingManager = SerialCommunications.validatedIncoming;
             SerialCommunications.communicationReadyFlag = false;
+
+            Debug.Log(validatedIncomingManager[7]);
+            if (!isButtonDown && validatedIncomingManager[7] == 1)
+            {
+                isButtonDown = true;
+            }
+            else if (isButtonDown && validatedIncomingManager[7] == 0)
+            {
+                isButtonDown = false;
+                HandleGreenButton();
+            }
         }
 
         if (!gameLocked)
         {
 
+            attackTimer -= Time.deltaTime;
 
             repairTimer += Time.deltaTime;
 
@@ -290,9 +257,10 @@ public class GameManager : MonoBehaviour
             LerpMonsterPosition();
 
 
-            if (monsterDamage >= 1)
+            if (attackTimer<=0 && monsterDamage>0)
             {
                 MonsterAttackInput();
+                attackTimer = timeUntilNextAttack;
             }
 
             PetrifyTimer();
@@ -351,17 +319,17 @@ public class GameManager : MonoBehaviour
             nightCounter++;
             paused = true;
             gameLocked = true;
-            gameWon = true;
             if (nightCounter > maxNights)
             {
+                gameWon = true;
                 humanCanvas.GetComponent<CanvasScript>().FadeInfo("GAME OVER", "The human has survived.", "Press button to play again");
                 monsterCanvas.GetComponent<CanvasScript>().FadeInfo("GAME OVER", "The human has survived.", "Press button to play again");
 
             }
             else
             {
-                humanCanvas.GetComponent<CanvasScript>().FadeInfo("GAME OVER", "Night " + nightCounter + "/" + maxNights, "But the monster grows angrier...<br>+15% faster attack charge<br>+25% deadlier gaze");
-                monsterCanvas.GetComponent<CanvasScript>().FadeInfo("The Human Lives to See Another Day.", "Night " + nightCounter + "/" + maxNights, "You grow angrier...<br>+15% faster attack charge<br>+25% deadlier gaze");
+                humanCanvas.GetComponent<CanvasScript>().FadeInfo("You Live to See Another Day.", "Night " + nightCounter + "/" + maxNights, "But the monster grows angrier...<br>+15% faster attack charge<br>+50% deadlier gaze");
+                monsterCanvas.GetComponent<CanvasScript>().FadeInfo("The Human Lives to See Another Day.", "Night " + nightCounter + "/" + maxNights, "You grow angrier...<br>+15% faster attack charge<br>+50% deadlier gaze");
             }
             
             paused = true;
@@ -620,14 +588,15 @@ public class GameManager : MonoBehaviour
     {
         previousHumanPosition = currentHumanPosition;
         currentHumanPosition = validatedIncomingManager[6];
+        if (validatedIncomingManager[6] != 0)
+        {
+            player.GetComponent<BoxCollider>().enabled = true;
+            player.GetComponent<MeshRenderer>().enabled = true;
+            playerAbsent = false;
+        }
+
         if (currentHumanPosition != previousHumanPosition || !serialFlag)
         {
-            if (validatedIncomingManager[6] != 0)
-            {
-                player.GetComponent<BoxCollider>().enabled = true;
-                player.GetComponent<MeshRenderer>().enabled = true;
-                playerAbsent = false;
-            }
 
             if (Input.GetKeyDown("u") && ValidatePlayerPosition("u") || validatedIncomingManager[6] == 4)
             {
@@ -761,7 +730,83 @@ public class GameManager : MonoBehaviour
 
     public void shakeCameras(float strength)
     {
-/*        StartCoroutine(shaker1.startShake(1f));
-*/
+        shaker1.StartCoroutine(shaker1.ShakeCam(1f));
+        shaker2.StartCoroutine(shaker1.ShakeCam(1f));
+
+    }
+    public void HandleGreenButton()
+    {
+        if (gameWon)
+        {
+            ResetGame();
+        }
+        else
+        {
+            if (paused && !inTutorial && !tutorialCompleted && !introSlideVisible)
+            {
+                tutorialIndex = -1;
+                gameLocked = false;
+                inTutorial = true;
+                humanCanvas.GetComponent<CanvasScript>().FadeInfo(null, null, null);
+                monsterCanvas.GetComponent<CanvasScript>().FadeInfo(null, null, null);
+                humanCanvas.GetComponent<CanvasScript>().FadeGameUI();
+                monsterCanvas.GetComponent<CanvasScript>().FadeGameUI();
+            }
+
+            if (introSlideVisible)
+            {
+                introSlideVisible = false;
+                countDownEnabled = true;
+            }
+            if (inTutorial && tutorialIndex < 2)
+            {
+                tutorialIndex++;
+            }
+            else if (inTutorial && tutorialIndex >= 2)
+            {
+                inTutorial = false;
+                introSlideVisible = true;
+                humanCanvas.GetComponent<CanvasScript>().FadeInfo("Night " + nightCounter + "/" + maxNights, "Survive.", null);
+                monsterCanvas.GetComponent<CanvasScript>().FadeInfo("Night " + nightCounter + "/" + maxNights, "Kill.", null);
+            }
+            if (paused && tutorialCompleted)
+            {
+                ResetStats();
+                countDownEnabled = true;
+            }
+
+            if (gameLocked && !inTutorial)
+            {
+                paused = true;
+
+                humanCanvas.GetComponent<CanvasScript>().FadeMenu();
+                monsterCanvas.GetComponent<CanvasScript>().FadeMenu();
+
+                humanCanvas.GetComponent<CanvasScript>().FadeInfo("You Are A <color=red>Brutal Monster</color>,", "Hunting down a puny human in their home.", "Kill the human in the next 6 nights.");
+                monsterCanvas.GetComponent<CanvasScript>().FadeInfo("You Are A <color=red>Desperate Human</color>,", "Trying to protect your home against a brutal monster.", "Survive for the next 6 nights.");
+
+            }
+        }
+    }
+    public void ResetGame()
+    {
+        MoveEyeCameraToLocation(monsterEyepositions[monsterEyepositions.Length - 1]);
+        gameWon = false;
+        gameLocked = true;
+        paused = false;
+        introSlideVisible = false;
+        inTutorial = false;
+        tutorialCompleted = false;
+        ResetStats();
+        tutorialIndex = 99;
+        nightCounter = 1;
+        humanCanvas.GetComponent<CanvasScript>().FadeMenu();
+        monsterCanvas.GetComponent<CanvasScript>().FadeMenu();
+        humanCanvas.GetComponent<CanvasScript>().FadeInfo(null, null, null);
+        monsterCanvas.GetComponent<CanvasScript>().FadeInfo(null, null, null);
+        humanCanvas.GetComponent<CanvasScript>().FadeGameUI();
+        monsterCanvas.GetComponent<CanvasScript>().FadeGameUI();
+
+
     }
 }
