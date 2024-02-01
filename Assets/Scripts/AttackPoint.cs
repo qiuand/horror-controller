@@ -130,10 +130,11 @@ public class AttackPoint : MonoBehaviour
     {
         if (repairing && health < maxHealth /*&& health>=0*/)
         {
-            repairSource.enabled = true;
-
+/*            repairSource.enabled = true;
+*/
             if (gameManager.GetComponent<GameManager>().repairTimer >= gameManager.GetComponent<GameManager>().timeUntilCanRepair)
             {
+                repairSource.Play();
                 Instantiate(gameManager.GetComponent<GameManager>().sparks, transform.position, transform.rotation);
                 gameManager.GetComponent<GameManager>().repairTimer = 0;
                 if (gameManager.GetComponent<GameManager>().playerIsVisible)
@@ -143,8 +144,8 @@ public class AttackPoint : MonoBehaviour
                 }
                 else
                 {
-                    repairSource.enabled = false;
-                    gameManager.GetComponent<GameManager>().houseHealth += repairAmount;
+/*                    repairSource.enabled = false;
+*/                    gameManager.GetComponent<GameManager>().houseHealth += repairAmount;
                     health += repairAmount;
                 }
             }
@@ -153,7 +154,7 @@ public class AttackPoint : MonoBehaviour
 */        }
         else if (health==maxHealth)
         {
-            repairSource.enabled = false;
+/*            repairSource.enabled = false;*/
         }
         if (health > maxHealth)
         {

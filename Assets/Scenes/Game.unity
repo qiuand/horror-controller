@@ -1166,7 +1166,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh1364620
+  m_Name: pb_Mesh258762
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4099,7 +4099,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!154 &170806273
 TerrainCollider:
   m_ObjectHideFlags: 0
@@ -78661,7 +78661,7 @@ MonoBehaviour:
   monsterStrengthIncrement: 0.15
   monsterPetrifyIncrement: 1
   nightCounter: 1
-  maxNights: 1
+  maxNights: 6
   tutorialIndex: 0
   paused: 0
   inTutorial: 0
@@ -78685,7 +78685,7 @@ MonoBehaviour:
   monsterMaxHealth: 100
   monsterHealth: 100
   monsterAttackTimer: 1
-  monsterAttackOriginalCooldown: 1.5
+  monsterAttackOriginalCooldown: 1.15
   monsterAttackCooldownTimer: 0
   gameTimer: 5
   petrifyText: {fileID: 1333259128}
@@ -88001,7 +88001,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6546476698436229668, guid: f6714174f8bb8184eb08e99354ed3c12, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6651793564806574154, guid: f6714174f8bb8184eb08e99354ed3c12, type: 3}
       propertyPath: m_RootOrder
