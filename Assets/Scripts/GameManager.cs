@@ -303,6 +303,7 @@ public class GameManager : MonoBehaviour
             whoWon = "Monster Victory";
             if (CalculateHouseDestroyed())
             {
+                collapse.enabled = true;
                 cause = "Cause: House Obliterated";
             }
             else
@@ -310,7 +311,6 @@ public class GameManager : MonoBehaviour
                 cause = "Cause: Lethal Gaze";
             }
             gameWon = true;
-            collapse.enabled = true;
             scream.enabled = true;
             /*            StartCoroutine(LoadGameOver());*/
         }
@@ -730,8 +730,8 @@ public class GameManager : MonoBehaviour
 
     public void shakeCameras(float strength)
     {
-        shaker1.StartCoroutine(shaker1.ShakeCam(1f));
-        shaker2.StartCoroutine(shaker1.ShakeCam(1f));
+        shaker1.StartCoroutine(shaker1.ShakeCam(0.3f));
+        shaker2.StartCoroutine(shaker1.ShakeCam(0.3f));
 
     }
     public void HandleGreenButton()
