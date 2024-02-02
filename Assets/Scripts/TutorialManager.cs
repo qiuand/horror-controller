@@ -40,7 +40,7 @@ public class TutorialManager : MonoBehaviour
     public TutorialObject[] humanTutorialArray = new TutorialObject[3];
 
     public TextMeshProUGUI titleUI, bodyUI, bodyUI2, tipUI;
-    public VideoPlayer videoUI;
+    public VideoPlayer videoUI, videoUI2;
     public RawImage illusUI;
 
     // Start is called before the first frame update
@@ -135,16 +135,18 @@ public class TutorialManager : MonoBehaviour
                 bodyUI.text = monsterTutorialArray[index].body;
                 bodyUI2.text = monsterTutorialArray[index].body2;
                 tipUI.text = monsterTutorialArray[index].tippie;
-                /*                videoUI.GetComponent<VideoPlayer>().clip = monsterTutorialArray[index].video;
-                                illusUI.GetComponent<RawImage>().texture = monsterTutorialArray[index].illustration;*/
+                videoUI.GetComponent<VideoPlayer>().clip = monsterTutorialArray[index].video;
+                videoUI2.GetComponent<VideoPlayer>().clip = humanTutorialArray[index].video;
+                /*                illusUI.GetComponent<RawImage>().texture = monsterTutorialArray[index].illustration;*/
                 break;
             case 1:
                 titleUI.text = humanTutorialArray[index].title;
                 bodyUI.text = humanTutorialArray[index].body;
                 bodyUI2.text = humanTutorialArray[index].body2;
                 tipUI.text = humanTutorialArray[index].tippie;
-                /*                videoUI.GetComponent<VideoPlayer>().clip = humanTutorialArray[index].video;
-                                illusUI.GetComponent<RawImage>().texture = humanTutorialArray[index].illustration;*/
+                videoUI.GetComponent<VideoPlayer>().clip = humanTutorialArray[index].video;
+                videoUI2.GetComponent<VideoPlayer>().clip = monsterTutorialArray[index].video;
+                /*                illusUI.GetComponent<RawImage>().texture = humanTutorialArray[index].illustration;*/
                 break;
 
         }
