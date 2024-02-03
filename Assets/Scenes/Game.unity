@@ -77261,6 +77261,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hammer
       objectReference: {fileID: 0}
+    - target: {fileID: 3303804121734676959, guid: 7280be84d23406e43968d18ad02e3295, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1c123ca7ed09d47448eb1271c422897b, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7280be84d23406e43968d18ad02e3295, type: 3}
 --- !u!4 &1730026396 stripped
