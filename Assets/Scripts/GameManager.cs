@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
     public bool tutorialCompleted = false;
     public bool introSlideVisible = false;
 
-    bool serialFlag = true;
+    bool serialFlag = false;
 
     public bool playerAbsent = true;
 
@@ -210,7 +210,7 @@ public class GameManager : MonoBehaviour
 
         LightUpLEDWindow(attachedEyeWall.GetComponent<Window>().windowID);
 
-        if (SerialCommunications.communicationReadyFlag)
+        if (serialFlag && SerialCommunications.communicationReadyFlag)
         {
             validatedIncomingManager = SerialCommunications.validatedIncoming;
             SerialCommunications.communicationReadyFlag = false;
@@ -225,6 +225,14 @@ public class GameManager : MonoBehaviour
                 isButtonDown = false;
                 HandleGreenButton();
             }
+        }
+        if (!serialFlag)
+        {
+            KeyboardControls();
+        }
+        if (Input.GetKeyDown("a"))
+        {
+            HandleGreenButton();
         }
 
         if (!gameLocked)
@@ -270,6 +278,11 @@ public class GameManager : MonoBehaviour
             if (Input.GetKeyDown("b"))
             {
                 SceneManager.LoadScene(0);
+            }
+
+            if (!serialFlag)
+            {
+                validatedIncomingManager[5] = 0;
             }
         }
 
@@ -478,31 +491,31 @@ public class GameManager : MonoBehaviour
 */        
         if (previousEyePosition != currentEyePosition)
             {
-                if (Input.GetKeyDown("5") || validatedIncomingManager[3] == 1)
+                if (validatedIncomingManager[3] == 1)
                 {
                     monsterHUD.SetActive(true);
                     changeLerpTarget(monsterEyepositions[0]);
 /*                    MoveEyeCameraToLocation(monsterEyepositions[0]);
 */            }
-            else if (Input.GetKeyDown("9") || validatedIncomingManager[3] == 4)
+            else if (validatedIncomingManager[3] == 4)
             {
                 monsterHUD.SetActive(true);
                 changeLerpTarget(monsterEyepositions[1]);
                 MoveEyeCameraToLocation(monsterEyepositions[1]);
             }
-            else if (Input.GetKeyDown("7") || validatedIncomingManager[3] == 3)
+            else if (validatedIncomingManager[3] == 3)
             {
                 monsterHUD.SetActive(true);
                 changeLerpTarget(monsterEyepositions[2]);
                 MoveEyeCameraToLocation(monsterEyepositions[2]);
             }
-            else if (Input.GetKeyDown("6") || validatedIncomingManager[3] == 2)
+            else if (validatedIncomingManager[3] == 2)
             {
                 monsterHUD.SetActive(true);
                 changeLerpTarget(monsterEyepositions[3]);
                 MoveEyeCameraToLocation(monsterEyepositions[3]);
             }
-            else if (Input.GetKeyDown("8") || validatedIncomingManager[3] == 0)
+            else if (validatedIncomingManager[3] == 0)
                 {
                     monsterHUD.SetActive(true);
                     changeLerpTarget(monsterEyepositions[4]);
@@ -514,19 +527,19 @@ public class GameManager : MonoBehaviour
     {
         if (true)
         {
-            if (Input.GetKeyDown("2") || validatedIncomingManager[5] == 4)
+            if (validatedIncomingManager[5] == 4)
             {
                 MoveMonsterTail(monsterAttackPositions[0]);
                 monsterAttackPositions[0].GetComponent<AttackPoint>().OnHit();
                 shakeCameras(1f);
             }
-            else if (Input.GetKeyDown("1") || validatedIncomingManager[5] == 2)
+            else if (validatedIncomingManager[5] == 2)
             {
                 MoveMonsterTail(monsterAttackPositions[1]);
                 monsterAttackPositions[1].GetComponent<AttackPoint>().OnHit();
                 shakeCameras(1f);
             }
-            else if (Input.GetKeyDown("3") || validatedIncomingManager[5] == 3)
+            else if (validatedIncomingManager[5] == 3)
             {
                 MoveMonsterTail(monsterAttackPositions[2]);
                 monsterAttackPositions[2].GetComponent<AttackPoint>().OnHit();
@@ -550,25 +563,25 @@ public class GameManager : MonoBehaviour
     {
         previousBoardPosition = currentBoardPosition;
         currentBoardPosition = validatedIncomingManager[4];
-        if (currentBoardPosition != previousBoardPosition || !serialFlag)
+        if (currentBoardPosition != previousBoardPosition)
         {
-            if (Input.GetKeyDown("q") || validatedIncomingManager[4] == 1)
+            if (validatedIncomingManager[4] == 1)
             {
                 MoveHumanBlock(monsterEyepositions[0]);
             }
-            else if (Input.GetKeyDown(KeyCode.Tab) || validatedIncomingManager[4] == 4)
+            else if (validatedIncomingManager[4] == 4)
             {
                 MoveHumanBlock(monsterEyepositions[1]);
             }
-            else if (Input.GetKeyDown("w") || validatedIncomingManager[4] == 2)
+            else if (validatedIncomingManager[4] == 2)
             {
                 MoveHumanBlock(monsterEyepositions[2]);
             }
-            else if (Input.GetKeyDown("e") || validatedIncomingManager[4] == 3)
+            else if (validatedIncomingManager[4] == 3)
             {
                 MoveHumanBlock(monsterEyepositions[3]);
             }
-            else if (Input.GetKeyDown("r") || validatedIncomingManager[4] == 0)
+            else if (validatedIncomingManager[4] == 0)
             {
                 for (int i = 0; i < monsterEyepositions.Length; i++)
                 {
@@ -602,22 +615,22 @@ public class GameManager : MonoBehaviour
             playerAbsent = false;
         }
 
-        if (currentHumanPosition != previousHumanPosition || !serialFlag)
+        if (currentHumanPosition != previousHumanPosition)
         {
 
-            if (Input.GetKeyDown("u") && ValidatePlayerPosition("u") || validatedIncomingManager[6] == 4)
+            if (validatedIncomingManager[6] == 4)
             {
                 MoveHumanRepair(monsterAttackPositions[0]);
             }
-            else if (Input.GetKeyDown("t") && ValidatePlayerPosition("t") || validatedIncomingManager[6] == 2)
+            else if (validatedIncomingManager[6] == 2)
             {
                 MoveHumanRepair(monsterAttackPositions[1]);
             }
-            else if (Input.GetKeyDown("y") && ValidatePlayerPosition("y") || validatedIncomingManager[6] == 3)
+            else if (validatedIncomingManager[6] == 3)
             {
                 MoveHumanRepair(monsterAttackPositions[2]);
             }
-            else if (Input.GetKeyDown("i") || validatedIncomingManager[6] == 0)
+            else if (validatedIncomingManager[6] == 0)
             {
                 playerAbsent = true;
                 InvalidateAllDefendedPoints();
@@ -813,6 +826,78 @@ public class GameManager : MonoBehaviour
         humanCanvas.GetComponent<CanvasScript>().FadeGameUI();
         monsterCanvas.GetComponent<CanvasScript>().FadeGameUI();
 
+
+    }
+    public void KeyboardControls()
+    {
+        if (Input.GetKeyDown("1"))
+        {
+            validatedIncomingManager[4] = 1;
+        }
+        else if (Input.GetKeyDown("2"))
+        {
+            validatedIncomingManager[4] = 2;
+        }
+        else if (Input.GetKeyDown("3"))
+        {
+            validatedIncomingManager[4] = 3;
+        }
+        else if (Input.GetKeyDown("4"))
+        {
+            validatedIncomingManager[4] = 4;
+        }
+        else if (Input.GetKeyDown("5"))
+        {
+            validatedIncomingManager[4] = 0;
+        }
+        if (Input.GetKeyDown("s"))
+        {
+            validatedIncomingManager[5] = 4;
+        }
+        else if (Input.GetKeyDown("d"))
+        {
+            validatedIncomingManager[5] = 2;
+        }
+        else if (Input.GetKeyDown("f"))
+        {
+            validatedIncomingManager[5] = 3;
+        }
+        else if (Input.GetKeyDown("6"))
+        {
+            validatedIncomingManager[6] = 4;
+        }
+        else if (Input.GetKeyDown("7"))
+        {
+            validatedIncomingManager[6] = 2;
+        }
+        else if (Input.GetKeyDown("8"))
+        {
+            validatedIncomingManager[6] = 3;
+        }
+        else if (Input.GetKeyDown("9"))
+        {
+            validatedIncomingManager[6] = 0;
+        }
+        else if (Input.GetKeyDown("h"))
+        {
+            validatedIncomingManager[3] = 1;
+        }
+        else if (Input.GetKeyDown("j"))
+        {
+            validatedIncomingManager[3] = 2;
+        }
+        else if (Input.GetKeyDown("k"))
+        {
+            validatedIncomingManager[3] = 3;
+        }
+        else if (Input.GetKeyDown("l"))
+        {
+            validatedIncomingManager[3] = 4;
+        }
+        else if (Input.GetKeyDown("g"))
+        {
+            validatedIncomingManager[3] = 0;
+        }
 
     }
 }
