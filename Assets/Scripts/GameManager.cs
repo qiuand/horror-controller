@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
     public int nightCounter = 1;
     public int maxNights = 6;
 
-    public int tutorialIndex=99;
+    public int tutorialIndex=0;
 
     public bool paused = false;
     public bool inTutorial = false;
@@ -817,6 +817,7 @@ public class GameManager : MonoBehaviour
         monsterAttackOriginalCooldown = startingChargeSpeed;
         monsterPetrifyIncrement = startingPetrifySpeed;
 
+        countDownEnabled = false;
         MoveEyeCameraToLocation(monsterEyepositions[monsterEyepositions.Length - 1]);
         gameWon = false;
         gameLocked = true;
