@@ -9,7 +9,7 @@ using UnityEngine.Rendering.UI;
 
 public class GameManager : MonoBehaviour
 {
-    float startingChargeSpeed=1.5f;
+    float startingChargeSpeed=0.75f;
     float startingPetrifySpeed = 1f;
 
     public int attackPerHit = 1;
@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
     public bool tutorialCompleted = false;
     public bool introSlideVisible = false;
 
-    bool serialFlag = true;
+    bool serialFlag = false;
 
     public bool playerAbsent = true;
 
@@ -826,7 +826,7 @@ public class GameManager : MonoBehaviour
         inTutorial = false;
         tutorialCompleted = false;
         ResetStats();
-        tutorialIndex = 99;
+        tutorialIndex = 0;
         nightCounter = 1;
         humanCanvas.GetComponent<CanvasScript>().FadeMenu();
         monsterCanvas.GetComponent<CanvasScript>().FadeMenu();
