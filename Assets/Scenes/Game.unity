@@ -4423,7 +4423,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!154 &170806273
 TerrainCollider:
   m_ObjectHideFlags: 0
@@ -38928,10 +38928,22 @@ PrefabInstance:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6003680805336271576, guid: 96a551b12e3e4314f885185ee66523c7, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186227453690881458, guid: 96a551b12e3e4314f885185ee66523c7, type: 3}
+      propertyPath: Loop
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6186227453690881458, guid: 96a551b12e3e4314f885185ee66523c7, type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: b7eec08bccc47fa4b9f09604bd5792a6, type: 3}
+      objectReference: {fileID: 8300000, guid: 0f008f5be610db6468c0f609851ba1b0, type: 3}
+    - target: {fileID: 6186227453690881458, guid: 96a551b12e3e4314f885185ee66523c7, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6810827658141236409, guid: 96a551b12e3e4314f885185ee66523c7, type: 3}
       propertyPath: m_LocalPosition.z
       value: 362
@@ -63854,7 +63866,7 @@ PrefabInstance:
     - target: {fileID: 6186227453690881458, guid: 96a551b12e3e4314f885185ee66523c7, type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: b7eec08bccc47fa4b9f09604bd5792a6, type: 3}
+      objectReference: {fileID: 8300000, guid: 0f008f5be610db6468c0f609851ba1b0, type: 3}
     - target: {fileID: 6261105742092928905, guid: 96a551b12e3e4314f885185ee66523c7, type: 3}
       propertyPath: m_Layer
       value: 9
@@ -80390,7 +80402,7 @@ PrefabInstance:
     - target: {fileID: 6186227453690881458, guid: 96a551b12e3e4314f885185ee66523c7, type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: b7eec08bccc47fa4b9f09604bd5792a6, type: 3}
+      objectReference: {fileID: 8300000, guid: 0f008f5be610db6468c0f609851ba1b0, type: 3}
     - target: {fileID: 7115444256219261132, guid: 96a551b12e3e4314f885185ee66523c7, type: 3}
       propertyPath: m_LocalPosition.z
       value: 4.66

@@ -9,6 +9,8 @@ using UnityEngine.Rendering.UI;
 
 public class GameManager : MonoBehaviour
 {
+    float startingChargeSpeed=1.5f;
+    float startingPetrifySpeed = 1f;
 
     public int attackPerHit = 1;
 
@@ -36,7 +38,7 @@ public class GameManager : MonoBehaviour
     public bool tutorialCompleted = false;
     public bool introSlideVisible = false;
 
-    bool serialFlag = false;
+    bool serialFlag = true;
 
     public bool playerAbsent = true;
 
@@ -148,6 +150,9 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        monsterAttackOriginalCooldown = startingChargeSpeed;
+        monsterPetrifyIncrement = startingPetrifySpeed;
+
         attackTimer = timeUntilNextAttack;
 
         countdownTimer = originalCountdown;
@@ -809,6 +814,9 @@ public class GameManager : MonoBehaviour
     }
     public void ResetGame()
     {
+        monsterAttackOriginalCooldown = startingChargeSpeed;
+        monsterPetrifyIncrement = startingPetrifySpeed;
+
         MoveEyeCameraToLocation(monsterEyepositions[monsterEyepositions.Length - 1]);
         gameWon = false;
         gameLocked = true;
