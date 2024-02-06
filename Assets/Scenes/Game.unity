@@ -38928,6 +38928,10 @@ PrefabInstance:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6186227453690881458, guid: 96a551b12e3e4314f885185ee66523c7, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: b7eec08bccc47fa4b9f09604bd5792a6, type: 3}
     - target: {fileID: 6810827658141236409, guid: 96a551b12e3e4314f885185ee66523c7, type: 3}
       propertyPath: m_LocalPosition.z
       value: 362
@@ -63847,6 +63851,10 @@ PrefabInstance:
       propertyPath: MinDistance
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6186227453690881458, guid: 96a551b12e3e4314f885185ee66523c7, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: b7eec08bccc47fa4b9f09604bd5792a6, type: 3}
     - target: {fileID: 6261105742092928905, guid: 96a551b12e3e4314f885185ee66523c7, type: 3}
       propertyPath: m_Layer
       value: 9
@@ -80379,6 +80387,10 @@ PrefabInstance:
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 6186227453690881458, guid: 96a551b12e3e4314f885185ee66523c7, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: b7eec08bccc47fa4b9f09604bd5792a6, type: 3}
     - target: {fileID: 7115444256219261132, guid: 96a551b12e3e4314f885185ee66523c7, type: 3}
       propertyPath: m_LocalPosition.z
       value: 4.66
