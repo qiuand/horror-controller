@@ -78203,7 +78203,7 @@ MeshCollider:
   m_GameObject: {fileID: 1688087715}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
@@ -81397,7 +81397,7 @@ MonoBehaviour:
   playerAbsent: 1
   scream: {fileID: 1801125537}
   hiddenPlayerPosition: {fileID: 2090064654}
-  timeUntilCanRepair: 1
+  timeUntilCanRepair: 0.5
   repairTimer: 0
   monsterHUD: {fileID: 429661098}
   monsterEyeModel: {fileID: 626959804}
@@ -81415,7 +81415,7 @@ MonoBehaviour:
   monsterAttackCooldownTimer: 0
   gameTimer: 5
   petrifyText: {fileID: 1333259128}
-  timeToPetrify: 25
+  timeToPetrify: 5
   petrifyTimer: 0
   board: {fileID: 1688087715}
   player: {fileID: 157790798}
@@ -82162,6 +82162,25 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -6102366419659122461, guid: 673bb7b393c94d84181f27813b6872d9, type: 3}
+--- !u!1 &1812267805 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 86888f03b25c1ff49a666204adec98c7, type: 3}
+  m_PrefabInstance: {fileID: 171487522}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &1812267808
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1812267805}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4037515072876348310, guid: 86888f03b25c1ff49a666204adec98c7, type: 3}
 --- !u!1001 &1817513421
 PrefabInstance:
   m_ObjectHideFlags: 0

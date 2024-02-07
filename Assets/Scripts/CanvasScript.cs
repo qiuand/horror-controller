@@ -63,7 +63,7 @@ public class CanvasScript : MonoBehaviour
     {
         timer.text = ""+System.Math.Round(gameManagerScript.countdownTimer, 2);
 
-        if (gameManagerScript.inTutorial && gameManagerScript.tutorialIndex != 99)
+        if (gameManagerScript.inTutorial && gameManagerScript.tutorialIndex != 99 && gameManagerScript.tutorialIndex>=0)
         {
             tutManager.DisplaySlide(gameManagerScript.tutorialIndex, canvasID);
         }

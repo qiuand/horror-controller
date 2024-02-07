@@ -9,6 +9,10 @@ using UnityEngine.Rendering.UI;
 
 public class GameManager : MonoBehaviour
 {
+
+    float healthRegenMultiplier = 0.5f;
+    float boardedDebuff = 0.3f;
+
     float startingChargeSpeed=0.75f;
     float startingPetrifySpeed = 1f;
 
@@ -410,22 +414,23 @@ public class GameManager : MonoBehaviour
     }
     void PetrifyTimer()
     {
-        if (playerIsVisible && !playerAbsent)
+        if (playerIsVisible && !playerAbsent && attachedEyeWall && !attachedEyeWall.GetComponent<Window>().isBoarded)
         {
             heartbeat.enabled = true;
-            /*            if (!visibleFlag)
-                        {
-                            player.GetComponent<Player>().playSound();
-                        }
-                        visibleFlag = true;*/
-            petrifyTimer += Time.deltaTime * monsterPetrifyIncrement ;
+            petrifyTimer += Time.deltaTime * monsterPetrifyIncrement;
+
+        }
+        else if (playerIsVisible && !playerAbsent)
+        {
+            heartbeat.enabled = true;
+            petrifyTimer += Time.deltaTime * monsterPetrifyIncrement * boardedDebuff;
         }
         else
         {
+            petrifyTimer -= Time.deltaTime * healthRegenMultiplier;
             heartbeat.enabled = false;
-            /*            visibleFlag = false;*/
-/*            petrifyTimer -= Time.deltaTime;
-*/        }
+
+        }
         if (petrifyTimer <= 0)
         {
             petrifyTimer = 0;
@@ -765,9 +770,22 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            if (inTutorial && tutorialIndex < 2)
+            {
+                tutorialIndex++;
+            }
+            else if (inTutorial && tutorialIndex >= 2)
+            {
+                ResetStats();
+                inTutorial = false;
+                introSlideVisible = true;
+                tutorialCompleted = true;
+                humanCanvas.GetComponent<CanvasScript>().FadeInfo("Night " + nightCounter + "/" + maxNights, "Survive.", null);
+                monsterCanvas.GetComponent<CanvasScript>().FadeInfo("Night " + nightCounter + "/" + maxNights, "Kill.", null);
+            }
             if (paused && !inTutorial && !tutorialCompleted && !introSlideVisible)
             {
-                tutorialIndex = -1;
+                tutorialIndex = 0;
                 gameLocked = false;
                 inTutorial = true;
                 humanCanvas.GetComponent<CanvasScript>().FadeInfo(null, null, null);
@@ -780,18 +798,6 @@ public class GameManager : MonoBehaviour
             {
                 introSlideVisible = false;
                 countDownEnabled = true;
-            }
-            if (inTutorial && tutorialIndex < 2)
-            {
-                tutorialIndex++;
-            }
-            else if (inTutorial && tutorialIndex >= 2)
-            {
-                ResetStats();
-                inTutorial = false;
-                introSlideVisible = true;
-                humanCanvas.GetComponent<CanvasScript>().FadeInfo("Night " + nightCounter + "/" + maxNights, "Survive.", null);
-                monsterCanvas.GetComponent<CanvasScript>().FadeInfo("Night " + nightCounter + "/" + maxNights, "Kill.", null);
             }
             if (paused && tutorialCompleted)
             {
