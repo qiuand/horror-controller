@@ -83190,7 +83190,7 @@ MonoBehaviour:
   monsterStrengthIncrement: 0.15
   monsterPetrifyIncrement: 1
   nightCounter: 1
-  maxNights: 6
+  maxNights: 1
   tutorialIndex: 0
   paused: 0
   inTutorial: 0
@@ -83214,7 +83214,7 @@ MonoBehaviour:
   monsterMaxHealth: 100
   monsterHealth: 100
   monsterAttackTimer: 1
-  monsterAttackOriginalCooldown: 1.15
+  monsterAttackOriginalCooldown: 10
   monsterAttackCooldownTimer: 0
   gameTimer: 5
   petrifyText: {fileID: 1333259128}

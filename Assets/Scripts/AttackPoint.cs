@@ -128,10 +128,10 @@ public class AttackPoint : MonoBehaviour
     }
     private void Repair()
     {
-        if (repairing && health < maxHealth /*&& health>=0*/)
+/*        if (repairing && health < maxHealth *//*&& health>=0*//*)
         {
-/*            repairSource.enabled = true;
-*/
+*//*            repairSource.enabled = true;
+*//*
             if (gameManager.GetComponent<GameManager>().repairTimer >= gameManager.GetComponent<GameManager>().timeUntilCanRepair)
             {
                 repairSource.Play();
@@ -144,21 +144,21 @@ public class AttackPoint : MonoBehaviour
                 }
                 else
                 {
-/*                    repairSource.enabled = false;
-*/                    gameManager.GetComponent<GameManager>().houseHealth += repairAmount;
+*//*                    repairSource.enabled = false;
+*//*                    gameManager.GetComponent<GameManager>().houseHealth += repairAmount;
                     health += repairAmount;
                 }
             }
 
-/*            print(health + " out of " + maxHealth);
-*/        }
+*//*            print(health + " out of " + maxHealth);
+*//*        }
         else if (health==maxHealth)
         {
-/*            repairSource.enabled = false;*/
+*//*            repairSource.enabled = false;*//*
         }
         if (health > maxHealth)
         {
             health = maxHealth;
-        }
+        }*/
     }
 }

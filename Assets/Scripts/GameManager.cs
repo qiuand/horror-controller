@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     float healthRegenMultiplier = 0.5f;
     float boardedDebuff = 0.3f;
 
-    float startingChargeSpeed=0.75f;
+    float startingChargeSpeed=10f;
     float startingPetrifySpeed = 1f;
 
     public int attackPerHit = 1;
@@ -104,7 +104,7 @@ public class GameManager : MonoBehaviour
 
     bool visibleFlag;
 
-    float originalGameTimer = 60f;
+    float originalGameTimer = 240f;
     public float gameTimer;
 
     [SerializeField] TextMeshProUGUI petrifyText;
@@ -414,7 +414,7 @@ public class GameManager : MonoBehaviour
     }
     void PetrifyTimer()
     {
-        if (playerIsVisible && !playerAbsent && attachedEyeWall && !attachedEyeWall.GetComponent<Window>().isBoarded)
+/*        if (playerIsVisible && !playerAbsent && attachedEyeWall && !attachedEyeWall.GetComponent<Window>().isBoarded)
         {
             heartbeat.enabled = true;
             petrifyTimer += Time.deltaTime * monsterPetrifyIncrement;
@@ -434,7 +434,7 @@ public class GameManager : MonoBehaviour
         if (petrifyTimer <= 0)
         {
             petrifyTimer = 0;
-        }
+        }*/
     }
     void MoveEyeCameraToLocation(GameObject reference)
     {
