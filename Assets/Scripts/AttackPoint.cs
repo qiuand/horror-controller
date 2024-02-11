@@ -72,7 +72,7 @@ public class AttackPoint : MonoBehaviour
     public void OnHit()
     {
 
-        if (/*timeUntilCanAttack <= 0 &&*/ health>0)
+        if (/*timeUntilCanAttack <= 0 &&*/ health>0 && gameManager.GetComponent<GameManager>().monsterDamage>=1 && timeUntilCanAttack<=0)
         {
             Instantiate(gameManager.GetComponent<GameManager>().monsterExplosion, transform.position, transform.rotation);
 /*            if (isDefended)
@@ -112,7 +112,7 @@ public class AttackPoint : MonoBehaviour
                     health -= gameManager.GetComponent<GameManager>().attackPerHit;
                 }
 
-                gameManager.GetComponent<GameManager>().monsterAttackCooldownTimer = gameManager.GetComponent<GameManager>().monsterAttackTimer;
+                gameManager.GetComponent<GameManager>().monsterAttackCooldownTimer = gameManager.GetComponent<GameManager>().monsterAttackOriginalCooldown;
                 sprite.gameObject.GetComponent<SpriteRenderer>().enabled = true;
                 //gameObject.GetComponent<MeshRenderer>().enabled = false;
 
