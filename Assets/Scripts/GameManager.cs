@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     float healthRegenMultiplier = 0.5f;
     float boardedDebuff = 0.3f;
 
-    float startingChargeSpeed=10f;
+    float startingChargeSpeed=5f;
     float startingPetrifySpeed = 1f;
 
     public int attackPerHit = 1;
@@ -741,7 +741,10 @@ public class GameManager : MonoBehaviour
         gameTimer = originalGameTimer;
         for(int i=0;i<monsterAttackPositions.Length; i++)
         {
-            monsterAttackPositions[i].GetComponent<AttackPoint>().health = weakPointHealth;
+            if (monsterAttackPositions[i].GetComponent<AttackPoint>().health > 0)
+            {
+                monsterAttackPositions[i].GetComponent<AttackPoint>().health = weakPointHealth;
+            }
         }
         petrifyTimer = 0;
         monsterDamage = 0;
