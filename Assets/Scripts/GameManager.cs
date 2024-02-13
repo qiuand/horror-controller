@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     float healthRegenMultiplier = 0.5f;
     float boardedDebuff = 0.3f;
 
-    float startingChargeSpeed=5f;
+    float startingChargeSpeed=2.5f;
     float startingPetrifySpeed = 1f;
 
     public int attackPerHit = 1;
@@ -394,7 +394,7 @@ public class GameManager : MonoBehaviour
                 destroyedPoints++;
             }
         }
-        if (destroyedPoints >= 1)
+        if (destroyedPoints >= 2)
         {
             return true;
         }
