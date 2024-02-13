@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
     public bool tutorialCompleted = false;
     public bool introSlideVisible = false;
 
-    bool serialFlag = false;
+    bool serialFlag = true;
 
     public bool playerAbsent = true;
 
@@ -104,7 +104,7 @@ public class GameManager : MonoBehaviour
 
     bool visibleFlag;
 
-    float originalGameTimer = 240f;
+    float originalGameTimer = 90f;
     public float gameTimer;
 
     [SerializeField] TextMeshProUGUI petrifyText;
