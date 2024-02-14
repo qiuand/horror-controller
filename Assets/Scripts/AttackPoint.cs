@@ -44,6 +44,7 @@ public class AttackPoint : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        repairSource.enabled = true;
 /*        repairSource.enabled = false;
 */        gameManager = GameObject.FindGameObjectWithTag("Game Manager");
         maxHealth = gameManager.GetComponent<GameManager>().weakPointHealth;
@@ -87,7 +88,9 @@ public class AttackPoint : MonoBehaviour
             {
                 if (isDefended)
                 {
+                    //Apply debuff
                     source.PlayOneShot(error);
+                    gameManager.GetComponent<GameManager>().monsterHealth--;
                 }
                 else
                 {
@@ -128,10 +131,10 @@ public class AttackPoint : MonoBehaviour
     }
     private void Repair()
     {
-/*        if (repairing && health < maxHealth *//*&& health>=0*//*)
+        if (repairing && health < maxHealth && health >= 0)
         {
-*//*            repairSource.enabled = true;
-*//*
+/*            repairSource.enabled = true;
+*/
             if (gameManager.GetComponent<GameManager>().repairTimer >= gameManager.GetComponent<GameManager>().timeUntilCanRepair)
             {
                 repairSource.Play();
@@ -144,21 +147,21 @@ public class AttackPoint : MonoBehaviour
                 }
                 else
                 {
-*//*                    repairSource.enabled = false;
-*//*                    gameManager.GetComponent<GameManager>().houseHealth += repairAmount;
+/*                    repairSource.enabled = false;
+*/                    gameManager.GetComponent<GameManager>().houseHealth += repairAmount;
                     health += repairAmount;
                 }
             }
 
-*//*            print(health + " out of " + maxHealth);
-*//*        }
-        else if (health==maxHealth)
-        {
-*//*            repairSource.enabled = false;*//*
+            print(health + " out of " + maxHealth);
         }
+        else if (health == maxHealth)
+        {
+/*            repairSource.enabled = false;
+*/        }
         if (health > maxHealth)
         {
             health = maxHealth;
-        }*/
+        }
     }
 }

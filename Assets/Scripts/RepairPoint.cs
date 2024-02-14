@@ -29,7 +29,7 @@ public class RepairPoint : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             parent.GetComponent<AttackPoint>().repairing = false;
-            parent.GetComponent<AttackPoint>().repairSource.enabled = false;
-        }
+/*            parent.GetComponent<AttackPoint>().repairSource.enabled = false;
+*/        }
     }
 }

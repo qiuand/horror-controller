@@ -72,7 +72,11 @@ public class CanvasScript : MonoBehaviour
         {
             strengthBar[i].gameObject.SetActive(false);
         }
-        for (int i=0; i<gameManagerScript.monsterDamage; i++)
+        /*        for (int i=0; i<gameManagerScript.monsterDamage; i++)
+                {
+                    strengthBar[i].gameObject.SetActive(true);
+                }*/
+        for (int i = 0; i < gameManagerScript.monsterHealth; i++)
         {
             strengthBar[i].gameObject.SetActive(true);
         }
@@ -107,7 +111,7 @@ public class CanvasScript : MonoBehaviour
         monsterAttackText.text = "Attack Strength: " + gameManagerScript.monsterDamage;
         integrityText.text = "House Integrity: " + gameManagerScript.houseHealth / gameManagerScript.maxHouseHealth+"%";
 
-        timerText.text = ""+System.Math.Round(gameManagerScript.gameTimer, 2) + "<br><color=red>" +gameManagerScript.monsterAttackCooldownTimer/*+"<br><size=15>Night " +gameManagerScript.nightCounter+"/"+gameManagerScript.maxNights+"</size><br><size=10>"+(gameManagerScript.monsterAttackOriginalCooldown)+" Monster Attack Recover<br>" +(gameManagerScript.monsterPetrifyIncrement+" Gaze Power")*/;
+        timerText.text = ""+System.Math.Round(gameManagerScript.gameTimer, 2) /*+ "<br><color=red>" +gameManagerScript.monsterAttackCooldownTimer*//*+"<br><size=15>Night " +gameManagerScript.nightCounter+"/"+gameManagerScript.maxNights+"</size><br><size=10>"+(gameManagerScript.monsterAttackOriginalCooldown)+" Monster Attack Recover<br>" +(gameManagerScript.monsterPetrifyIncrement+" Gaze Power")*/;
 
         healthBar.fillAmount = (gameManagerScript.houseHealth / gameManagerScript.maxHouseHealth);
 
@@ -123,23 +127,23 @@ public class CanvasScript : MonoBehaviour
         }
     }
     
-    public void FadeInfo(string title, string body, string tip)
+    public void FadeInfo(string title, string body, string tip, bool fadeIn)
     {
-        if (!BlackoutInfo.activeInHierarchy)
-        {
-            BlackoutInfo.SetActive(true);
-        }
-        else if (BlackoutInfo.activeInHierarchy)
+        if (!fadeIn)
         {
             BlackoutInfo.SetActive(false);
+        }
+        else
+        {
+            BlackoutInfo.SetActive(true);
         }
         infoTitle.text = title;
         infoBody.text = body;
         infoTip.text = tip;
     }
-    public void FadeMenu()
+    public void FadeMenu(bool fadeIn)
     {
-        if (MenuObject.activeInHierarchy)
+        if (!fadeIn)
         {
             MenuObject.SetActive(false);
         }
@@ -148,9 +152,9 @@ public class CanvasScript : MonoBehaviour
             MenuObject.SetActive(true);
         }
     }
-    public void FadeGameUI()
+    public void FadeGameUI(bool fadeIn)
     {
-        if (GameUI.activeInHierarchy)
+        if (!fadeIn)
         {
             GameUI.SetActive(false);
         }
