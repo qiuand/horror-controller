@@ -771,10 +771,10 @@ public class GameManager : MonoBehaviour
         gameTimer = originalGameTimer;
         for(int i=0;i<monsterAttackPositions.Length; i++)
         {
-            if (monsterAttackPositions[i].GetComponent<AttackPoint>().health > 0)
+/*            if (monsterAttackPositions[i].GetComponent<AttackPoint>().health > 0)
             {
                 monsterAttackPositions[i].GetComponent<AttackPoint>().health = weakPointHealth;
-            }
+            }*/
         }
         petrifyTimer = 0;
         monsterDamage = 0;
