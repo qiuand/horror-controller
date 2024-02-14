@@ -6,6 +6,8 @@ using TMPro;
 
 public class AttackPoint : MonoBehaviour
 {
+    [SerializeField] AudioClip humanStab;
+
     [SerializeField] Image healthBar;
     [SerializeField] Image humanHealthBar;
 
@@ -90,6 +92,8 @@ public class AttackPoint : MonoBehaviour
                 {
                     //Apply debuff
                     source.PlayOneShot(error);
+                    source.PlayOneShot(humanStab);
+
                     gameManager.GetComponent<GameManager>().monsterHealth--;
                 }
                 else

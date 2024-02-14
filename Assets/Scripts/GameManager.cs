@@ -10,7 +10,7 @@ using UnityEngine.Rendering.UI;
 public class GameManager : MonoBehaviour
 {
     public int monsterHealth;
-    int maxMonsterHealth=4;
+    int maxMonsterHealth=3;
 
     int stateProgressionTracker = 0;
 
@@ -304,6 +304,11 @@ public class GameManager : MonoBehaviour
             {
                 validatedIncomingManager[5] = 0;
             }
+        }
+
+        if(!gameLocked && paused && monsterHealth <= 0)
+        {
+            monsterHealth = maxMonsterHealth;
         }
 
     }
@@ -817,6 +822,7 @@ public class GameManager : MonoBehaviour
                     monsterCanvas.GetComponent<CanvasScript>().FadeGameUI(true);
                     humanCanvas.GetComponent<CanvasScript>().FadeInfo(null, null, null, false);
                     monsterCanvas.GetComponent<CanvasScript>().FadeInfo(null, null, null, false);
+                    gameLocked = false;
                     break;
                 case 2:
                     countdownTimer = originalCountdown;
@@ -835,6 +841,11 @@ public class GameManager : MonoBehaviour
     }
     public void ResetGame()
     {
+        for (int i = 0; i < monsterAttackPositions.Length; i++)
+        {
+            monsterAttackPositions[i].GetComponent<AttackPoint>().health = weakPointHealth;
+        }
+
         monsterAttackOriginalCooldown = startingChargeSpeed;
         monsterPetrifyIncrement = startingPetrifySpeed;
 
@@ -847,7 +858,9 @@ public class GameManager : MonoBehaviour
         introSlideVisible = false;
         inTutorial = false;
         tutorialCompleted = false;
+
         ResetStats();
+
         tutorialIndex = 0;
         nightCounter = 1;
         humanCanvas.GetComponent<CanvasScript>().FadeMenu(true);

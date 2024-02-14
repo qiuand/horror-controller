@@ -192,6 +192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfb5684d3864630449dfc0be5eae1561, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  humanStab: {fileID: 8300000, guid: c8bd29548c8551e49902174a1ece33dc, type: 3}
   healthBar: {fileID: 8452690691749443967}
   humanHealthBar: {fileID: 7174746215051910724}
   monsterHealth: 0
@@ -205,7 +206,7 @@ MonoBehaviour:
   normal: {fileID: 8300000, guid: f47997a5d2a0a7244a0703cceb9a72bd, type: 3}
   strong: {fileID: 8300000, guid: 7e0ff8cbeeda73441b9557664ed3d7f9, type: 3}
   veryStrong: {fileID: 8300000, guid: 12a87cc38c862d644937a6961c10c8c6, type: 3}
-  error: {fileID: 8300000, guid: cfa78c68692313e418525fa566b4ccd3, type: 3}
+  error: {fileID: 8300000, guid: b40f1682e3afda142b54930ce8eba36d, type: 3}
   roar: {fileID: 8300000, guid: ab080071119d76d4cac390434c7ece32, type: 3}
   sprite: {fileID: 7875721011021007106}
   repairSource: {fileID: 6186227453690881458}
