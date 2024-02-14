@@ -54,10 +54,10 @@ public class AttackPoint : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (health > maxHealth)
+/*        if (health > maxHealth)
         {
             health = maxHealth;
-        }
+        }*/
         healthBar.fillAmount = (float)health / (float)maxHealth;
         humanHealthBar.fillAmount = (float)health / (float)maxHealth;
 
@@ -140,17 +140,17 @@ public class AttackPoint : MonoBehaviour
                 repairSource.Play();
                 Instantiate(gameManager.GetComponent<GameManager>().sparks, transform.position, transform.rotation);
                 gameManager.GetComponent<GameManager>().repairTimer = 0;
-                if (gameManager.GetComponent<GameManager>().playerIsVisible)
+/*                if (gameManager.GetComponent<GameManager>().playerIsVisible)
                 {
                     gameManager.GetComponent<GameManager>().houseHealth += repairAmountDebuffed;
                     health += repairAmountDebuffed;
                 }
-                else
-                {
+                else if (health<maxHealth)
+                {*/
 /*                    repairSource.enabled = false;
 */                    gameManager.GetComponent<GameManager>().houseHealth += repairAmount;
                     health += repairAmount;
-                }
+/*                }*/
             }
 
             print(health + " out of " + maxHealth);
@@ -159,9 +159,9 @@ public class AttackPoint : MonoBehaviour
         {
 /*            repairSource.enabled = false;
 */        }
-        if (health > maxHealth)
+/*        if (health > maxHealth)
         {
             health = maxHealth;
-        }
+        }*/
     }
 }

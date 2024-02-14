@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
     public bool tutorialCompleted = false;
     public bool introSlideVisible = false;
 
-    bool serialFlag = false;
+    bool serialFlag = true;
 
     public bool playerAbsent = true;
 
