@@ -809,8 +809,11 @@ public class GameManager : MonoBehaviour
 
     public void shakeCameras(float strength)
     {
-        shaker1.StartCoroutine(shaker1.ShakeCam(0.3f));
-        shaker2.StartCoroutine(shaker1.ShakeCam(0.3f));
+        if (attachedEyeWall.tag=="Default Point")
+        {
+            shaker1.StartCoroutine(shaker1.ShakeCam(0.3f));
+            shaker2.StartCoroutine(shaker1.ShakeCam(0.3f));
+        }
 
     }
     public void HandleGreenButton()

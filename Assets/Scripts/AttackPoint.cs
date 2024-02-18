@@ -6,7 +6,7 @@ using TMPro;
 
 public class AttackPoint : MonoBehaviour
 {
-    [SerializeField] AudioClip humanStab;
+    [SerializeField] AudioClip humanStab, destroyed;
 
     [SerializeField] Image healthBar;
     [SerializeField] Image humanHealthBar;
@@ -34,7 +34,7 @@ public class AttackPoint : MonoBehaviour
 
     [SerializeField] AudioClip shatter;
 
-    [SerializeField] AudioClip weak, normal, strong, veryStrong, error;
+    [SerializeField] AudioClip weak, normal, strong, veryStrong, veryStrong2, veryStrong3, error;
 
     [SerializeField] AudioClip roar;
 
@@ -98,6 +98,10 @@ public class AttackPoint : MonoBehaviour
                 }
                 else
                 {
+                    if (health == 1)
+                    {
+                        source.PlayOneShot(destroyed);
+                    }
                     switch (gameManager.GetComponent<GameManager>().monsterDamage)
                     {
 /*                        case 1:
@@ -113,7 +117,19 @@ public class AttackPoint : MonoBehaviour
                             source.PlayOneShot(veryStrong);
                             break;*/
                         default:
-                            source.PlayOneShot(veryStrong);
+                            int random = Random.Range(0, 3);
+                            switch (random)
+                            {
+                                case 0:
+                                    source.PlayOneShot(veryStrong);
+                                    break;
+                                case 1:
+                                    source.PlayOneShot(veryStrong2);
+                                    break;
+                                case 2:
+                                    source.PlayOneShot(veryStrong3);
+                                    break;
+                            }
                             break;
                     }
                     health -= gameManager.GetComponent<GameManager>().attackPerHit;
