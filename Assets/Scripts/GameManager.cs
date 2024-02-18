@@ -823,6 +823,10 @@ public class GameManager : MonoBehaviour
         {
             ResetGame();
         }
+        else if (!countDownEnabled && !paused && !gameLocked)
+        {
+            ResetGame();
+        }
         else
         {
             DisableAllSlides();
@@ -887,6 +891,8 @@ public class GameManager : MonoBehaviour
         }
 
         tutorialGrace = true;
+
+        timer.enabled = false;
 
         humanCanvas.GetComponent<CanvasScript>().FadeTutorialWarning(true);
         monsterCanvas.GetComponent<CanvasScript>().FadeTutorialWarning(true);
