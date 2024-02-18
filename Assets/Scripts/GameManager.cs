@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] AudioSource source;
     [SerializeField] AudioClip gong;
-    [SerializeField] AudioClip sting;
+    [SerializeField] AudioClip sting, buttonClick;
 
     bool tutorialGrace = true;
 
@@ -530,7 +530,7 @@ public class GameManager : MonoBehaviour
         player.gameObject.transform.position = 
             new Vector3(
                 repairPoint.transform.position.x,
-                repairPoint.transform.position.y+2.5f,
+                repairPoint.transform.position.y+1.5f,
                 repairPoint.transform.position.z);
         player.gameObject.transform.rotation =
             Quaternion.Euler(
@@ -815,6 +815,7 @@ public class GameManager : MonoBehaviour
     }
     public void HandleGreenButton()
     {
+        source.PlayOneShot(buttonClick);
         if (gameWon)
         {
             ResetGame();
