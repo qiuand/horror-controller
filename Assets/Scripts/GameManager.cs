@@ -327,7 +327,7 @@ public class GameManager : MonoBehaviour
         if (nightCounter >= maxNights)
         {
             humanCanvas.GetComponent<CanvasScript>().FadeInfo("You Have Slain the Monster.", "Game Over.", "Congratulations.", true);
-            monsterCanvas.GetComponent<CanvasScript>().FadeInfo("You Have Been Slain by the Monster.", "Game Over.", "", true);
+            monsterCanvas.GetComponent<CanvasScript>().FadeInfo("You Have Been Slain by the Human.", "Game Over.", "", true);
             gameWon = true;
         }
         else
@@ -398,8 +398,8 @@ public class GameManager : MonoBehaviour
             if (nightCounter > maxNights)
             {
                 gameWon = true;
-                humanCanvas.GetComponent<CanvasScript>().FadeInfo("GAME OVER", "The human has survived.", "Press button to play again", true);
-                monsterCanvas.GetComponent<CanvasScript>().FadeInfo("GAME OVER", "The human has survived.", "Press button to play again", true);
+                humanCanvas.GetComponent<CanvasScript>().FadeInfo("GAME OVER", "The human has survived.", "", true);
+                monsterCanvas.GetComponent<CanvasScript>().FadeInfo("GAME OVER", "The human has survived.", "", true);
 
             }
             else
