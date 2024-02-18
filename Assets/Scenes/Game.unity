@@ -42726,7 +42726,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6546476698436229668, guid: f6714174f8bb8184eb08e99354ed3c12, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6651793564806574154, guid: f6714174f8bb8184eb08e99354ed3c12, type: 3}
       propertyPath: m_RootOrder
@@ -83631,7 +83631,7 @@ MonoBehaviour:
   playerAbsent: 1
   scream: {fileID: 1801125537}
   hiddenPlayerPosition: {fileID: 2090064654}
-  timeUntilCanRepair: 5
+  timeUntilCanRepair: 4.5
   repairTimer: 0
   monsterHUD: {fileID: 429661098}
   monsterEyeModel: {fileID: 626959804}
