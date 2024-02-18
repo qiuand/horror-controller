@@ -10,7 +10,7 @@ using UnityEngine.Rendering.UI;
 public class GameManager : MonoBehaviour
 {
     public int monsterHealth;
-    int maxMonsterHealth=3;
+    public int maxMonsterHealth=4;
 
     int stateProgressionTracker = 0;
 
@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
     public bool tutorialCompleted = false;
     public bool introSlideVisible = false;
 
-    bool serialFlag = true;
+    bool serialFlag = false;
 
     public bool playerAbsent = true;
 
@@ -158,6 +158,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        maxMonsterHealth = 4;
         monsterHealth = maxMonsterHealth;
 
         monsterAttackOriginalCooldown = startingChargeSpeed;
@@ -814,8 +815,8 @@ public class GameManager : MonoBehaviour
                 case 0:
                     humanCanvas.GetComponent<CanvasScript>().FadeMenu(false);
                     monsterCanvas.GetComponent<CanvasScript>().FadeMenu(false);
-                    humanCanvas.GetComponent<CanvasScript>().FadeInfo("You Are A <color=red>Desperate Human</color>,", "Trying to protect your home against a brutal monster.", "Survive for the next 6 nights.", true);
-                    monsterCanvas.GetComponent<CanvasScript>().FadeInfo("You Are A <color=red>Brutal Monster</color>,", "Hunting down a puny human in their home.", "Kill the human in the next 6 nights.", true);
+                    humanCanvas.GetComponent<CanvasScript>().FadeInfo("You Are A <color=red>Desperate Human</color>,", "Trying to protect your home against a brutal monster.", "Protect the house for the next 3 nights.", true);
+                    monsterCanvas.GetComponent<CanvasScript>().FadeInfo("You Are A <color=red>Brutal Monster</color>,", "Hunting down a puny human in their home.", "Destroy the house in the next 3 nights.", true);
                     break;
                 case 1:
                     humanCanvas.GetComponent<CanvasScript>().FadeGameUI(true);
@@ -827,8 +828,13 @@ public class GameManager : MonoBehaviour
                 case 2:
                     countdownTimer = originalCountdown;
                     countDownEnabled = true;
-                    humanCanvas.GetComponent<CanvasScript>().FadeInfo("Night " + nightCounter + "/" + maxNights, "Survive.", null, true);
-                    monsterCanvas.GetComponent<CanvasScript>().FadeInfo("Night " + nightCounter + "/" + maxNights, "Kill.", null, true);
+                    if (nightCounter >= maxNights)
+                    {
+                        humanCanvas.GetComponent<CanvasScript>().FadeInfo("Final Night", "Hold out against the final assault.", null, true);
+                        monsterCanvas.GetComponent<CanvasScript>().FadeInfo("Final Night", "Last chance to kill the human.", null, true);
+                    }
+                    humanCanvas.GetComponent<CanvasScript>().FadeInfo("Night " + nightCounter + "/" + maxNights, "If 2/3 walls are destroyed, the house falls.", null, true);
+                    monsterCanvas.GetComponent<CanvasScript>().FadeInfo("Night " + nightCounter + "/" + maxNights, "Destroy the house by zeroing 2/3 walls.", null, true);
                     break;
             }
             stateProgressionTracker++;
