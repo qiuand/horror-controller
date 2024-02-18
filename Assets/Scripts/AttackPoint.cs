@@ -95,9 +95,11 @@ public class AttackPoint : MonoBehaviour
                     source.PlayOneShot(humanStab);
 
                     gameManager.GetComponent<GameManager>().monsterHealth--;
+                    gameManager.GetComponent<GameManager>().TakeDamage();
                 }
                 else
                 {
+                    gameManager.GetComponent<GameManager>().TakeDamage();
                     if (health == 1)
                     {
                         source.PlayOneShot(destroyed);

@@ -326,12 +326,14 @@ public class GameManager : MonoBehaviour
     {
         if (nightCounter >= maxNights)
         {
+            timer.enabled = false;
             humanCanvas.GetComponent<CanvasScript>().FadeInfo("You Have Slain the Monster.", "Game Over.", "Congratulations.", true);
             monsterCanvas.GetComponent<CanvasScript>().FadeInfo("You Have Been Slain by the Human.", "Game Over.", "", true);
             gameWon = true;
         }
         else
         {
+            timer.enabled = false;
             nightCounter++;
             humanCanvas.GetComponent<CanvasScript>().FadeInfo("You Drove the Monster Back", "...For now. It slinks off to regenerate its lost limbs...", null, true);
             monsterCanvas.GetComponent<CanvasScript>().FadeInfo("You've Been Severely Wounded.", "You slink away to regenerate your lost limbs...", null, true);
@@ -380,6 +382,7 @@ public class GameManager : MonoBehaviour
             }
             if (!gameWon)
             {
+                timer.enabled = false;
                 humanCanvas.GetComponent<CanvasScript>().FadeInfo("Killed By The Monster.", "You surived for " + nightCounter + " days.", "", true);
                 monsterCanvas.GetComponent<CanvasScript>().FadeInfo("You killed the Human.", "It took " + nightCounter + " days of monstrous rage", "", true);
             }
@@ -836,7 +839,7 @@ public class GameManager : MonoBehaviour
                     humanCanvas.GetComponent<CanvasScript>().FadeMenu(false);
                     monsterCanvas.GetComponent<CanvasScript>().FadeMenu(false);
                     humanCanvas.GetComponent<CanvasScript>().FadeInfo("You Are A <color=red>Desperate Human</color>,", "Trying to protect your home against a brutal monster.", "Protect the house for the next 3 nights.", true);
-                    monsterCanvas.GetComponent<CanvasScript>().FadeInfo("You Are A <color=red>Brutal Monster</color>,", "Hunting down a puny human in their home.", "Over the next three nights, destroy 2/3 walls to obliterate the house.", true);
+                    monsterCanvas.GetComponent<CanvasScript>().FadeInfo("You Are A<br><color=red>Brutal Monster</color>,", "Hunting down a puny human in their home.", "Over the next three nights, destroy 2/3 walls to obliterate the house.", true);
                     break;
                 case 1:
                     humanCanvas.GetComponent<CanvasScript>().FadeGameUI(true);
@@ -860,6 +863,7 @@ public class GameManager : MonoBehaviour
                     humanCanvas.GetComponent<CanvasScript>().FadeTutorialWarning(false);
                     monsterCanvas.GetComponent<CanvasScript>().FadeTutorialWarning(false);
 
+                    gameLocked = true;
                     countdownTimer = originalCountdown;
                     countDownEnabled = true;
                     if (nightCounter >= maxNights)
@@ -885,6 +889,10 @@ public class GameManager : MonoBehaviour
     }
     public void ResetGame()
     {
+
+        countDownEnabled = false;
+        countdownTimer = originalCountdown;
+
         for (int i = 0; i < monsterAttackPositions.Length; i++)
         {
             monsterAttackPositions[i].GetComponent<AttackPoint>().health = weakPointHealth;
@@ -905,7 +913,7 @@ public class GameManager : MonoBehaviour
         MoveEyeCameraToLocation(monsterEyepositions[monsterEyepositions.Length - 1]);
         gameWon = false;
         gameLocked = true;
-        paused = false;
+        paused = true;
         introSlideVisible = false;
         inTutorial = false;
         tutorialCompleted = false;
@@ -994,6 +1002,11 @@ public class GameManager : MonoBehaviour
             validatedIncomingManager[3] = 0;
         }
 
+    }
+    public void TakeDamage()
+    {
+        humanCanvas.GetComponent<CanvasScript>().TakeDamage();
+        monsterCanvas.GetComponent<CanvasScript>().TakeDamage();
     }
 }
 

@@ -4,6 +4,11 @@ using UnityEngine.UI;
 
 public class CanvasScript : MonoBehaviour
 {
+    float chipSpeed = 2f;
+    float lerpTimer;
+    [SerializeField] Image petrifyBar;
+    [SerializeField] Image petrifyBarBack;
+
     public int canvasID;
 
     [SerializeField] GameObject tutorialWarning;
@@ -23,7 +28,6 @@ public class CanvasScript : MonoBehaviour
 
     [SerializeField] Image monsterHealthBar;
     [SerializeField] Image healthBar;
-    [SerializeField] Image petrifyBar;
     [SerializeField] Image chargeBar;
     [SerializeField] RawImage speedoNeedle;
 
@@ -117,7 +121,7 @@ public class CanvasScript : MonoBehaviour
 
         healthBar.fillAmount = (gameManagerScript.houseHealth / gameManagerScript.maxHouseHealth);
 
-        petrifyBar.fillAmount = (float)gameManagerScript.monsterHealth / (float)gameManagerScript.maxMonsterHealth;
+        UpdateHealthBar();
 
         if (gameManagerScript.playerIsVisible)
         {
@@ -177,6 +181,33 @@ public class CanvasScript : MonoBehaviour
         else
         {
             tutorialWarning.SetActive(false);
+        }
+    }
+    public void TakeDamage()
+    {
+        lerpTimer = 0;
+    }
+    public void UpdateHealthBar()
+    {
+        float fillF = petrifyBar.fillAmount;
+        float fillB = petrifyBarBack.fillAmount;
+        float healthFraction = (float)gameManagerScript.monsterHealth / (float)gameManagerScript.maxMonsterHealth;
+
+        if (fillB > healthFraction || fillB < healthFraction)
+        {
+            petrifyBar.fillAmount = healthFraction;
+            lerpTimer += Time.deltaTime;
+            float percentComplete = lerpTimer / chipSpeed;
+            percentComplete = percentComplete * percentComplete;
+            petrifyBarBack.fillAmount = Mathf.Lerp(fillB, healthFraction, percentComplete);
+        }
+        if (fillF < healthFraction)
+        {
+            petrifyBarBack.fillAmount = healthFraction;
+            lerpTimer += Time.deltaTime;
+            float percentComplete = lerpTimer / chipSpeed;
+            percentComplete = percentComplete * percentComplete;
+            petrifyBar.fillAmount = Mathf.Lerp(fillF, petrifyBarBack.fillAmount, percentComplete);
         }
     }
 }
