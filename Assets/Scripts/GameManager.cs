@@ -9,6 +9,14 @@ using UnityEngine.Rendering.UI;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] AudioSource timer;
+
+    [SerializeField] AudioSource source;
+    [SerializeField] AudioClip gong;
+    [SerializeField] AudioClip sting;
+
+    bool tutorialGrace = true;
+
     public int monsterHealth;
     public int maxMonsterHealth=4;
 
@@ -26,7 +34,7 @@ public class GameManager : MonoBehaviour
 
     public Shake shaker1, shaker2;
 
-    float originalCountdown=5f;
+    float originalCountdown=7f;
     public float countdownTimer;
 
     bool gameWon = false;
@@ -158,6 +166,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         maxMonsterHealth = 4;
         monsterHealth = maxMonsterHealth;
 
@@ -380,6 +389,9 @@ public class GameManager : MonoBehaviour
         }
         else if (gameTimer <= 0)
         {
+            timer.enabled = false;
+            source.PlayOneShot(gong, 1);
+
             nightCounter++;
             paused = true;
             gameLocked = true;
@@ -392,8 +404,8 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                humanCanvas.GetComponent<CanvasScript>().FadeInfo("You Live to See Another Day.", "Night " + nightCounter + "/" + maxNights, "But the monster grows angrier...<br>+15% faster attack charge<br>+50% deadlier gaze", true);
-                monsterCanvas.GetComponent<CanvasScript>().FadeInfo("The Human Lives to See Another Day.", "Night " + nightCounter + "/" + maxNights, "You grow angrier...<br>+15% faster attack charge<br>+50% deadlier gaze", true);
+                humanCanvas.GetComponent<CanvasScript>().FadeInfo("You Live to See Another Day.", "Night " + nightCounter + "/" + maxNights, "But the monster will return...", true);
+                monsterCanvas.GetComponent<CanvasScript>().FadeInfo("The Human Lives to See Another Day.", "Night " + nightCounter + "/" + maxNights, "But you return the next night...", true);
             }
             stateProgressionTracker = 2;
             paused = true;
@@ -826,15 +838,33 @@ public class GameManager : MonoBehaviour
                     gameLocked = false;
                     break;
                 case 2:
+
+                    timer.enabled = true;
+
+                    if (tutorialGrace)
+                    {
+                        tutorialGrace = false;
+                        for (int i = 0; i < monsterAttackPositions.Length; i++)
+                        {
+                            monsterAttackPositions[i].GetComponent<AttackPoint>().health = weakPointHealth;
+                        }
+                    }
+                    humanCanvas.GetComponent<CanvasScript>().FadeTutorialWarning(false);
+                    monsterCanvas.GetComponent<CanvasScript>().FadeTutorialWarning(false);
+
                     countdownTimer = originalCountdown;
                     countDownEnabled = true;
                     if (nightCounter >= maxNights)
                     {
-                        humanCanvas.GetComponent<CanvasScript>().FadeInfo("Final Night", "Hold out against the final assault.", null, true);
+                        humanCanvas.GetComponent<CanvasScript>().FadeInfo("Final Night", "Hold out against the final attack.", null, true);
                         monsterCanvas.GetComponent<CanvasScript>().FadeInfo("Final Night", "Last chance to kill the human.", null, true);
                     }
-                    humanCanvas.GetComponent<CanvasScript>().FadeInfo("Night " + nightCounter + "/" + maxNights, "If 2/3 walls are destroyed, the house falls.", null, true);
-                    monsterCanvas.GetComponent<CanvasScript>().FadeInfo("Night " + nightCounter + "/" + maxNights, "Destroy the house by zeroing 2/3 walls.", null, true);
+                    else
+                    {
+                        humanCanvas.GetComponent<CanvasScript>().FadeInfo("Night " + nightCounter + "/" + maxNights, "If 2/3 walls are destroyed, the house falls.", null, true);
+                        monsterCanvas.GetComponent<CanvasScript>().FadeInfo("Night " + nightCounter + "/" + maxNights, "Destroy the house by zeroing 2/3 walls.", null, true);
+                    }
+                    
                     break;
             }
             stateProgressionTracker++;
@@ -851,6 +881,11 @@ public class GameManager : MonoBehaviour
         {
             monsterAttackPositions[i].GetComponent<AttackPoint>().health = weakPointHealth;
         }
+
+        tutorialGrace = true;
+
+        humanCanvas.GetComponent<CanvasScript>().FadeTutorialWarning(true);
+        monsterCanvas.GetComponent<CanvasScript>().FadeTutorialWarning(true);
 
         monsterAttackOriginalCooldown = startingChargeSpeed;
         monsterPetrifyIncrement = startingPetrifySpeed;

@@ -6,6 +6,8 @@ public class CanvasScript : MonoBehaviour
 {
     public int canvasID;
 
+    [SerializeField] GameObject tutorialWarning;
+
     [SerializeField] TextMeshProUGUI timer;
 
     [SerializeField] RawImage[] strengthBar;
@@ -61,7 +63,7 @@ public class CanvasScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timer.text = ""+System.Math.Round(gameManagerScript.countdownTimer, 2);
+        timer.text = ""+System.Math.Round(gameManagerScript.countdownTimer, 0);
 
         if (gameManagerScript.inTutorial && gameManagerScript.tutorialIndex != 99 && gameManagerScript.tutorialIndex>=0)
         {
@@ -111,7 +113,7 @@ public class CanvasScript : MonoBehaviour
         monsterAttackText.text = "Attack Strength: " + gameManagerScript.monsterDamage;
         integrityText.text = "House Integrity: " + gameManagerScript.houseHealth / gameManagerScript.maxHouseHealth+"%";
 
-        timerText.text = ""+System.Math.Round(gameManagerScript.gameTimer, 2) /*+ "<br><color=red>" +gameManagerScript.monsterAttackCooldownTimer*//*+"<br><size=15>Night " +gameManagerScript.nightCounter+"/"+gameManagerScript.maxNights+"</size><br><size=10>"+(gameManagerScript.monsterAttackOriginalCooldown)+" Monster Attack Recover<br>" +(gameManagerScript.monsterPetrifyIncrement+" Gaze Power")*/;
+        timerText.text = ""+System.Math.Round(gameManagerScript.gameTimer, 0) /*+ "<br><color=red>" +gameManagerScript.monsterAttackCooldownTimer*//*+"<br><size=15>Night " +gameManagerScript.nightCounter+"/"+gameManagerScript.maxNights+"</size><br><size=10>"+(gameManagerScript.monsterAttackOriginalCooldown)+" Monster Attack Recover<br>" +(gameManagerScript.monsterPetrifyIncrement+" Gaze Power")*/;
 
         healthBar.fillAmount = (gameManagerScript.houseHealth / gameManagerScript.maxHouseHealth);
 
@@ -163,6 +165,18 @@ public class CanvasScript : MonoBehaviour
         else
         {
             GameUI.SetActive(true); ;
+        }
+    }
+
+    public void FadeTutorialWarning(bool fadeIn)
+    {
+        if (fadeIn)
+        {
+            tutorialWarning.SetActive(true);
+        }
+        else
+        {
+            tutorialWarning.SetActive(false);
         }
     }
 }
