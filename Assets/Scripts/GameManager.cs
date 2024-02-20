@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
     public bool tutorialCompleted = false;
     public bool introSlideVisible = false;
 
-    bool serialFlag = false;
+    bool serialFlag = true;
 
     public bool playerAbsent = true;
 
@@ -838,7 +838,7 @@ public class GameManager : MonoBehaviour
                 case 0:
                     humanCanvas.GetComponent<CanvasScript>().FadeMenu(false);
                     monsterCanvas.GetComponent<CanvasScript>().FadeMenu(false);
-                    humanCanvas.GetComponent<CanvasScript>().FadeInfo("You Are A <color=red>Desperate Human</color>,", "Trying to protect your home against a brutal monster.", "Protect the house for the next 3 nights.", true);
+                    humanCanvas.GetComponent<CanvasScript>().FadeInfo("You Are A <color=red>Desperate Human</color>,", "Trying to protect your home against a brutal monster.", "If two walls are destroyed, the house falls.", true);
                     monsterCanvas.GetComponent<CanvasScript>().FadeInfo("You Are A<br><color=red>Brutal Monster</color>,", "Hunting down a puny human in their home.", "Over the next three nights, destroy 2/3 walls to obliterate the house.", true);
                     break;
                 case 1:
