@@ -9,6 +9,9 @@ using UnityEngine.Rendering.UI;
 
 public class GameManager : MonoBehaviour
 {
+    float buttonBufferTime = 0.05f;
+    float buttonTimer;
+
     [SerializeField] AudioSource timer;
 
     [SerializeField] AudioSource source;
@@ -246,11 +249,16 @@ public class GameManager : MonoBehaviour
             {
                 isButtonDown = true;
             }
-            else if (isButtonDown && validatedIncomingManager[7] == 0)
+            else if (isButtonDown && validatedIncomingManager[7] == 0 && buttonTimer>=buttonBufferTime)
             {
+                buttonTimer = 0;
                 isButtonDown = false;
                 HandleGreenButton();
             }
+        }
+        if (isButtonDown)
+        {
+            buttonTimer += Time.deltaTime;
         }
         if (!serialFlag)
         {
