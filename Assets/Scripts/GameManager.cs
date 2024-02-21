@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
     public bool tutorialCompleted = false;
     public bool introSlideVisible = false;
 
-    bool serialFlag = true;
+    bool serialFlag = false;
 
     public bool playerAbsent = true;
 
@@ -198,6 +198,8 @@ public class GameManager : MonoBehaviour
         monsterAttackCooldownTimer = monsterAttackTimer;
 
         MoveEyeCameraToLocation(monsterEyepositions[monsterEyepositions.Length-1]);
+        changeLerpTarget(monsterEyepositions[4]);
+
         maxHouseHealth = weakPointHealth * numberOfWeakPoints;
         houseHealth = maxHouseHealth;
         petrifyTimer = 0;
@@ -522,8 +524,11 @@ public class GameManager : MonoBehaviour
         GameObject boardPoint = reference.transform.Find("Board Point").gameObject;
         board.gameObject.transform.position = boardPoint.transform.position;
         board.gameObject.transform.rotation = boardPoint.transform.rotation;
-        Instantiate(sparks, boardPoint.transform.position, boardPoint.transform.rotation);
-        board.GetComponent<Board>().PlaySound();
+
+        board.gameObject.GetComponent<Animator>().Play("BoardPlace");
+
+/*        Instantiate(sparks, boardPoint.transform.position, boardPoint.transform.rotation);
+*/        board.GetComponent<Board>().PlaySound();
     }
     void InvalidateAllDefendedPoints()
     {
@@ -663,9 +668,10 @@ public class GameManager : MonoBehaviour
                 {
                     monsterEyepositions[i].GetComponent<Window>().isBoarded = false;
                 }
-                board.gameObject.transform.position = defaultBarricadePoint.transform.position;
-                board.gameObject.transform.rotation = defaultBarricadePoint.transform.rotation;
+/*                board.gameObject.transform.position = defaultBarricadePoint.transform.position;
+                board.gameObject.transform.rotation = defaultBarricadePoint.transform.rotation;*/
                 board.GetComponent<Board>().PlaySound();
+                board.GetComponent<Animator>().Play("BoardRemove");
 
             }
         }
@@ -927,7 +933,10 @@ public class GameManager : MonoBehaviour
 
         stateProgressionTracker = 0;
         countDownEnabled = false;
+
+        changeLerpTarget(monsterEyepositions[4]);
         MoveEyeCameraToLocation(monsterEyepositions[monsterEyepositions.Length - 1]);
+
         gameWon = false;
         gameLocked = true;
         paused = true;

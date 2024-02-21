@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: M_Sadie
-  m_Shader: {fileID: -6465566751694194690, guid: 6beb68d977ea7cd438e8a92231d3b98b, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: d5240c4ccf0637e47be9227a244b23a1, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
