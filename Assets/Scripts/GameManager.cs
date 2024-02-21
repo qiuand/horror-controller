@@ -245,11 +245,11 @@ public class GameManager : MonoBehaviour
             SerialCommunications.communicationReadyFlag = false;
 
             Debug.Log(validatedIncomingManager[7]);
-            if (validatedIncomingManager[7] == 1)
+            if (validatedIncomingManager[7] == 0)
             {
                 isButtonDown = true;
             }
-            else if (isButtonDown && validatedIncomingManager[7] == 0 && buttonTimer>=buttonBufferTime)
+            else if (isButtonDown && validatedIncomingManager[7] == 1 && buttonTimer>=buttonBufferTime)
             {
                 isButtonDown = false;
                 HandleGreenButton();
