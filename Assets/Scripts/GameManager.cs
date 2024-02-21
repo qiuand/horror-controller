@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Animator humanAnimator;
 
     float buttonTimer = 0f;
-    float buttonBufferTime = 0.25f;
+    float buttonBufferTime = 0.1f;
 
     [SerializeField] AudioSource timer;
 
@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
     public bool tutorialCompleted = false;
     public bool introSlideVisible = false;
 
-    bool serialFlag = false;
+    bool serialFlag = true;
 
     public bool playerAbsent = true;
 
