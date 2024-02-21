@@ -9,6 +9,9 @@ using UnityEngine.Rendering.UI;
 
 public class GameManager : MonoBehaviour
 {
+
+    [SerializeField] Animator humanAnimator;
+
     float buttonTimer = 0f;
     float buttonBufferTime = 0.25f;
 
@@ -57,7 +60,7 @@ public class GameManager : MonoBehaviour
     public bool tutorialCompleted = false;
     public bool introSlideVisible = false;
 
-    bool serialFlag = true;
+    bool serialFlag = false;
 
     public bool playerAbsent = true;
 
@@ -552,6 +555,7 @@ public class GameManager : MonoBehaviour
                 repairPoint.transform.rotation.x,
                 repairPoint.transform.rotation.y,
                 repairPoint.transform.rotation.z);
+        player.GetComponent<Animator>().Play("HumanReplace");
     }
 
     //Monster eye
@@ -708,7 +712,8 @@ public class GameManager : MonoBehaviour
                 InvalidateAllDefendedPoints();
                 player.GetComponent<Player>().Move();
                 player.GetComponent<BoxCollider>().enabled=false;
-                player.GetComponent<MeshRenderer>().enabled = false;
+                player.GetComponent<Animator>().Play("Human");
+/*                player.GetComponent<MeshRenderer>().enabled = false;*/
                 /*                MoveHumanRepair(hiddenPlayerPosition);*/
             }
         }
