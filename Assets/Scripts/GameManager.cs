@@ -9,7 +9,7 @@ using UnityEngine.Rendering.UI;
 
 public class GameManager : MonoBehaviour
 {
-    float buttonBufferTime = 0.01f;
+    float buttonBufferTime = 0.25f;
     float buttonTimer;
     bool buttonPressedWell = false;
 
@@ -246,7 +246,7 @@ public class GameManager : MonoBehaviour
             SerialCommunications.communicationReadyFlag = false;
 
             Debug.Log(validatedIncomingManager[7]);
-            if (!isButtonDown && validatedIncomingManager[7] == 1)
+            if (validatedIncomingManager[7] == 1)
             {
                 isButtonDown = true;
                 if (buttonTimer >= buttonBufferTime)
@@ -260,6 +260,12 @@ public class GameManager : MonoBehaviour
                 buttonTimer = 0;
                 isButtonDown = false;
                 HandleGreenButton();
+            }
+            else if (validatedIncomingManager[7] == 0)
+            {
+                buttonPressedWell = false;
+                buttonTimer = 0;
+                isButtonDown = false;
             }
         }
         if (isButtonDown)
