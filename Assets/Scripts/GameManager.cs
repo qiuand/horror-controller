@@ -245,7 +245,7 @@ public class GameManager : MonoBehaviour
             SerialCommunications.communicationReadyFlag = false;
 
             Debug.Log(validatedIncomingManager[7]);
-            if (!isButtonDown && validatedIncomingManager[7] == 1)
+            if (validatedIncomingManager[7] == 1)
             {
                 isButtonDown = true;
             }
