@@ -9,9 +9,8 @@ using UnityEngine.Rendering.UI;
 
 public class GameManager : MonoBehaviour
 {
+    float buttonTimer = 0f;
     float buttonBufferTime = 0.25f;
-    float buttonTimer;
-    bool buttonPressedWell = false;
 
     [SerializeField] AudioSource timer;
 
@@ -246,25 +245,18 @@ public class GameManager : MonoBehaviour
             SerialCommunications.communicationReadyFlag = false;
 
             Debug.Log(validatedIncomingManager[7]);
-            if (validatedIncomingManager[7] == 1)
+            if (!isButtonDown && validatedIncomingManager[7] == 1)
             {
                 isButtonDown = true;
-                if (buttonTimer >= buttonBufferTime)
-                {
-                    buttonPressedWell = true;
-                }
             }
-            else if (isButtonDown && buttonPressedWell && validatedIncomingManager[7] == 0)
+            else if (isButtonDown && validatedIncomingManager[7] == 0 && buttonTimer>=buttonBufferTime)
             {
-                buttonPressedWell = false;
-                buttonTimer = 0;
                 isButtonDown = false;
                 HandleGreenButton();
             }
-            else if (validatedIncomingManager[7] == 0)
+            else
             {
-                buttonPressedWell = false;
-                buttonTimer = 0;
+                buttonTimer = 0f;
                 isButtonDown = false;
             }
         }
