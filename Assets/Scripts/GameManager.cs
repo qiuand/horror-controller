@@ -248,14 +248,17 @@ public class GameManager : MonoBehaviour
             if (!isButtonDown && validatedIncomingManager[7] == 1)
             {
                 isButtonDown = true;
-                buttonTimer += Time.deltaTime;
             }
-            else if (isButtonDown && validatedIncomingManager[7] == 0 && buttonTimer>=buttonBufferTime)
+            else if (isButtonDown && validatedIncomingManager[7] == 1 && buttonTimer>=buttonBufferTime)
             {
                 buttonTimer = 0;
                 isButtonDown = false;
                 HandleGreenButton();
             }
+        }
+        if (isButtonDown)
+        {
+            buttonTimer += Time.deltaTime;
         }
         if (!serialFlag)
         {
