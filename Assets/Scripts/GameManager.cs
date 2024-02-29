@@ -341,6 +341,7 @@ public class GameManager : MonoBehaviour
     }
     void MonsterDied()
     {
+        source.PlayOneShot(gong, 1);
         if (nightCounter >= maxNights)
         {
             timer.enabled = false;
@@ -415,10 +416,10 @@ public class GameManager : MonoBehaviour
             nightCounter++;
             paused = true;
             gameLocked = true;
-            if (nightCounter > maxNights)
+            if (nightCounter > maxNights && !gameWon)
             {
                 gameWon = true;
-                humanCanvas.GetComponent<CanvasScript>().FadeInfo("GAME OVER", "The human has survived.", "", true);
+                humanCanvas.GetComponent<CanvasScript>().FadeInfo("GAME OVER", "You have survived.", "", true);
                 monsterCanvas.GetComponent<CanvasScript>().FadeInfo("GAME OVER", "The human has survived.", "", true);
 
             }

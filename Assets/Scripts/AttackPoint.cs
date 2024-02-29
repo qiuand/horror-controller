@@ -30,6 +30,8 @@ public class AttackPoint : MonoBehaviour
 
     public bool repairing = false;
 
+    [SerializeField] AudioSource repairingInterval;
+
     [SerializeField] AudioSource source;
 
     [SerializeField] AudioClip shatter;
@@ -155,6 +157,11 @@ public class AttackPoint : MonoBehaviour
     {
         if (repairing && health < maxHealth && health >= 0)
         {
+            if (!repairingInterval.isPlaying && !repairSource.isPlaying)
+            {
+                repairingInterval.PlayScheduled(AudioSettings.dspTime+1);
+            }
+
 /*            repairSource.enabled = true;
 */
             if (gameManager.GetComponent<GameManager>().repairTimer >= gameManager.GetComponent<GameManager>().timeUntilCanRepair)
