@@ -9,6 +9,7 @@ using UnityEngine.Rendering.UI;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] Animator healthAnimator;
 
     [SerializeField] Animator humanAnimator;
 
@@ -541,6 +542,7 @@ public class GameManager : MonoBehaviour
     }
     void MoveHumanRepair(GameObject reference)
     {
+        humanCanvas.GetComponent<CanvasScript>().fadeRepair(true);
         repairTimer = 0;
         player.GetComponent<Player>().Move();
 
@@ -715,6 +717,7 @@ public class GameManager : MonoBehaviour
             }
             else if (validatedIncomingManager[6] == 0)
             {
+                humanCanvas.GetComponent<CanvasScript>().fadeRepair(false);
                 playerAbsent = true;
                 InvalidateAllDefendedPoints();
                 player.GetComponent<Player>().Move();

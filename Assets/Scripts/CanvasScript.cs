@@ -11,6 +11,12 @@ public class CanvasScript : MonoBehaviour
 
     public int canvasID;
 
+    [SerializeField] Animator healthAnimator;
+
+    [SerializeField] Animator repairAnimator;
+
+    [SerializeField] GameObject repairObject;
+
     [SerializeField] GameObject tutorialWarning;
 
     [SerializeField] TextMeshProUGUI timer;
@@ -186,6 +192,8 @@ public class CanvasScript : MonoBehaviour
     public void TakeDamage()
     {
         lerpTimer = 0;
+        healthAnimator.Play("HealthFlash");
+
     }
     public void UpdateHealthBar()
     {
@@ -208,6 +216,18 @@ public class CanvasScript : MonoBehaviour
             float percentComplete = lerpTimer / chipSpeed;
             percentComplete = percentComplete * percentComplete;
             petrifyBar.fillAmount = Mathf.Lerp(fillF, petrifyBarBack.fillAmount, percentComplete);
+        }
+    }
+
+    public void fadeRepair(bool fadeIn)
+    {
+        if (fadeIn)
+        {
+            repairAnimator.SetBool("active", true);
+        }
+        else
+        {
+            repairAnimator.SetBool("active", false);
         }
     }
 }

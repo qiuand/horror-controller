@@ -93,7 +93,7 @@ public class AttackPoint : MonoBehaviour
                 if (isDefended)
                 {
                     //Apply debuff
-                    source.PlayOneShot(error);
+                    source.PlayOneShot(error, 0.4f);
                     source.PlayOneShot(humanStab);
 
                     gameManager.GetComponent<GameManager>().monsterHealth--;
