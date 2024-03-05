@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Animator humanAnimator;
 
     float buttonTimer = 0f;
-    float buttonBufferTime = 0.1f;
+    float buttonBufferTime = 0.25f;
 
     [SerializeField] AudioSource timer;
 
