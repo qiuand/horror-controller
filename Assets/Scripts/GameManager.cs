@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Animator humanAnimator;
 
     float buttonTimer = 0f;
-    float buttonBufferTime = 0.25f;
+    float buttonBufferTime = 0.050f;
 
     [SerializeField] AudioSource timer;
 
@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
     public bool tutorialCompleted = false;
     public bool introSlideVisible = false;
 
-    bool serialFlag = false;
+    bool serialFlag = true;
 
     public bool playerAbsent = true;
 
@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour
 
     float elapsedLerpTime;
 
-    byte[] validatedIncomingManager = new byte[8];
+    byte[] validatedIncomingManager = new byte[9];
 
     public string timerString;
 
@@ -370,7 +370,7 @@ public class GameManager : MonoBehaviour
             if (8 - monsterAttackPositions[i].GetComponent<AttackPoint>().health > greatestDamage)
             {
                 greatestDamage = 8 - monsterAttackPositions[i].GetComponent<AttackPoint>().health;
-                Debug.Log(greatestDamage);
+/*                Debug.Log(greatestDamage);*/
                 GameManagerSource.volume = greatestDamage * 0.17f;
             }
         }

@@ -22,7 +22,7 @@ public class AttackPoint : MonoBehaviour
     float timeUntilCanRepair = 0f;
     float repairCooldownTime = 1f;
 
-    int repairAmount=2;
+    int repairAmount=1;
     int repairAmountDebuffed = 5;
 
     public int maxHealth;

@@ -11,14 +11,18 @@ public class SerialCommunications : MonoBehaviour
 
     Thread IOThread = new Thread(DataThread);
 
-    private static SerialPort sp = new SerialPort("COM7", 9600);
+    private static SerialPort sp = new SerialPort("COM6", 9600);
 
     int variable;
 
-    private static byte[] incoming = new byte[8];
+    private static int index;
+
+    private static byte[] incoming = new byte[9];
     public static byte[] outgoing = new byte[7];
 
-    public static byte[] validatedIncoming = new byte[8];
+    public static byte[] rawData = new byte[100];
+
+    public static byte[] validatedIncoming = new byte[9];
 
 
     float lightTimer;
@@ -28,14 +32,36 @@ public class SerialCommunications : MonoBehaviour
     public static void DataThread()
     {
        
-        sp = new SerialPort("COM7", 9600);
+        sp = new SerialPort("COM6", 9600);
         sp.Open();
-
+        sp.ReadTimeout=50;
         while (true)
         {
-            sp.Read(incoming, 0, 8);
+            for(int k=0; k<rawData.Length; k++)
+            {
+                rawData[k] = 0;
+            }
+            int bytesAvailable = sp.BytesToRead;
+            sp.Read(rawData, 0, bytesAvailable);
 
-            if (incoming[0] == 'P' && incoming[1] == 'C')
+            if (bytesAvailable >= 9)
+            {
+
+            }
+            for(int i=0; i<bytesAvailable; i++)
+            {
+                if((rawData[i]=='P') && (rawData[i+1]=='C') && (rawData[i + 2] == '4'))
+                {
+                    index = i;
+                    break;
+                }
+            }
+            for(int j=0; j<9; j++)
+            {
+                incoming[j] = rawData[index+j];
+            }
+
+            if ((incoming[0] == 'P') && (incoming[1] == 'C') && (incoming[2] =='4') && (incoming[8] == 'Z'))
             {
                 if (!communicationReadyFlag)
                 { 
