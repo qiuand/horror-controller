@@ -24,6 +24,8 @@ public class SerialCommunications : MonoBehaviour
 
     public static byte[] validatedIncoming = new byte[9];
 
+    public static float threadTimer = 0f;
+    public static float threadDelay = 0.020f;
 
     float lightTimer;
     float lightTimerOriginal = .5f;
@@ -31,10 +33,15 @@ public class SerialCommunications : MonoBehaviour
 
     public static void DataThread()
     {
-       
+/*        while(threadTimer<= threadDelay)
+        {
+            threadTimer += Time.deltaTime;
+        }
+        threadTimer = 0f;*/
+
         sp = new SerialPort("COM6", 9600);
         sp.Open();
-        sp.ReadTimeout=50;
+        sp.ReadTimeout=20;
         while (true)
         {
             for(int k=0; k<rawData.Length; k++)
@@ -42,9 +49,13 @@ public class SerialCommunications : MonoBehaviour
                 rawData[k] = 0;
             }
             int bytesAvailable = sp.BytesToRead;
-            sp.Read(rawData, 0, bytesAvailable);
 
-            for(int i=0; i<bytesAvailable; i++)
+            sp.Read(rawData, 0, bytesAvailable);
+            sp.Write(outgoing, 0, 8);
+
+            print("bytes: " + bytesAvailable);
+
+            for (int i=0; i<bytesAvailable; i++)
             {
                 if((rawData[i]=='P') && (rawData[i+1]=='C') && (rawData[i + 2] == '4'))
                 {
@@ -70,13 +81,13 @@ public class SerialCommunications : MonoBehaviour
             }
             else
             {
-                sp.Write(outgoing, 0, 8);
+
             }
             /*            Debug.Log("Serial Script: " + validatedIncoming[0] + " + " + validatedIncoming[1] + " + " + validatedIncoming[2] + " + " + validatedIncoming[3] + " + " + validatedIncoming[4] + " + " + validatedIncoming[5] + " + " + validatedIncoming[6]);
             */
 
 
-            Thread.Sleep(10);
+            Thread.Sleep(30);
         }
     }
 
@@ -91,6 +102,7 @@ public class SerialCommunications : MonoBehaviour
     void Start()
     {
         IOThread.Start();
+        IOThread.Priority = System.Threading.ThreadPriority.Highest;
 
         /*        lightTimer = lightTimerOriginal;
 
