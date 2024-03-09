@@ -68,7 +68,7 @@ public class TutorialManagerNew : MonoBehaviour
         humanTutorialArray[1] = new TutorialObject
             (
             "If the red light reaches you, the monster can see inside." +
-            "<br><br>Block the monster’s vision with your barricade to stop it from finding unprotected walls.",
+            "<br><br>Block the monster’s vision with your board to stop it from finding unprotected walls.",
             humanVideoArray[1]
             );
         humanTutorialArray[2] = new TutorialObject

@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
     public bool tutorialCompleted = false;
     public bool introSlideVisible = false;
 
-    bool serialFlag = false;
+    bool serialFlag = true;
 
     public bool playerAbsent = true;
 
@@ -912,8 +912,8 @@ public class GameManager : MonoBehaviour
                     }
                     else
                     {
-                        humanCanvas.GetComponent<CanvasScript>().FadeInfo("Night " + nightCounter + "/" + maxNights, "If 2/3 walls are destroyed, the house falls.", null, true);
-                        monsterCanvas.GetComponent<CanvasScript>().FadeInfo("Night " + nightCounter + "/" + maxNights, "Destroy the house by zeroing 2/3 walls.", null, true);
+                        humanCanvas.GetComponent<CanvasScript>().FadeInfo("Night " + nightCounter + "/" + maxNights, "If 2/3 walls are destroyed, you die.", null, true);
+                        monsterCanvas.GetComponent<CanvasScript>().FadeInfo("Night " + nightCounter + "/" + maxNights, "Destroy 2/3 walls to win.", null, true);
                     }
                     
                     break;
