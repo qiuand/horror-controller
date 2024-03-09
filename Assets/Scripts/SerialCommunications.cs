@@ -18,7 +18,7 @@ public class SerialCommunications : MonoBehaviour
     private static int index;
 
     private static byte[] incoming = new byte[9];
-    public static byte[] outgoing = new byte[7];
+    public static byte[] outgoing = new byte[8];
 
     public static byte[] rawData = new byte[100];
 
@@ -44,10 +44,6 @@ public class SerialCommunications : MonoBehaviour
             int bytesAvailable = sp.BytesToRead;
             sp.Read(rawData, 0, bytesAvailable);
 
-            if (bytesAvailable >= 9)
-            {
-
-            }
             for(int i=0; i<bytesAvailable; i++)
             {
                 if((rawData[i]=='P') && (rawData[i+1]=='C') && (rawData[i + 2] == '4'))
@@ -61,7 +57,7 @@ public class SerialCommunications : MonoBehaviour
                 incoming[j] = rawData[index+j];
             }
 
-            if ((incoming[0] == 'P') && (incoming[1] == 'C') && (incoming[2] =='4') && (incoming[8] == 'Z'))
+            if (/*(incoming[0] == 'P') && (incoming[1] == 'C') && (incoming[2] =='4') && */(incoming[8] == 'Z'))
             {
                 if (!communicationReadyFlag)
                 { 
@@ -74,7 +70,7 @@ public class SerialCommunications : MonoBehaviour
             }
             else
             {
-                sp.Write(outgoing, 0, 7);
+                sp.Write(outgoing, 0, 8);
             }
             /*            Debug.Log("Serial Script: " + validatedIncoming[0] + " + " + validatedIncoming[1] + " + " + validatedIncoming[2] + " + " + validatedIncoming[3] + " + " + validatedIncoming[4] + " + " + validatedIncoming[5] + " + " + validatedIncoming[6]);
             */
@@ -115,6 +111,7 @@ public class SerialCommunications : MonoBehaviour
         outgoing[4] = 0b11111111;
         outgoing[5] = 0b11111111;
         outgoing[6] = 0b11111111;
+        outgoing[7] = (byte)'Z';
 
     }
 
