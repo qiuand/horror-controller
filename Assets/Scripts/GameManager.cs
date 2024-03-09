@@ -873,10 +873,22 @@ public class GameManager : MonoBehaviour
                     monsterCanvas.GetComponent<CanvasScript>().FadeGameUI(true);
                     humanCanvas.GetComponent<CanvasScript>().FadeInfo(null, null, null, false);
                     monsterCanvas.GetComponent<CanvasScript>().FadeInfo(null, null, null, false);
+
+                    humanCanvas.GetComponent<CanvasScript>().FadeTutorialWarning(false);
+                    monsterCanvas.GetComponent<CanvasScript>().FadeTutorialWarning(false);
+                    inTutorial = true;
                     gameLocked = false;
                     break;
-                case 2:
 
+                case 2:
+                    tutorialIndex++;
+                    break;
+                case 3:
+                    tutorialIndex++;
+                    break;
+                case 4:
+
+                    inTutorial = false;
                     timer.enabled = true;
 
                     if (tutorialGrace)
@@ -887,8 +899,8 @@ public class GameManager : MonoBehaviour
                             monsterAttackPositions[i].GetComponent<AttackPoint>().health = weakPointHealth;
                         }
                     }
-                    humanCanvas.GetComponent<CanvasScript>().FadeTutorialWarning(false);
-                    monsterCanvas.GetComponent<CanvasScript>().FadeTutorialWarning(false);
+/*                    humanCanvas.GetComponent<CanvasScript>().FadeTutorialWarning(false);
+                    monsterCanvas.GetComponent<CanvasScript>().FadeTutorialWarning(false);*/
 
                     gameLocked = true;
                     countdownTimer = originalCountdown;
