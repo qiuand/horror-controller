@@ -44,7 +44,7 @@ public class CanvasScript : MonoBehaviour
     [SerializeField] GameObject MenuObject;
     [SerializeField] GameObject GameUI;
 
-    TutorialManager tutManager;
+    TutorialManagerNew tutManager;
 
     [SerializeField] GameObject BlackoutInfo;
     [SerializeField] TextMeshProUGUI infoTitle, infoBody, infoTip;
@@ -58,7 +58,7 @@ public class CanvasScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        tutManager = GetComponent<TutorialManager>();
+        tutManager = GetComponent<TutorialManagerNew>();
         gameManagerScript =GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameManager>();
     }
 
