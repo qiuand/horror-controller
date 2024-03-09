@@ -284,7 +284,6 @@ public class GameManager : MonoBehaviour
 
             attackTimer -= Time.deltaTime;
 
-            repairTimer += Time.deltaTime;
 
 
             monsterAttackCooldownTimer -= Time.deltaTime;
@@ -356,7 +355,7 @@ public class GameManager : MonoBehaviour
             nightCounter++;
             humanCanvas.GetComponent<CanvasScript>().FadeInfo("You Drove the Monster Back", "...For now. It slinks off to regenerate its lost limbs...", null, true);
             monsterCanvas.GetComponent<CanvasScript>().FadeInfo("You've Been Severely Wounded.", "You slink away to regenerate your lost limbs...", null, true);
-            stateProgressionTracker = 2;
+            stateProgressionTracker = 4;
         }
         
         paused = true;
@@ -429,7 +428,7 @@ public class GameManager : MonoBehaviour
                 humanCanvas.GetComponent<CanvasScript>().FadeInfo("You Live to See Another Day.", "Night " + nightCounter + "/" + maxNights, "But the monster will return...", true);
                 monsterCanvas.GetComponent<CanvasScript>().FadeInfo("The Human Lives to See Another Day.", "Night " + nightCounter + "/" + maxNights, "But you return the next night...", true);
             }
-            stateProgressionTracker = 2;
+            stateProgressionTracker = 4;
             paused = true;
 /*            StartCoroutine(LoadGameOver());
 */        }
@@ -865,8 +864,8 @@ public class GameManager : MonoBehaviour
                 case 0:
                     humanCanvas.GetComponent<CanvasScript>().FadeMenu(false);
                     monsterCanvas.GetComponent<CanvasScript>().FadeMenu(false);
-                    humanCanvas.GetComponent<CanvasScript>().FadeInfo("You Are A <color=red>Desperate Human</color>,", "Trying to protect your home against a brutal monster.", "If two walls are destroyed, the house falls.", true);
-                    monsterCanvas.GetComponent<CanvasScript>().FadeInfo("You Are A<br><color=red>Brutal Monster</color>,", "Hunting down a puny human in their home.", "Over the next three nights, destroy 2/3 walls to obliterate the house.", true);
+                    humanCanvas.GetComponent<CanvasScript>().FadeInfo("You Are A <color=red>Desperate Human</color>,", "Trying to protect your home against a brutal monster.", "If two walls are destroyed, you die.", true);
+                    monsterCanvas.GetComponent<CanvasScript>().FadeInfo("You Are A<br><color=red>Brutal Monster</color>,", "Hunting down a puny human in their home.", "You have three nights to kill the human.", true);
                     break;
                 case 1:
                     humanCanvas.GetComponent<CanvasScript>().FadeGameUI(true);
