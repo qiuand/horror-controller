@@ -97,6 +97,73 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!1 &475531670191972093
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1649631474236536589}
+  - component: {fileID: 4437437260487154324}
+  m_Layer: 0
+  m_Name: Video Player Monster
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1649631474236536589
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 475531670191972093}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -23.281504, y: 0.7070605, z: -5.831371}
+  m_LocalScale: {x: 0.7835606, y: 0.78356045, z: 0.78356045}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4860181131745326246}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!328 &4437437260487154324
+VideoPlayer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 475531670191972093}
+  m_Enabled: 1
+  m_VideoClip: {fileID: 0}
+  m_TargetCameraAlpha: 1
+  m_TargetCamera3DLayout: 0
+  m_TargetCamera: {fileID: 0}
+  m_TargetTexture: {fileID: 8400000, guid: 4992bfae608f8a54791d3d8a28d2cd6b, type: 2}
+  m_TimeReference: 0
+  m_TargetMaterialRenderer: {fileID: 0}
+  m_TargetMaterialProperty: <noninit>
+  m_RenderMode: 2
+  m_AspectRatio: 2
+  m_DataSource: 0
+  m_PlaybackSpeed: 1
+  m_AudioOutputMode: 0
+  m_TargetAudioSources:
+  - {fileID: 0}
+  m_DirectAudioVolumes:
+  - 1
+  m_Url: 
+  m_EnabledAudioTracks: 01
+  m_DirectAudioMutes: 00
+  m_ControlledAudioTrackCount: 1
+  m_PlayOnAwake: 1
+  m_SkipOnDrop: 1
+  m_Looping: 1
+  m_WaitForFirstFrame: 1
+  m_FrameReadyEventEnabled: 0
+  m_VideoShaders: []
 --- !u!1 &491468514157677437
 GameObject:
   m_ObjectHideFlags: 0
@@ -1252,13 +1319,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TutorialFrame: {fileID: 6117047928462534491}
   monsterVideoArray:
-  - {fileID: 32900000, guid: 2d468f9e88c2b5a4faeed7386a415d4e, type: 3}
-  - {fileID: 32900000, guid: 2d468f9e88c2b5a4faeed7386a415d4e, type: 3}
-  - {fileID: 32900000, guid: 2d468f9e88c2b5a4faeed7386a415d4e, type: 3}
+  - {fileID: 32900000, guid: b488fa1f3d542fa4d86f62b1c3191e94, type: 3}
+  - {fileID: 32900000, guid: 34bd1fc508847864abb1e17aa1aaceaa, type: 3}
+  - {fileID: 32900000, guid: f54eaf39f7eb1374ba9324c0fe2f301d, type: 3}
   humanVideoArray:
-  - {fileID: 32900000, guid: 2d468f9e88c2b5a4faeed7386a415d4e, type: 3}
-  - {fileID: 32900000, guid: 2d468f9e88c2b5a4faeed7386a415d4e, type: 3}
-  - {fileID: 32900000, guid: 2d468f9e88c2b5a4faeed7386a415d4e, type: 3}
+  - {fileID: 32900000, guid: b488fa1f3d542fa4d86f62b1c3191e94, type: 3}
+  - {fileID: 32900000, guid: 72284a9adf777e24c832a517d78949c7, type: 3}
+  - {fileID: 32900000, guid: f54eaf39f7eb1374ba9324c0fe2f301d, type: 3}
   monsterTutorialArray:
   - {fileID: 0}
   - {fileID: 0}
@@ -1268,7 +1335,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   bodyUI: {fileID: 3498727941234392962}
-  videoUI: {fileID: 4519353561302682603}
+  videoUIHuman: {fileID: 4519353561302682603}
+  videoUIMonster: {fileID: 4437437260487154324}
 --- !u!1 &1879409512749161035
 GameObject:
   m_ObjectHideFlags: 0
@@ -1845,7 +1913,7 @@ GameObject:
   - component: {fileID: 3571207980974475627}
   - component: {fileID: 3932098749193773531}
   m_Layer: 5
-  m_Name: RawImage
+  m_Name: RawImage Human
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1860,7 +1928,7 @@ RectTransform:
   m_GameObject: {fileID: 2578838933213997310}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -5.831371}
-  m_LocalScale: {x: 0.7716763, y: 0.44811508, z: 0.00003180414}
+  m_LocalScale: {x: 0.91747093, y: 0.5327785, z: 0.00003781297}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4860181131745326246}
@@ -1868,7 +1936,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -20.191269, y: -48.1}
+  m_AnchoredPosition: {x: -12, y: -44.5}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3571207980974475627
@@ -2431,7 +2499,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -7.2, y: 18.1}
+  m_AnchoredPosition: {x: -7.2, y: 19.7}
   m_SizeDelta: {x: 168.892, y: 105.9658}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &770557294518429163
@@ -3066,7 +3134,7 @@ GameObject:
   - component: {fileID: 5301285046374678009}
   - component: {fileID: 4519353561302682603}
   m_Layer: 0
-  m_Name: Video Player
+  m_Name: Video Player Human
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3085,7 +3153,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4860181131745326246}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!328 &4519353561302682603
 VideoPlayer:
@@ -4295,6 +4363,79 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &6782809545382550472
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1612018808231267703}
+  - component: {fileID: 7359183011731865442}
+  - component: {fileID: 988665547396997862}
+  m_Layer: 5
+  m_Name: RawImage Monster
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1612018808231267703
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6782809545382550472}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -5.831371}
+  m_LocalScale: {x: 0.91747093, y: 0.5327785, z: 0.00003781297}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4860181131745326246}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -12, y: -44.5}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &7359183011731865442
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6782809545382550472}
+  m_CullTransparentMesh: 1
+--- !u!114 &988665547396997862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6782809545382550472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 8400000, guid: 143bd2f44285d614cb6e65f407c59d6b, type: 2}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
 --- !u!1 &7083387333585195122
 GameObject:
   m_ObjectHideFlags: 0
@@ -5014,7 +5155,9 @@ Transform:
   - {fileID: 265496456158332922}
   - {fileID: 3204531648047733566}
   - {fileID: 1314551124202134113}
+  - {fileID: 1612018808231267703}
   - {fileID: 5301285046374678009}
+  - {fileID: 1649631474236536589}
   m_Father: {fileID: 8695838108114539734}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

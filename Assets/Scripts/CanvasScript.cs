@@ -76,11 +76,6 @@ public class CanvasScript : MonoBehaviour
     {
         timer.text = ""+System.Math.Round(gameManagerScript.countdownTimer, 0);
 
-        if (gameManagerScript.inTutorial && gameManagerScript.tutorialIndex != 99 && gameManagerScript.tutorialIndex>=0)
-        {
-            tutManager.DisplaySlide(gameManagerScript.tutorialIndex, canvasID);
-        }
-
         for (int i = 0; i < strengthBar.Length; i++)
         {
             strengthBar[i].gameObject.SetActive(false);
@@ -141,7 +136,13 @@ public class CanvasScript : MonoBehaviour
             petrifyText.text = "Not visible: " + System.Math.Round(gameManagerScript.petrifyTimer) + " seconds to death";
         }
     }
-    
+    public void UpdateTutorialSlides()
+    {
+        if (gameManagerScript.inTutorial && gameManagerScript.tutorialIndex < tutManager.monsterTutorialArray.Length)
+        {
+            tutManager.DisplaySlide(gameManagerScript.tutorialIndex, canvasID);
+        }
+    }
     public void FadeInfo(string title, string body, string tip, bool fadeIn)
     {
         if (!fadeIn)

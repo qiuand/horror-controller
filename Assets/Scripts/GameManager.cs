@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
     public bool tutorialCompleted = false;
     public bool introSlideVisible = false;
 
-    bool serialFlag = true;
+    bool serialFlag = false;
 
     public bool playerAbsent = true;
 
@@ -864,6 +864,7 @@ public class GameManager : MonoBehaviour
             switch (stateProgressionTracker)
             {
                 case 0:
+
                     EnableTimer(false);
                     humanCanvas.GetComponent<CanvasScript>().FadeMenu(false);
                     monsterCanvas.GetComponent<CanvasScript>().FadeMenu(false);
@@ -872,6 +873,7 @@ public class GameManager : MonoBehaviour
                     EnableButton(true);
                     break;
                 case 1:
+
                     humanCanvas.GetComponent<CanvasScript>().FadeGameUI(true);
                     monsterCanvas.GetComponent<CanvasScript>().FadeGameUI(true);
                     humanCanvas.GetComponent<CanvasScript>().FadeInfo(null, null, null, false);
@@ -881,13 +883,18 @@ public class GameManager : MonoBehaviour
                     monsterCanvas.GetComponent<CanvasScript>().FadeTutorialWarning(false);
                     inTutorial = true;
                     gameLocked = false;
+
+                    UpdateTutorial();
+
                     break;
 
                 case 2:
                     tutorialIndex++;
+                    UpdateTutorial();
                     break;
                 case 3:
                     tutorialIndex++;
+                    UpdateTutorial();
                     break;
                 case 4:
 
@@ -1055,6 +1062,11 @@ public class GameManager : MonoBehaviour
     {
         humanCanvas.GetComponent<CanvasScript>().TakeDamage();
         monsterCanvas.GetComponent<CanvasScript>().TakeDamage();
+    }
+    public void UpdateTutorial()
+    {
+        humanCanvas.GetComponent<CanvasScript>().UpdateTutorialSlides();
+        monsterCanvas.GetComponent<CanvasScript>().UpdateTutorialSlides();
     }
     public void EnableTimer(bool isenabled)
     {
