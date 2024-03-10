@@ -11,7 +11,7 @@ public class SerialCommunications : MonoBehaviour
 
     Thread IOThread = new Thread(DataThread);
 
-    private static SerialPort sp = new SerialPort("COM6", 9600);
+    private static SerialPort sp = new SerialPort("COM3", 9600);
 
     int variable;
 
@@ -39,7 +39,7 @@ public class SerialCommunications : MonoBehaviour
         }
         threadTimer = 0f;*/
 
-        sp = new SerialPort("COM6", 9600);
+        sp = new SerialPort("COM3", 9600);
         sp.Open();
         sp.ReadTimeout=20;
         while (true)
