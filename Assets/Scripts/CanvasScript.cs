@@ -19,7 +19,8 @@ public class CanvasScript : MonoBehaviour
 
     [SerializeField] GameObject tutorialWarning;
 
-    [SerializeField] TextMeshProUGUI timer;
+    public TextMeshProUGUI timer;
+    public GameObject buttonBig;
 
     [SerializeField] RawImage[] strengthBar;
 

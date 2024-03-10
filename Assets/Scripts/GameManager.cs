@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
 
     public Shake shaker1, shaker2;
 
-    float originalCountdown=7f;
+    float originalCountdown=9f;
     public float countdownTimer;
 
     bool gameWon = false;
@@ -284,7 +284,7 @@ public class GameManager : MonoBehaviour
 
             attackTimer -= Time.deltaTime;
 
-
+            repairTimer += Time.deltaTime;
 
             monsterAttackCooldownTimer -= Time.deltaTime;
 
@@ -351,6 +351,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            EnableButton(true);
             timer.enabled = false;
             nightCounter++;
             humanCanvas.GetComponent<CanvasScript>().FadeInfo("You Drove the Monster Back", "...For now. It slinks off to regenerate its lost limbs...", null, true);
@@ -410,6 +411,7 @@ public class GameManager : MonoBehaviour
         }
         else if (gameTimer <= 0)
         {
+/*            EnableButton(true);*/
             timer.enabled = false;
             source.PlayOneShot(gong, 1);
 
@@ -862,10 +864,12 @@ public class GameManager : MonoBehaviour
             switch (stateProgressionTracker)
             {
                 case 0:
+                    EnableTimer(false);
                     humanCanvas.GetComponent<CanvasScript>().FadeMenu(false);
                     monsterCanvas.GetComponent<CanvasScript>().FadeMenu(false);
                     humanCanvas.GetComponent<CanvasScript>().FadeInfo("You Are A <color=red>Desperate Human</color>,", "Trying to protect your home against a brutal monster.", "If two walls are destroyed, you die.", true);
-                    monsterCanvas.GetComponent<CanvasScript>().FadeInfo("You Are A<br><color=red>Brutal Monster</color>,", "Hunting down a puny human in their home.", "You have three nights to kill the human.", true);
+                    monsterCanvas.GetComponent<CanvasScript>().FadeInfo("You Are A<br><color=red>Brutal Monster</color>,", "Hunting down a puny human in their home.", "You have three nights to destroy the house.", true);
+                    EnableButton(true);
                     break;
                 case 1:
                     humanCanvas.GetComponent<CanvasScript>().FadeGameUI(true);
@@ -887,6 +891,9 @@ public class GameManager : MonoBehaviour
                     break;
                 case 4:
 
+                    EnableButton(false);
+
+                    EnableTimer(true);
                     inTutorial = false;
                     timer.enabled = true;
 
@@ -914,7 +921,7 @@ public class GameManager : MonoBehaviour
                         humanCanvas.GetComponent<CanvasScript>().FadeInfo("Night " + nightCounter + "/" + maxNights, "If 2/3 walls are destroyed, you die.", null, true);
                         monsterCanvas.GetComponent<CanvasScript>().FadeInfo("Night " + nightCounter + "/" + maxNights, "Destroy 2/3 walls to win.", null, true);
                     }
-                    
+                    EnableButton(false);
                     break;
             }
             stateProgressionTracker++;
@@ -1048,6 +1055,33 @@ public class GameManager : MonoBehaviour
     {
         humanCanvas.GetComponent<CanvasScript>().TakeDamage();
         monsterCanvas.GetComponent<CanvasScript>().TakeDamage();
+    }
+    public void EnableTimer(bool isenabled)
+    {
+        if (isenabled)
+        {
+            humanCanvas.GetComponent<CanvasScript>().timer.enabled = true;
+            monsterCanvas.GetComponent<CanvasScript>().timer.enabled = true;
+        }
+        else
+        {
+            humanCanvas.GetComponent<CanvasScript>().timer.enabled = false;
+            monsterCanvas.GetComponent<CanvasScript>().timer.enabled = false;
+        }
+    }
+    public void EnableButton(bool isenabled)
+    {
+        if (isenabled)
+        {
+            humanCanvas.GetComponent<CanvasScript>().buttonBig.GetComponent<Animator>().SetBool("enabled", true);
+            monsterCanvas.GetComponent<CanvasScript>().buttonBig.GetComponent<Animator>().SetBool("enabled", true);
+        }
+        else
+        {
+            humanCanvas.GetComponent<CanvasScript>().buttonBig.GetComponent<Animator>().SetBool("enabled", false);
+            monsterCanvas.GetComponent<CanvasScript>().buttonBig.GetComponent<Animator>().SetBool("enabled", false);
+        }
+        print(monsterCanvas.GetComponent<CanvasScript>().buttonBig.GetComponent<Animator>().GetBool("enabled"));
     }
 }
 

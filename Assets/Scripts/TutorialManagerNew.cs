@@ -42,8 +42,8 @@ public class TutorialManagerNew : MonoBehaviour
 
         monsterTutorialArray[0] = new TutorialObject
             (
-            "You can smash walls to destroy them." +
-            "<br><br>But the human can stand at a wall to protect it, slowly fixing damage and hurting you if you try and attack it."
+            "Smash the walls to destroy them." +
+            "The human can stand at a wall to protect it, slowly fixing damage and hurting you if you try and attack it."
             , monsterVideoArray[0]
             );
         monsterTutorialArray[1] = new TutorialObject
