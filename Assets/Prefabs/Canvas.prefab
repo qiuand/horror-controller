@@ -1319,13 +1319,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TutorialFrame: {fileID: 6117047928462534491}
   monsterVideoArray:
-  - {fileID: 32900000, guid: b488fa1f3d542fa4d86f62b1c3191e94, type: 3}
-  - {fileID: 32900000, guid: 34bd1fc508847864abb1e17aa1aaceaa, type: 3}
-  - {fileID: 32900000, guid: f54eaf39f7eb1374ba9324c0fe2f301d, type: 3}
+  - {fileID: 32900000, guid: b0d0d7c699270054da37203a7f1de7e0, type: 3}
+  - {fileID: 32900000, guid: b6a6dcae1afda5f4280ba05a3750c629, type: 3}
+  - {fileID: 32900000, guid: 81241083c647bd747a812d505769b5e5, type: 3}
   humanVideoArray:
-  - {fileID: 32900000, guid: b488fa1f3d542fa4d86f62b1c3191e94, type: 3}
-  - {fileID: 32900000, guid: 72284a9adf777e24c832a517d78949c7, type: 3}
-  - {fileID: 32900000, guid: f54eaf39f7eb1374ba9324c0fe2f301d, type: 3}
+  - {fileID: 32900000, guid: b0d0d7c699270054da37203a7f1de7e0, type: 3}
+  - {fileID: 32900000, guid: f032b7bc2e43ed64fb6e356b70023f78, type: 3}
+  - {fileID: 32900000, guid: 81241083c647bd747a812d505769b5e5, type: 3}
   monsterTutorialArray:
   - {fileID: 0}
   - {fileID: 0}
