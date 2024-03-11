@@ -5,8 +5,8 @@ const int sizeOfArray=5;
 int detectionThreshold=30;
 
 byte inputArrayOut[9];
-
-byte previousInputArrayOut[9];
+byte inputArrayOut_Previous[9];
+byte inputArrayOut_Final[9];
 
 const int tailInput=1;
 const int eyeInput=3;
@@ -19,8 +19,6 @@ float delayTime=20;
 
 bool turnOff=false;
 
-bool sendFlag=false;
-
 void setup() {
 
 
@@ -29,6 +27,12 @@ void setup() {
   inputArrayOut[0]='P';
   inputArrayOut[1]='C';
   inputArrayOut[2]='4';
+  inputArrayOut[8]='Z';
+
+  inputArrayOut_Final[0]='P';
+  inputArrayOut_Final[1]='C';
+  inputArrayOut_Final[2]='4';
+  inputArrayOut_Final[8]='Z';
 
   Serial.begin(9600);
 
@@ -58,15 +62,6 @@ void loop() {
   while(currentTime<=(lastTime+delayTime))
   {
       currentTime=millis();
-  }
-
-  if(!sendFlag)
-  {
-      sendFlag=true;
-  }
-  else
-  {
-      sendFlag=false;
   }
 
     // if(turnOff)
@@ -154,29 +149,29 @@ void DetectInput()
   int blockValue=analogRead(blockInput);
   int repairValue=analogRead(repairInput);
 
+  for(int j=3; j<7; j++)
+  {
+      inputArrayOut_Previous[j]= inputArrayOut[j];
+  }
   assignInputNumbers(eyeValue, 3);
   assignInputNumbers(blockValue, 4);
   assignInputNumbers(tailValue, 5);
   assignInputNumbers(repairValue, 6);
   inputArrayOut[7]=(digitalRead(13));
-  inputArrayOut[8]='Z';
 
-  for(int p=3; p<=6; p++)
+  for(int j=3; j<7; j++)
   {
-      inputArrayOut[p]=comparePreviousNumber(inputArrayOut[p], previousInputArrayOut[p]);
+      if(inputArrayOut_Previous[j] == inputArrayOut[j])
+      {
+        inputArrayOut_Final[j]=inputArrayOut[j];
+      }
+      else
+      {
+        inputArrayOut_Final[j]=inputArrayOut_Previous[j];
+      }
   }
 
-
-  if(sendFlag)
-  {
-    Serial.write(inputArrayOut, 9);
-  }
-
-  for(int i=0; i<9; i++)
-  {
-    previousInputArrayOut[i]=inputArrayOut[i];
-  }
-
+  Serial.write(inputArrayOut_Final, 9);
   // for(int i=0; i<7; i++){
   //   Serial.print(inputArrayOut[i]);
   // }
@@ -195,13 +190,4 @@ void assignInputNumbers(int readValue, int arrayPlace)
       break;
     }
   }
-}
-
-int comparePreviousNumber(int previousValue, int currentValue)
-{
-  if(currentValue==previousValue)
-  {
-    return currentValue;
-  }
-  return previousValue;
 }
