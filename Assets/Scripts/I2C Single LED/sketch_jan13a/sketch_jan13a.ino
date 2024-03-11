@@ -9,6 +9,8 @@ int detectionThreshold=10;
 
 byte inputArrayOut[9];
 byte inputArrayOut_Previous[9];
+byte inputArrayOut_Previous_Pre[9];
+
 byte inputArrayOut_Final[9];
 
 const int tailInput=1;
@@ -154,6 +156,7 @@ void DetectInput()
 
   for(int j=3; j<7; j++)
   {
+      inputArrayOut_Previous_Pre[j]= inputArrayOut_Previous[j];
       inputArrayOut_Previous[j]= inputArrayOut[j];
   }
   assignInputNumbers(eyeValue, 3);
@@ -166,13 +169,13 @@ void DetectInput()
 
   for(int j=3; j<7; j++)
   {
-      if(inputArrayOut_Previous[j] == inputArrayOut[j])
+      if((inputArrayOut_Previous[j] == inputArrayOut[j]) && (inputArrayOut[j]==inputArrayOut_Previous_Pre[j]))
       {
         inputArrayOut_Final[j]=inputArrayOut[j];
       }
       else
       {
-        inputArrayOut_Final[j]=inputArrayOut_Previous[j];
+        inputArrayOut_Final[j]=inputArrayOut_Previous_Pre[j];
       }
   }
 
@@ -189,11 +192,9 @@ void assignInputNumbers(int readValue, int arrayPlace)
 {
   int i;
   for (i=0; i<5; i++){
-    if(
-      readValue > (valueArray[i] - detectionThreshold)
-      &&
-      readValue < (valueArray[i] + detectionThreshold)
-    ){
+    if(readValue > (valueArray[i] - detectionThreshold) &&
+      readValue < (valueArray[i] + detectionThreshold))
+    {
       inputArrayOut[arrayPlace]=i;
       break;
     }
