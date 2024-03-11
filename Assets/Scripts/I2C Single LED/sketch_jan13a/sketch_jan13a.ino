@@ -1,6 +1,9 @@
 #include "Wire.h"
 
+int valueArrayOld[]={1024, 850, 785, 725, 560};
+
 int valueArray[]={1024, 850, 785, 725, 560};
+
 const int sizeOfArray=5;
 int detectionThreshold=30;
 
@@ -192,6 +195,10 @@ void assignInputNumbers(int readValue, int arrayPlace)
     ){
       inputArrayOut[arrayPlace]=i;
       break;
+    }
+    if(i==5)
+    {
+      inputArrayOut[arrayPlace]=0;
     }
   }
 }
