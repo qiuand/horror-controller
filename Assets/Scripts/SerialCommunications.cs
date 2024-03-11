@@ -42,6 +42,10 @@ public class SerialCommunications : MonoBehaviour
         sp = new SerialPort("COM10", 9600);
         sp.Open();
         sp.ReadTimeout=20;
+
+        sp.DiscardInBuffer();
+        sp.DiscardOutBuffer();
+
         while (true)
         {
             for(int k=0; k<rawData.Length; k++)
