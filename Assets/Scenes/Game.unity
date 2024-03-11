@@ -42449,7 +42449,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1879008552520188209, guid: f6714174f8bb8184eb08e99354ed3c12, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1879008552520188213, guid: f6714174f8bb8184eb08e99354ed3c12, type: 3}
       propertyPath: m_Pivot.x
@@ -42461,7 +42461,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1879008552520188213, guid: f6714174f8bb8184eb08e99354ed3c12, type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1879008552520188213, guid: f6714174f8bb8184eb08e99354ed3c12, type: 3}
       propertyPath: m_AnchorMax.x
@@ -42616,6 +42616,10 @@ PrefabInstance:
       value: 0.04165573
       objectReference: {fileID: 0}
     - target: {fileID: 2415753077300189587, guid: f6714174f8bb8184eb08e99354ed3c12, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 7.76663
+      objectReference: {fileID: 0}
+    - target: {fileID: 2415753077300189587, guid: f6714174f8bb8184eb08e99354ed3c12, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 69.401
       objectReference: {fileID: 0}
@@ -42646,6 +42650,10 @@ PrefabInstance:
     - target: {fileID: 2488581558560728796, guid: f6714174f8bb8184eb08e99354ed3c12, type: 3}
       propertyPath: m_LocalScale.z
       value: 4.071759
+      objectReference: {fileID: 0}
+    - target: {fileID: 2488581558560728796, guid: f6714174f8bb8184eb08e99354ed3c12, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 38
       objectReference: {fileID: 0}
     - target: {fileID: 2488581558560728796, guid: f6714174f8bb8184eb08e99354ed3c12, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -50716,7 +50724,7 @@ Transform:
   - {fileID: 1713926014}
   - {fileID: 62637283}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &786464943 stripped
 GameObject:
@@ -83887,7 +83895,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh3006786
+  m_Name: pb_Mesh153418
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -95083,7 +95091,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1879008552520188213, guid: f6714174f8bb8184eb08e99354ed3c12, type: 3}
       propertyPath: m_RootOrder
-      value: 16
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 1879008552520188213, guid: f6714174f8bb8184eb08e99354ed3c12, type: 3}
       propertyPath: m_AnchorMax.x
