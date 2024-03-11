@@ -159,6 +159,8 @@ void DetectInput()
   assignInputNumbers(repairValue, 6);
   inputArrayOut[7]=(digitalRead(13));
 
+  inputArrayOut[8]='Z';
+
   for(int j=3; j<7; j++)
   {
       if(inputArrayOut_Previous[j] == inputArrayOut[j])
@@ -171,7 +173,9 @@ void DetectInput()
       }
   }
 
-  Serial.write(inputArrayOut_Final, 9);
+  inputArrayOut_Final[7]=inputArrayOut[7];
+
+  Serial.write(inputArrayOut, 9);
   // for(int i=0; i<7; i++){
   //   Serial.print(inputArrayOut[i]);
   // }
