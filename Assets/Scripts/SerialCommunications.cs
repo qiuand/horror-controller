@@ -57,8 +57,8 @@ public class SerialCommunications : MonoBehaviour
             sp.Read(rawData, 0, bytesAvailable);
             sp.Write(outgoing, 0, 8);
 
-            print("bytes: " + bytesAvailable);
-
+/*            print("bytes: " + bytesAvailable);
+*/
             for (int i=0; i<bytesAvailable; i++)
             {
                 if((rawData[i]=='P') && (rawData[i+1]=='C') && (rawData[i + 2] == '4'))

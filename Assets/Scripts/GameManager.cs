@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
     public bool tutorialCompleted = false;
     public bool introSlideVisible = false;
 
-    bool serialFlag = false;
+    bool serialFlag = true;
 
     public bool playerAbsent = true;
 
@@ -250,7 +250,7 @@ public class GameManager : MonoBehaviour
             validatedIncomingManager = SerialCommunications.validatedIncoming;
             SerialCommunications.communicationReadyFlag = false;
 
-            Debug.Log(validatedIncomingManager[7]);
+            Debug.Log("Eye input: "+validatedIncomingManager[3]);
             if (validatedIncomingManager[7] == 0)
             {
                 isButtonDown = true;

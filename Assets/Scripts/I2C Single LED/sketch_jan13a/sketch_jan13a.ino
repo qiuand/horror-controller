@@ -5,7 +5,7 @@ int valueArrayOld[]={1024, 850, 785, 725, 560};
 int valueArray[]={1024, 850, 785, 725, 560};
 
 const int sizeOfArray=5;
-int detectionThreshold=30;
+int detectionThreshold=10;
 
 byte inputArrayOut[9];
 byte inputArrayOut_Previous[9];
