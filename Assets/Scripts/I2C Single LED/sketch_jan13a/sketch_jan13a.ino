@@ -10,6 +10,7 @@ int detectionThreshold=10;
 byte inputArrayOut[9];
 byte inputArrayOut_Previous[9];
 byte inputArrayOut_Previous_Pre[9];
+byte inputArrayOut_Previous_Pre_2[9];
 
 byte inputArrayOut_Final[9];
 
@@ -156,6 +157,7 @@ void DetectInput()
 
   for(int j=3; j<7; j++)
   {
+      inputArrayOut_Previous_Pre_2[j]= inputArrayOut_Previous_Pre[j];
       inputArrayOut_Previous_Pre[j]= inputArrayOut_Previous[j];
       inputArrayOut_Previous[j]= inputArrayOut[j];
   }
@@ -169,13 +171,16 @@ void DetectInput()
 
   for(int j=3; j<7; j++)
   {
-      if((inputArrayOut_Previous[j] == inputArrayOut[j]) && (inputArrayOut[j]==inputArrayOut_Previous_Pre[j]))
+      if(
+        (inputArrayOut_Previous[j] == inputArrayOut[j]) &&
+        (inputArrayOut[j]==inputArrayOut_Previous_Pre[j]) &&
+        (inputArrayOut[j]==inputArrayOut_Previous_Pre_2[j]))
       {
         inputArrayOut_Final[j]=inputArrayOut[j];
       }
       else
       {
-        inputArrayOut_Final[j]=inputArrayOut_Previous_Pre[j];
+        inputArrayOut_Final[j]=inputArrayOut_Previous_Pre_2[j];
       }
   }
 
