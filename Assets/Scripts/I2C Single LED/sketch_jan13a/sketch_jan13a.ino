@@ -187,7 +187,8 @@ void DetectInput()
 
 void assignInputNumbers(int readValue, int arrayPlace)
 {
-  for (int i=0; i<5; i++){
+  int i;
+  for (i=0; i<5; i++){
     if(
       readValue > (valueArray[i] - detectionThreshold)
       &&
@@ -196,9 +197,9 @@ void assignInputNumbers(int readValue, int arrayPlace)
       inputArrayOut[arrayPlace]=i;
       break;
     }
-    if(i==5)
-    {
-      inputArrayOut[arrayPlace]=0;
-    }
+  }
+  if(i==5)
+  {
+    inputArrayOut[arrayPlace]=0;
   }
 }
