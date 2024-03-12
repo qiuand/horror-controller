@@ -28,7 +28,7 @@ bool turnOff=false;
 void setup() {
 
 
-  Serial.setTimeout(1);
+  Serial.setTimeout(5);
 
   inputArrayOut[0]='P';
   inputArrayOut[1]='C';
@@ -39,6 +39,14 @@ void setup() {
   inputArrayOut_Final[1]='C';
   inputArrayOut_Final[2]='4';
   inputArrayOut_Final[8]='Z';
+
+  for(int j=3; j<7; j++)
+  {
+      inputArrayOut_Previous_Pre_2[j]= 0;
+      inputArrayOut_Previous_Pre[j]= 0;
+      inputArrayOut_Previous[j]= 0;
+      inputArrayOut[j] = 0;
+  }
 
   Serial.begin(9600);
 
@@ -180,13 +188,13 @@ void DetectInput()
       }
       else
       {
-        inputArrayOut_Final[j]=inputArrayOut_Previous_Pre_2[j];
+        inputArrayOut_Final[j]=0;
       }
   }
 
   inputArrayOut_Final[7]=inputArrayOut[7];
 
-  Serial.write(inputArrayOut, 9);
+  Serial.write(inputArrayOut_Final, 9);
   // for(int i=0; i<7; i++){
   //   Serial.print(inputArrayOut[i]);
   // }
