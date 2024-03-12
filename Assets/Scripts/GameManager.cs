@@ -250,7 +250,7 @@ public class GameManager : MonoBehaviour
             validatedIncomingManager = SerialCommunications.validatedIncoming;
             SerialCommunications.communicationReadyFlag = false;
 
-            Debug.Log("Eye input: "+validatedIncomingManager[3]);
+            Debug.Log(validatedIncomingManager[7]);
             if (validatedIncomingManager[7] == 0)
             {
                 isButtonDown = true;

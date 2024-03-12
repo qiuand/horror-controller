@@ -42,13 +42,13 @@ public class TutorialManagerNew : MonoBehaviour
 
         monsterTutorialArray[0] = new TutorialObject
             (
-            "Smash the walls to destroy them." +
-            "<br><br>The human can stand at a wall to protect it, <color=red>slowly fixing damage and killing you</color> if you try and attack it."
+            "Destroy the walls by hitting the red <color=red>X</color>s." +
+            "<br><br>The human inside can guard a wall to <color=red>fix damage.</color><br><color=red>You will also be badly injured if you attack a guarded wall."
             , monsterVideoArray[0]
             );
         monsterTutorialArray[1] = new TutorialObject
             (
-            "Look through the windows and find unprotected walls to attack."+
+            "Stick your piece on the windows to see if the walls are guarded."+
             "<br><br><color=red>But the human might have a way to block the windows…"
             ,
             monsterVideoArray[1]
@@ -62,13 +62,13 @@ public class TutorialManagerNew : MonoBehaviour
         humanTutorialArray[0] = new TutorialObject
             (
             "<color=red>If the monster destroys two walls, you lose.</color>" +
-            "<br><br>Move your human to a wall to protect it, slowly fixing damage and killing the monster if they try to attack it.",
+            "<br><br>Move your human to a wall to guard it. You will slowly <color=green>fix damage</color> and <color=green>injure the monster</color> if they attack that wall. ",
             humanVideoArray[0]
             );
         humanTutorialArray[1] = new TutorialObject
             (
-            "<color=red>If the red light reaches you, the monster can see inside.</color>" +
-            "<br><br>Block the monster’s vision with your board to stop it from finding unprotected walls.",
+            "<color=red>The monster can see where the red light shines.</color>" +
+            "<br><br>Block the monster’s vision with your board to stop it from finding unguarded walls.",
             humanVideoArray[1]
             );
         humanTutorialArray[2] = new TutorialObject
