@@ -4,6 +4,11 @@ using UnityEngine.UI;
 
 public class CanvasScript : MonoBehaviour
 {
+
+    [SerializeField] Image readyBarFill;
+
+    [SerializeField] Animator tutorialSlideAnimator;
+
     float chipSpeed = 2f;
     float lerpTimer;
     [SerializeField] Image petrifyBar;
@@ -25,6 +30,8 @@ public class CanvasScript : MonoBehaviour
     [SerializeField] RawImage[] strengthBar;
 
     [SerializeField] TextMeshProUGUI separateWeakPointText;
+
+    [SerializeField] TextMeshProUGUI practiceText;
 
     [SerializeField] TextMeshProUGUI winText;
     [SerializeField] TextMeshProUGUI monsterAttackText;
@@ -74,6 +81,7 @@ public class CanvasScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        readyBarFill.fillAmount = gameManagerScript.buttonTimer / gameManagerScript.buttonBufferTime_Long;
         timer.text = ""+System.Math.Round(gameManagerScript.countdownTimer, 0);
 
         for (int i = 0; i < strengthBar.Length; i++)
@@ -231,5 +239,20 @@ public class CanvasScript : MonoBehaviour
         {
             repairAnimator.SetBool("active", false);
         }
+    }
+    public void FadeTutorialSlide(bool fadeIn)
+    {
+        if (fadeIn)
+        {
+            tutorialSlideAnimator.SetBool("SlideIn", true);
+        }
+        else
+        {
+            tutorialSlideAnimator.SetBool("SlideIn", false);
+        }
+    }
+    public void ChangePracticeText(string message)
+    {
+        practiceText.text = message;
     }
 }

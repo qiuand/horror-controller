@@ -9,12 +9,15 @@ using UnityEngine.Rendering.UI;
 
 public class GameManager : MonoBehaviour
 {
+    bool practiceAdvancable = false;
+
     [SerializeField] Animator healthAnimator;
 
     [SerializeField] Animator humanAnimator;
 
-    float buttonTimer = 0f;
+    public float buttonTimer = 0f;
     float buttonBufferTime = 0.050f;
+    public float buttonBufferTime_Long;
 
     [SerializeField] AudioSource timer;
 
@@ -23,6 +26,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] AudioClip sting, buttonClick;
 
     bool tutorialGrace = true;
+
+    int tutorialIndex_Macro = 0;
 
     public int monsterHealth;
     public int maxMonsterHealth=4;
@@ -173,6 +178,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        buttonBufferTime_Long = 2f;
 
         maxMonsterHealth = 4;
         monsterHealth = maxMonsterHealth;
@@ -255,10 +261,25 @@ public class GameManager : MonoBehaviour
             {
                 isButtonDown = true;
             }
+            else if (inTutorial && validatedIncomingManager[7] == 1 && buttonTimer >= buttonBufferTime_Long)
+            {
+                buttonTimer = 0f;
+                isButtonDown = false;
+                HandleGreenButton();
+                print("Yeah");
+            }
             else if (isButtonDown && validatedIncomingManager[7] == 1 && buttonTimer>=buttonBufferTime)
             {
                 isButtonDown = false;
-                HandleGreenButton();
+
+                if (inTutorial)
+                {
+                    AdvanceTutorialSlides();
+                }
+                else
+                {
+                    HandleGreenButton();
+                }
             }
             else
             {
@@ -425,7 +446,7 @@ public class GameManager : MonoBehaviour
                 monsterCanvas.GetComponent<CanvasScript>().FadeInfo("GAME OVER", "The human has survived.", "", true);
 
             }
-            else
+            else if (!gameWon)
             {
                 humanCanvas.GetComponent<CanvasScript>().FadeInfo("You Live to See Another Day.", "Night " + nightCounter + "/" + maxNights, "But the monster will return...", true);
                 monsterCanvas.GetComponent<CanvasScript>().FadeInfo("The Human Lives to See Another Day.", "Night " + nightCounter + "/" + maxNights, "But you return the next night...", true);
@@ -874,27 +895,48 @@ public class GameManager : MonoBehaviour
                     break;
                 case 1:
 
+                    humanCanvas.GetComponent<CanvasScript>().FadeTutorialWarning(true);
+                    monsterCanvas.GetComponent<CanvasScript>().FadeTutorialWarning(true);
+
                     humanCanvas.GetComponent<CanvasScript>().FadeGameUI(true);
                     monsterCanvas.GetComponent<CanvasScript>().FadeGameUI(true);
                     humanCanvas.GetComponent<CanvasScript>().FadeInfo(null, null, null, false);
                     monsterCanvas.GetComponent<CanvasScript>().FadeInfo(null, null, null, false);
 
-                    humanCanvas.GetComponent<CanvasScript>().FadeTutorialWarning(false);
-                    monsterCanvas.GetComponent<CanvasScript>().FadeTutorialWarning(false);
+/*                    humanCanvas.GetComponent<CanvasScript>().FadeTutorialWarning(false);
+                    monsterCanvas.GetComponent<CanvasScript>().FadeTutorialWarning(false);*/
                     inTutorial = true;
                     gameLocked = false;
 
                     UpdateTutorial();
 
+                    humanCanvas.GetComponent<CanvasScript>().ChangePracticeText("Practice defending the walls.");
+                    monsterCanvas.GetComponent<CanvasScript>().ChangePracticeText("Practice destroying the walls.");
+
                     break;
 
                 case 2:
-                    tutorialIndex++;
-                    UpdateTutorial();
+                    if (practiceAdvancable)
+                    {
+                        practiceAdvancable = false;
+                        tutorialIndex_Macro++;
+                        tutorialIndex = -1;
+                        AdvanceTutorialSlides();
+                        UpdateTutorial();
+
+                        humanCanvas.GetComponent<CanvasScript>().ChangePracticeText("Practice blocking the monster's sight.");
+                        monsterCanvas.GetComponent<CanvasScript>().ChangePracticeText("Practice finding unguarded walls.");
+                    }
                     break;
                 case 3:
-                    tutorialIndex++;
-                    UpdateTutorial();
+                    if (practiceAdvancable)
+                    {
+                        practiceAdvancable = false;
+                        tutorialIndex_Macro++;
+                        tutorialIndex = -1;
+                        AdvanceTutorialSlides();
+                        UpdateTutorial();
+                    }
                     break;
                 case 4:
 
@@ -929,6 +971,10 @@ public class GameManager : MonoBehaviour
                         monsterCanvas.GetComponent<CanvasScript>().FadeInfo("Night " + nightCounter + "/" + maxNights, "Destroy 2/3 walls to win.", null, true);
                     }
                     EnableButton(false);
+
+                    humanCanvas.GetComponent<CanvasScript>().FadeTutorialWarning(false);
+                    monsterCanvas.GetComponent<CanvasScript>().FadeTutorialWarning(false);
+
                     break;
             }
             stateProgressionTracker++;
@@ -941,6 +987,7 @@ public class GameManager : MonoBehaviour
     }
     public void ResetGame()
     {
+        tutorialIndex_Macro = 0;
 
         countDownEnabled = false;
         countdownTimer = originalCountdown;
@@ -1094,6 +1141,55 @@ public class GameManager : MonoBehaviour
             monsterCanvas.GetComponent<CanvasScript>().buttonBig.GetComponent<Animator>().SetBool("enabled", false);
         }
         print(monsterCanvas.GetComponent<CanvasScript>().buttonBig.GetComponent<Animator>().GetBool("enabled"));
+    }
+    public void AdvanceTutorialSlides()
+    {
+        int temp_index_min = 0;
+        int temp_index_max = 0;
+
+        switch (tutorialIndex_Macro)
+        {
+            case 0:
+                temp_index_min = 0;
+                temp_index_max = 1;
+                break;
+            case 1:
+                temp_index_min = 2;
+                temp_index_max = 2;
+                break;
+        }
+
+        if (temp_index_min <= tutorialIndex && tutorialIndex <=temp_index_max)
+        {
+            tutorialIndex++;
+        }
+        else
+        {
+            tutorialIndex = temp_index_min;
+        }
+
+        if (tutorialIndex == temp_index_min)
+        {
+            practiceAdvancable = false;
+            FadeTutorialSlides(true);
+        }
+
+        else if (tutorialIndex > temp_index_max)
+        {
+            practiceAdvancable = true;
+
+            FadeTutorialSlides(false);
+            tutorialIndex = temp_index_min-1;
+        }
+
+        UpdateTutorial();
+        source.PlayOneShot(buttonClick);
+
+    }
+    public void FadeTutorialSlides(bool fadeIn)
+    {
+        humanCanvas.GetComponent<CanvasScript>().FadeTutorialSlide(fadeIn);
+        monsterCanvas.GetComponent<CanvasScript>().FadeTutorialSlide(fadeIn);
     }
 }
 

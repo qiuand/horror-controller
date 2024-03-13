@@ -48,7 +48,7 @@ public class TutorialManagerNew : MonoBehaviour
             );
         monsterTutorialArray[1] = new TutorialObject
             (
-            "Stick your piece on the windows to see if the walls are guarded."+
+            "Stick your piece on the windows to see if the walls are guarded." +
             "<br><br><color=red>But the human might have a way to block the windows…"
             ,
             monsterVideoArray[1]
@@ -97,14 +97,14 @@ public class TutorialManagerNew : MonoBehaviour
         switch (canvasID)
         {
             case 0:
-                if (index < monsterTutorialArray.Length)
+                if (index >= 0 && index < monsterTutorialArray.Length)
                 {
                     bodyUI.text = monsterTutorialArray[index].body;
                     videoUIMonster.GetComponent<VideoPlayer>().clip = monsterTutorialArray[index].video;
                 }
                 break;
             case 1:
-                if (index < humanTutorialArray.Length)
+                if (index >= 0 && index < humanTutorialArray.Length)
                 {
                     bodyUI.text = humanTutorialArray[index].body;
                     videoUIHuman.GetComponent<VideoPlayer>().clip = humanTutorialArray[index].video;

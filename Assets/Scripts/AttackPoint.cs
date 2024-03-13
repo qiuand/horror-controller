@@ -6,6 +6,7 @@ using TMPro;
 
 public class AttackPoint : MonoBehaviour
 {
+
     [SerializeField] AudioClip humanStab, destroyed;
 
     [SerializeField] Image healthBar;
