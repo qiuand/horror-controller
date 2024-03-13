@@ -885,6 +885,8 @@ public class GameManager : MonoBehaviour
             switch (stateProgressionTracker)
             {
                 case 0:
+                    humanCanvas.GetComponent<CanvasScript>().FadeTutorialWarning(false);
+                    monsterCanvas.GetComponent<CanvasScript>().FadeTutorialWarning(false);
 
                     EnableTimer(false);
                     humanCanvas.GetComponent<CanvasScript>().FadeMenu(false);
@@ -894,9 +896,6 @@ public class GameManager : MonoBehaviour
                     EnableButton(true);
                     break;
                 case 1:
-
-                    humanCanvas.GetComponent<CanvasScript>().FadeTutorialWarning(true);
-                    monsterCanvas.GetComponent<CanvasScript>().FadeTutorialWarning(true);
 
                     humanCanvas.GetComponent<CanvasScript>().FadeGameUI(true);
                     monsterCanvas.GetComponent<CanvasScript>().FadeGameUI(true);
@@ -1185,12 +1184,18 @@ public class GameManager : MonoBehaviour
 
         if (tutorialIndex == temp_index_min)
         {
+            humanCanvas.GetComponent<CanvasScript>().FadeTutorialWarning(false);
+            monsterCanvas.GetComponent<CanvasScript>().FadeTutorialWarning(false);
+
             practiceAdvancable = false;
             FadeTutorialSlides(true);
         }
 
         else if (tutorialIndex > temp_index_max)
         {
+            humanCanvas.GetComponent<CanvasScript>().FadeTutorialWarning(true);
+            monsterCanvas.GetComponent<CanvasScript>().FadeTutorialWarning(true);
+
             practiceAdvancable = true;
             FadeTutorialSlides(false);
             tutorialIndex = temp_index_min-1;

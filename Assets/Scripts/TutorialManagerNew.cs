@@ -94,7 +94,7 @@ public class TutorialManagerNew : MonoBehaviour
             (
             "Move your human piece to a weak point to defend it." +
             "<br>If a monster hits an <color=red>undefended</color>weak point, the monster will deal damage to it." +
-            "<br>If the monster hits a <color=green>defended</color>weak point, <you will deal damage to the monster." +
+            "<br>If the monster hits a <color=green>defended</color> weak point, you will deal damage to the monster." +
             "<br>If you kill the monster,<color=green> it will waste the rest of the night regenerating.</color>" +
             "<br>Defended weak points <color=green>regain 1 health every 4 seconds.</color>",
             humanVideoArray[2]

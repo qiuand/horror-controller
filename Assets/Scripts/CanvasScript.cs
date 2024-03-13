@@ -192,11 +192,11 @@ public class CanvasScript : MonoBehaviour
     {
         if (fadeIn)
         {
-            tutorialWarning.SetActive(true);
+            tutorialWarning.GetComponent<Animator>().SetBool("Active", true);
         }
         else
         {
-            tutorialWarning.SetActive(false);
+            tutorialWarning.GetComponent<Animator>().SetBool("Active", false);
         }
     }
     public void TakeDamage()
