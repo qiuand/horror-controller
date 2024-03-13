@@ -940,6 +940,9 @@ public class GameManager : MonoBehaviour
                     break;
                 case 4:
 
+                    break;
+                case 5:
+
                     EnableButton(false);
 
                     EnableTimer(true);
@@ -1151,13 +1154,19 @@ public class GameManager : MonoBehaviour
         {
             case 0:
                 temp_index_min = 0;
-                temp_index_max = 1;
-                break;
-            case 1:
-                temp_index_min = 2;
                 temp_index_max = 2;
                 break;
+            case 1:
+                temp_index_min = 3;
+                temp_index_max = 4;
+                break;
+            case 2:
+                temp_index_min = 5;
+                temp_index_max = 5;
+                break;
         }
+
+
 
         if (temp_index_min <= tutorialIndex && tutorialIndex <=temp_index_max)
         {
@@ -1166,6 +1175,12 @@ public class GameManager : MonoBehaviour
         else
         {
             tutorialIndex = temp_index_min;
+        }
+
+        if (tutorialIndex_Macro == 2 && tutorialIndex >= temp_index_max)
+        {
+            FadeTutorialSlides(false);
+            HandleGreenButton();
         }
 
         if (tutorialIndex == temp_index_min)
@@ -1177,12 +1192,16 @@ public class GameManager : MonoBehaviour
         else if (tutorialIndex > temp_index_max)
         {
             practiceAdvancable = true;
-
             FadeTutorialSlides(false);
             tutorialIndex = temp_index_min-1;
         }
 
-        UpdateTutorial();
+        print("Macro" + tutorialIndex_Macro + "index" + tutorialIndex);
+
+        if (tutorialIndex >= temp_index_min)
+        {
+            UpdateTutorial();
+        }
         source.PlayOneShot(buttonClick);
 
     }
