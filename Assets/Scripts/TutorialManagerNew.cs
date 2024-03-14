@@ -61,32 +61,32 @@ public class TutorialManagerNew : MonoBehaviour
         monsterTutorialArray[3] = new TutorialObject
             (
             "Defended weak points also <color=red>regain 1 health every 4 seconds</color> — even ones you've completely destroyed."
-            , monsterVideoArray[2]
+            , monsterVideoArray[3]
             );
         monsterTutorialArray[4] = new TutorialObject
             (
             "<b>Use your eye piece to check for safe points to attack.</b>" +
             "<br><br>To check if a weak point is defended, stick your eye on a window pointing to it." +
-            "<br><br>If it's empty, it's <color=green> undefended.</color> and safe to attack." +
+            "<br><br>If it's empty, it's <color=green>undefended</color> and safe to attack." +
             "<br><br>If you see the human, it's <color=red> defended."
             ,
-            monsterVideoArray[3]
+            monsterVideoArray[4]
             );
         monsterTutorialArray[5] = new TutorialObject
             (
-            "But the human can also <color=red>obstruct your view</color> by blocking a single window." +
+            "But the human can also <color=red>block your view</color> with their board." +
             "<br><br><color=red><br>How frustrating..."
             ,
-            monsterVideoArray[4]
+            monsterVideoArray[5]
             );
         monsterTutorialArray[6] = new TutorialObject
             (
             "You have three nights to completely destroy two weak points.<br><br><color=green><b>Good luck!",
-            monsterVideoArray[5]
+            monsterVideoArray[6]
             );
         humanTutorialArray[0] = new TutorialObject
             (
-            "<b>The monster will try to destroy your house by hitting three weak points.</b>" +
+            "<b>The monster will try to destroy your house by hitting your weak points.</b>" +
             "<br><br>If the monster completely destroys two weak points, <color=red>you lose.</color>",
             humanVideoArray[0]
             );
@@ -106,25 +106,25 @@ public class TutorialManagerNew : MonoBehaviour
         humanTutorialArray[3] = new TutorialObject
             (
             "Defended weak points also <color=green>regain 1 health every 4 seconds — even completely destroyed ones.</color>",
-            humanVideoArray[2]
+            humanVideoArray[3]
             );
         humanTutorialArray[4] = new TutorialObject
             (
             "<b>The monster can peer through the windows to check whether a point is defended.</b>" +
             "<br><br>It can use this to figure out which points are safe to attack." +
             "<br><br>But its vision is limited — it can only see where the red light can reach.",
-            humanVideoArray[3]
+            humanVideoArray[4]
             );
         humanTutorialArray[5] = new TutorialObject
              (
              "<b>You have a blue board piece you can use to block windows.</b>"+
-             "<br><br>Block the monster’s vision to stop it from finding undefended weak points.",
-             humanVideoArray[4]
+             "<br><br>Block the monster’s vision to stop it from find``ing undefended weak points.",
+             humanVideoArray[5]
              );
         humanTutorialArray[6] = new TutorialObject
              (
              "Defend the walls, block the windows, and try to survive for three nights.<br><br><color=green><b>Good luck!",
-             humanVideoArray[5]
+             humanVideoArray[6]
              );
     }
 
@@ -162,3 +162,20 @@ public class TutorialManagerNew : MonoBehaviour
         }
     }
 }
+
+
+/*If the monster destroys two walls, you lose.
+Move your human to a wall to protect it, slowly fixing damage and hurting the monster if they try to attack it. 
+
+Smash the walls to destroy them. If you destroy two walls, you win.
+The human can stand at a wall to protect it, slowly fixing damage and hurting you if you try and attack it.
+
+If the red light reaches you, the monster can see inside.
+Block the monster’s vision with your barricade to stop it from finding unprotected walls.
+
+Look through the windows and find unprotected walls to attack.
+But the human might have a way to block the windows…
+
+You have three nights to destroy two walls and crush the cabin. Good luck!
+Survive three nights, or use your wits to slay the monster. Good luck!*/
+

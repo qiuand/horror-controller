@@ -19,6 +19,10 @@ public class GameManager : MonoBehaviour
 
     public float buttonTimer = 0f;
     float buttonBufferTime = 0.050f;
+
+    float bufferTime_Failed_Min = 0.3f;
+    float bufferTime_Failed_Max = 0.8f;
+
     public float buttonBufferTime_Long;
 
     [SerializeField] AudioSource timer;
@@ -274,6 +278,12 @@ public class GameManager : MonoBehaviour
             {
                 isButtonDown = true;
             }
+            else if (validatedIncomingManager[7] == 1 && buttonTimer>bufferTime_Failed_Min && buttonTimer < bufferTime_Failed_Max)
+            {
+                print("got");
+                buttonTimer = 0f;
+                isButtonDown = false;
+            }
             else if (validatedIncomingManager[7] == 1 && buttonTimer >= buttonBufferTime_Long)
             {
                 if (inTutorial)
@@ -291,6 +301,7 @@ public class GameManager : MonoBehaviour
                     HandleGreenButton();
                 }
             }
+
             else if (isButtonDown && validatedIncomingManager[7] == 1 && buttonTimer>=buttonBufferTime)
             {
                 isButtonDown = false;
@@ -298,10 +309,14 @@ public class GameManager : MonoBehaviour
                 if (inTutorial)
                 {
                     AdvanceTutorialSlides();
+                    buttonTimer = 0;
+                    isButtonDown = false;
                 }
                 else
                 {
                     HandleGreenButton();
+                    buttonTimer = 0;
+                    isButtonDown = false;
                 }
             }
             else
@@ -400,7 +415,7 @@ public class GameManager : MonoBehaviour
             nightCounter++;
             humanCanvas.GetComponent<CanvasScript>().FadeInfo("You Drove the Monster Back", "...For now. It slinks off to regenerate its lost limbs...", null, true);
             monsterCanvas.GetComponent<CanvasScript>().FadeInfo("You've Been Severely Wounded.", "You slink away to regenerate your lost limbs...", null, true);
-            stateProgressionTracker = 4;
+            stateProgressionTracker = 5;
         }
         
         paused = true;
@@ -474,7 +489,7 @@ public class GameManager : MonoBehaviour
                 humanCanvas.GetComponent<CanvasScript>().FadeInfo("You Live to See Another Day.", "Night " + nightCounter + "/" + maxNights, "But the monster will return...", true);
                 monsterCanvas.GetComponent<CanvasScript>().FadeInfo("The Human Lives to See Another Day.", "Night " + nightCounter + "/" + maxNights, "But you return the next night...", true);
             }
-            stateProgressionTracker = 4;
+            stateProgressionTracker = 5;
             paused = true;
 /*            StartCoroutine(LoadGameOver());
 */        }
@@ -954,7 +969,7 @@ public class GameManager : MonoBehaviour
                         playSound = false;
 
                         humanCanvas.GetComponent<CanvasScript>().ChangePracticeText("Practice blocking the monster's vision now.");
-                        monsterCanvas.GetComponent<CanvasScript>().ChangePracticeText("Practice finding & attacking undefended weak points now.");
+                        monsterCanvas.GetComponent<CanvasScript>().ChangePracticeText("Practice finding and attacking undefended weak points now.");
                     }
                     break;
                 case 3:
