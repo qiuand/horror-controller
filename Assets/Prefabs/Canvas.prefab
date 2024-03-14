@@ -4764,7 +4764,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: <size=15>press <color=green>button</color> to view tips again.
+  m_text: <size=15>Click <color=green>button</color> to view tips again.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 90647f93e0a3ce742b2152213ef99f01, type: 2}
   m_sharedMaterial: {fileID: -4949351093035025804, guid: 90647f93e0a3ce742b2152213ef99f01, type: 2}

@@ -280,11 +280,10 @@ public class GameManager : MonoBehaviour
             }
             else if (validatedIncomingManager[7] == 1 && buttonTimer>bufferTime_Failed_Min && buttonTimer < bufferTime_Failed_Max)
             {
-                print("got");
                 buttonTimer = 0f;
                 isButtonDown = false;
             }
-            else if (validatedIncomingManager[7] == 1 && buttonTimer >= buttonBufferTime_Long)
+            else if (validatedIncomingManager[7] == 0 && buttonTimer >= buttonBufferTime_Long)
             {
                 if (inTutorial)
                 {

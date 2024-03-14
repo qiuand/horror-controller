@@ -65,9 +65,8 @@ public class TutorialManagerNew : MonoBehaviour
             );
         monsterTutorialArray[4] = new TutorialObject
             (
-            "<b>Use your eye piece to check for safe points to attack.</b>" +
-            "<br><br>To check if a weak point is defended, stick your eye on a window pointing to it." +
-            "<br><br>If it's empty, it's <color=green>undefended</color> and safe to attack." +
+            "<b>To check if a weak point is defended, stick your eye on a window pointing to it.</b>" +
+            "<br><br>If it's empty, it's <color=green>undefended</color>and safe to attack." +
             "<br><br>If you see the human, it's <color=red> defended."
             ,
             monsterVideoArray[4]
@@ -98,7 +97,7 @@ public class TutorialManagerNew : MonoBehaviour
             );
         humanTutorialArray[2] = new TutorialObject
             (
-            "If a monster hits an <color=red>undefended</color> weak point, they will <color=red>damage that point.</color>" +
+            "If a monster hits an <color=red>undefended</color>weak point, they will <color=red>damage that point.</color>" +
             "<br><br>But if the monster hits a <color=green>defended</color> weak point, you will <color=green>deal damage to the monster.</color>" +
             "<br><br>If you kill the monster,<color=green> it will waste a whole night to regenerate.</color>",
             humanVideoArray[2]
@@ -118,7 +117,7 @@ public class TutorialManagerNew : MonoBehaviour
         humanTutorialArray[5] = new TutorialObject
              (
              "<b>You have a blue board piece you can use to block windows.</b>"+
-             "<br><br>Block the monster’s vision to stop it from find``ing undefended weak points.",
+             "<br><br>Block the monster’s vision to stop it from finding undefended weak points.",
              humanVideoArray[5]
              );
         humanTutorialArray[6] = new TutorialObject
