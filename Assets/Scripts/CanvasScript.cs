@@ -4,8 +4,10 @@ using UnityEngine.UI;
 
 public class CanvasScript : MonoBehaviour
 {
+    [SerializeField] Animator FlashEffect;
 
     [SerializeField] Image readyBarFill;
+    [SerializeField] Image readyBarFillTitle;
 
     [SerializeField] Animator tutorialSlideAnimator;
 
@@ -82,6 +84,8 @@ public class CanvasScript : MonoBehaviour
     void Update()
     {
         readyBarFill.fillAmount = gameManagerScript.buttonTimer / gameManagerScript.buttonBufferTime_Long;
+        readyBarFillTitle.fillAmount = gameManagerScript.buttonTimer / gameManagerScript.buttonBufferTime_Long;
+
         timer.text = ""+System.Math.Round(gameManagerScript.countdownTimer, 0);
 
         for (int i = 0; i < strengthBar.Length; i++)
@@ -254,5 +258,10 @@ public class CanvasScript : MonoBehaviour
     public void ChangePracticeText(string message)
     {
         practiceText.text = message;
+    }
+    public void FlashScreen(Vector3 colour)
+    {
+        FlashEffect.gameObject.GetComponent<RawImage>().color = new Color(colour.x, colour.y, colour.z);
+        FlashEffect.Play("RedFlash");
     }
 }

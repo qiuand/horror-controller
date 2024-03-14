@@ -97,11 +97,18 @@ public class AttackPoint : MonoBehaviour
                     source.PlayOneShot(error, 0.4f);
                     source.PlayOneShot(humanStab);
 
+                    gameManager.GetComponent<GameManager>().MonsterDamageFlash(new Vector3(256,0,0), "monster");
+                    gameManager.GetComponent<GameManager>().MonsterDamageFlash(new Vector3(0, 256, 0), "human");
+
                     gameManager.GetComponent<GameManager>().monsterHealth--;
                     gameManager.GetComponent<GameManager>().TakeDamage();
                 }
                 else
                 {
+                    if (health > 0)
+                    {
+                        gameManager.GetComponent<GameManager>().MonsterDamageFlash(new Vector3(256, 0, 0), "human");
+                    }
                     gameManager.GetComponent<GameManager>().TakeDamage();
                     if (health == 1)
                     {

@@ -9,6 +9,8 @@ using UnityEngine.Rendering.UI;
 
 public class GameManager : MonoBehaviour
 {
+    bool inMenu = true;
+
     bool practiceAdvancable = false;
 
     [SerializeField] Animator healthAnimator;
@@ -123,7 +125,7 @@ public class GameManager : MonoBehaviour
 
     public float monsterAttackTimer = 0.5f;
 
-    public float monsterAttackOriginalCooldown = 1f;
+    public float monsterAttackOriginalCooldown = 0.1f;
     public float monsterAttackCooldownTimer;
 
     bool visibleFlag;
@@ -178,7 +180,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        buttonBufferTime_Long = 2f;
+        buttonBufferTime_Long = .75f;
 
         maxMonsterHealth = 4;
         monsterHealth = maxMonsterHealth;
@@ -223,6 +225,12 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+           
+        {
+            ResetGame();
+        }
+
         if (countDownEnabled)
         {
             countdownTimer -= Time.deltaTime;
@@ -238,6 +246,11 @@ public class GameManager : MonoBehaviour
                 tutorialCompleted = true;
                 humanCanvas.GetComponent<CanvasScript>().FadeInfo(null, null, null, false);
                 monsterCanvas.GetComponent<CanvasScript>().FadeInfo(null, null, null, false);
+
+                humanCanvas.GetComponent<CanvasScript>().FadeMenu(false);
+                monsterCanvas.GetComponent<CanvasScript>().FadeMenu(false);
+                humanCanvas.GetComponent<CanvasScript>().FadeGameUI(true);
+                monsterCanvas.GetComponent<CanvasScript>().FadeGameUI(true);
             }
         }
 
@@ -261,12 +274,22 @@ public class GameManager : MonoBehaviour
             {
                 isButtonDown = true;
             }
-            else if (inTutorial && validatedIncomingManager[7] == 1 && buttonTimer >= buttonBufferTime_Long)
+            else if (validatedIncomingManager[7] == 1 && buttonTimer >= buttonBufferTime_Long)
             {
-                buttonTimer = 0f;
-                isButtonDown = false;
-                HandleGreenButton();
-                print("Yeah");
+                if (inTutorial)
+                {
+                    buttonTimer = 0f;
+                    isButtonDown = false;
+                    HandleGreenButton();
+                }
+                else if (inMenu)
+                {
+                    print("Yeah");
+                    buttonTimer = 0f;
+                    isButtonDown = false;
+                    stateProgressionTracker = 5;
+                    HandleGreenButton();
+                }
             }
             else if (isButtonDown && validatedIncomingManager[7] == 1 && buttonTimer>=buttonBufferTime)
             {
@@ -870,7 +893,7 @@ public class GameManager : MonoBehaviour
     }
     public void HandleGreenButton()
     {
-        source.PlayOneShot(buttonClick);
+        bool playSound = true;
         if (gameWon)
         {
             ResetGame();
@@ -885,20 +908,24 @@ public class GameManager : MonoBehaviour
             switch (stateProgressionTracker)
             {
                 case 0:
+                    inMenu = false;
+
                     humanCanvas.GetComponent<CanvasScript>().FadeTutorialWarning(false);
                     monsterCanvas.GetComponent<CanvasScript>().FadeTutorialWarning(false);
 
                     EnableTimer(false);
                     humanCanvas.GetComponent<CanvasScript>().FadeMenu(false);
                     monsterCanvas.GetComponent<CanvasScript>().FadeMenu(false);
-                    humanCanvas.GetComponent<CanvasScript>().FadeInfo("You Are A <color=red>Desperate Human</color>,", "Trying to protect your home against a brutal monster.", "If two walls are destroyed, <color=red>you die.", true);
+
+                    humanCanvas.GetComponent<CanvasScript>().FadeGameUI(false);
+                    humanCanvas.GetComponent<CanvasScript>().FadeInfo("You Are A <color=red>Desperate Human</color>,", "Trying to protect your home against a brutal monster.", "You must protect the house for three nights.", true);
                     monsterCanvas.GetComponent<CanvasScript>().FadeInfo("You Are A<br><color=red>Brutal Monster</color>,", "Hunting down a puny human in their home.", "You have three nights to destroy the house.", true);
                     EnableButton(true);
                     break;
                 case 1:
-
                     humanCanvas.GetComponent<CanvasScript>().FadeGameUI(true);
                     monsterCanvas.GetComponent<CanvasScript>().FadeGameUI(true);
+
                     humanCanvas.GetComponent<CanvasScript>().FadeInfo(null, null, null, false);
                     monsterCanvas.GetComponent<CanvasScript>().FadeInfo(null, null, null, false);
 
@@ -907,10 +934,11 @@ public class GameManager : MonoBehaviour
                     inTutorial = true;
                     gameLocked = false;
 
+
                     UpdateTutorial();
 
-                    humanCanvas.GetComponent<CanvasScript>().ChangePracticeText("Practice defending the walls.");
-                    monsterCanvas.GetComponent<CanvasScript>().ChangePracticeText("Practice destroying the walls.");
+                    humanCanvas.GetComponent<CanvasScript>().ChangePracticeText("Practice defending and repairing now.");
+                    monsterCanvas.GetComponent<CanvasScript>().ChangePracticeText("Practice destroying weak points now.");
 
                     break;
 
@@ -923,13 +951,17 @@ public class GameManager : MonoBehaviour
                         AdvanceTutorialSlides();
                         UpdateTutorial();
 
-                        humanCanvas.GetComponent<CanvasScript>().ChangePracticeText("Practice blocking the monster's sight.");
-                        monsterCanvas.GetComponent<CanvasScript>().ChangePracticeText("Practice finding unguarded walls.");
+                        playSound = false;
+
+                        humanCanvas.GetComponent<CanvasScript>().ChangePracticeText("Practice blocking the monster's vision now.");
+                        monsterCanvas.GetComponent<CanvasScript>().ChangePracticeText("Practice finding & attacking undefended weak points now.");
                     }
                     break;
                 case 3:
                     if (practiceAdvancable)
                     {
+                        playSound = false;
+
                         practiceAdvancable = false;
                         tutorialIndex_Macro++;
                         tutorialIndex = -1;
@@ -938,9 +970,21 @@ public class GameManager : MonoBehaviour
                     }
                     break;
                 case 4:
-
+                    if (practiceAdvancable)
+                    {
+                        playSound = false;
+                        practiceAdvancable = false;
+                        tutorialIndex_Macro++;
+                        tutorialIndex = -1;
+                        AdvanceTutorialSlides();
+                        UpdateTutorial();
+                    }
                     break;
+
                 case 5:
+
+                    humanCanvas.GetComponent<CanvasScript>().FadeTutorialWarning(false);
+                    monsterCanvas.GetComponent<CanvasScript>().FadeTutorialWarning(false);
 
                     EnableButton(false);
 
@@ -981,6 +1025,10 @@ public class GameManager : MonoBehaviour
             }
             stateProgressionTracker++;
 
+            if (playSound)
+            {
+                source.PlayOneShot(buttonClick);
+            }
         }
     }
     public void DisableAllSlides()
@@ -989,6 +1037,8 @@ public class GameManager : MonoBehaviour
     }
     public void ResetGame()
     {
+        inMenu = true;
+
         tutorialIndex_Macro = 0;
 
         countDownEnabled = false;
@@ -1146,6 +1196,8 @@ public class GameManager : MonoBehaviour
     }
     public void AdvanceTutorialSlides()
     {
+        bool playSound=true;
+
         int temp_index_min = 0;
         int temp_index_max = 0;
 
@@ -1153,15 +1205,15 @@ public class GameManager : MonoBehaviour
         {
             case 0:
                 temp_index_min = 0;
-                temp_index_max = 2;
+                temp_index_max = 3;
                 break;
             case 1:
-                temp_index_min = 3;
-                temp_index_max = 4;
+                temp_index_min = 4;
+                temp_index_max = 5;
                 break;
             case 2:
-                temp_index_min = 5;
-                temp_index_max = 5;
+                temp_index_min = 6;
+                temp_index_max = 6;
                 break;
         }
 
@@ -1178,6 +1230,7 @@ public class GameManager : MonoBehaviour
 
         if (tutorialIndex_Macro == 2 && tutorialIndex >= temp_index_max)
         {
+            playSound = false;
             FadeTutorialSlides(false);
             HandleGreenButton();
         }
@@ -1207,13 +1260,28 @@ public class GameManager : MonoBehaviour
         {
             UpdateTutorial();
         }
-        source.PlayOneShot(buttonClick);
+        if (playSound)
+        {
+            source.PlayOneShot(buttonClick);
+        }
+
 
     }
     public void FadeTutorialSlides(bool fadeIn)
     {
         humanCanvas.GetComponent<CanvasScript>().FadeTutorialSlide(fadeIn);
         monsterCanvas.GetComponent<CanvasScript>().FadeTutorialSlide(fadeIn);
+    }
+    public void MonsterDamageFlash(Vector3 colour, string ID)
+    {
+        if (ID == "monster")
+        {
+            monsterCanvas.GetComponent<CanvasScript>().FlashScreen(new Vector3(256,0,0));
+        }
+        else
+        {
+            humanCanvas.GetComponent<CanvasScript>().FlashScreen(colour);
+        }
     }
 }
 
