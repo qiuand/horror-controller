@@ -55,7 +55,7 @@ public class TutorialManagerNew : MonoBehaviour
         monsterTutorialArray[2] = new TutorialObject
             (
             "However, if you hold your eye against a defended weak point, the <color=red>human inside will deal damage to you." +
-            "<br><br><b>If the human kills you, you <color=red> waste the rest of the night to regenerate.</color></b>",
+            "<br><br><b>If the human kills you, you <color=red>waste the rest of the night to regenerate.</color></b>",
             monsterVideoArray[2]
             );
         monsterTutorialArray[3] = new TutorialObject
@@ -65,8 +65,8 @@ public class TutorialManagerNew : MonoBehaviour
             );
         monsterTutorialArray[4] = new TutorialObject
             (
-            "<b>To check if a weak point is defended, stick your eye on a window pointing to it.</b>" +
-            "<br><br>If it's empty, it's <color=green>undefended</color>and safe to attack." +
+            "<b>To check if a weak point is defended, stick your eye piece on a window pointing to it and check the screen.</b>" +
+            "<br><br>If it's empty, it's <color=green>undefended</color> and safe to attack." +
             "<br><br>If you see the human, it's <color=red> defended."
             ,
             monsterVideoArray[4]

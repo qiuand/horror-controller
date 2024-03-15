@@ -255,6 +255,9 @@ public class GameManager : MonoBehaviour
                 monsterCanvas.GetComponent<CanvasScript>().FadeMenu(false);
                 humanCanvas.GetComponent<CanvasScript>().FadeGameUI(true);
                 monsterCanvas.GetComponent<CanvasScript>().FadeGameUI(true);
+
+                humanCanvas.GetComponent<CanvasScript>().FadeTutorialWarning(false);
+                monsterCanvas.GetComponent<CanvasScript>().FadeTutorialWarning(false);
             }
         }
 
@@ -399,9 +402,10 @@ public class GameManager : MonoBehaviour
     }
     void MonsterDied()
     {
-        source.PlayOneShot(gong, 1);
-        if (nightCounter >= maxNights)
+        if (nightCounter >= maxNights && !gameWon)
         {
+            source.PlayOneShot(gong, 1);
+
             timer.enabled = false;
             humanCanvas.GetComponent<CanvasScript>().FadeInfo("You Have Slain the Monster.", "Game Over.", "Congratulations.", true);
             monsterCanvas.GetComponent<CanvasScript>().FadeInfo("You Have Been Slain by the Human.", "Game Over.", "", true);
@@ -409,6 +413,8 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            source.PlayOneShot(gong, 1);
+
             EnableButton(true);
             timer.enabled = false;
             nightCounter++;
@@ -1259,7 +1265,7 @@ public class GameManager : MonoBehaviour
             FadeTutorialSlides(true);
         }
 
-        else if (tutorialIndex > temp_index_max)
+        else if (tutorialIndex > temp_index_max && tutorialIndex_Macro<2)
         {
             humanCanvas.GetComponent<CanvasScript>().FadeTutorialWarning(true);
             monsterCanvas.GetComponent<CanvasScript>().FadeTutorialWarning(true);
