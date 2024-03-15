@@ -471,13 +471,13 @@ public class GameManager : MonoBehaviour
         {
 /*            EnableButton(true);*/
             timer.enabled = false;
-            source.PlayOneShot(gong, 1);
 
             nightCounter++;
             paused = true;
             gameLocked = true;
             if (nightCounter > maxNights && !gameWon)
             {
+                source.PlayOneShot(gong, 1);
                 gameWon = true;
                 humanCanvas.GetComponent<CanvasScript>().FadeInfo("GAME OVER", "You have survived.", "", true);
                 monsterCanvas.GetComponent<CanvasScript>().FadeInfo("GAME OVER", "The human has survived.", "", true);
@@ -485,6 +485,7 @@ public class GameManager : MonoBehaviour
             }
             else if (!gameWon)
             {
+                source.PlayOneShot(gong, 1);
                 humanCanvas.GetComponent<CanvasScript>().FadeInfo("You Live to See Another Day.", "Night " + nightCounter + "/" + maxNights, "But the monster will return...", true);
                 monsterCanvas.GetComponent<CanvasScript>().FadeInfo("The Human Lives to See Another Day.", "Night " + nightCounter + "/" + maxNights, "But you return the next night...", true);
             }
