@@ -283,7 +283,7 @@ public class GameManager : MonoBehaviour
                 buttonTimer = 0f;
                 isButtonDown = false;
             }
-            else if (validatedIncomingManager[7] == 0 && buttonTimer >= buttonBufferTime_Long)
+            else if (validatedIncomingManager[7] == 1 && buttonTimer >= buttonBufferTime_Long)
             {
                 if (inTutorial)
                 {
