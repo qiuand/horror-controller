@@ -939,8 +939,8 @@ public class GameManager : MonoBehaviour
                     monsterCanvas.GetComponent<CanvasScript>().FadeMenu(false);
 
                     humanCanvas.GetComponent<CanvasScript>().FadeGameUI(false);
-                    humanCanvas.GetComponent<CanvasScript>().FadeInfo("You Are A <color=red>Desperate Human</color>,", "Trying to protect your home against a brutal monster.", "You must protect the house for three nights.", true);
-                    monsterCanvas.GetComponent<CanvasScript>().FadeInfo("You Are A<br><color=red>Brutal Monster</color>,", "Hunting down a puny human in their home.", "You have three nights to destroy the house.", true);
+                    humanCanvas.GetComponent<CanvasScript>().FadeInfo("You Are A <color=red>Desperate Human,</color>", "Trying to protect your home against a brutal monster.", "You must protect the house for three nights.", true);
+                    monsterCanvas.GetComponent<CanvasScript>().FadeInfo("You Are A<br><color=red>Brutal Monster,</color>,", "Hunting down a puny human in their home.", "You have three nights to destroy the house.", true);
                     EnableButton(true);
                     break;
                 case 1:
