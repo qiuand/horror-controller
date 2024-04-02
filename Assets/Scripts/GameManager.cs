@@ -186,7 +186,7 @@ public class GameManager : MonoBehaviour
     {
         buttonBufferTime_Long = .75f;
 
-        maxMonsterHealth = 3;
+        maxMonsterHealth = 4;
         monsterHealth = maxMonsterHealth;
 
         monsterAttackOriginalCooldown = startingChargeSpeed;
