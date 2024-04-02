@@ -186,7 +186,7 @@ public class GameManager : MonoBehaviour
     {
         buttonBufferTime_Long = .75f;
 
-        maxMonsterHealth = 4;
+        maxMonsterHealth = 3;
         monsterHealth = maxMonsterHealth;
 
         monsterAttackOriginalCooldown = startingChargeSpeed;
@@ -419,7 +419,7 @@ public class GameManager : MonoBehaviour
             timer.enabled = false;
             nightCounter++;
             humanCanvas.GetComponent<CanvasScript>().FadeInfo("You Drove the Monster Back", "...For now. It slinks off to regenerate its lost limbs...", null, true);
-            monsterCanvas.GetComponent<CanvasScript>().FadeInfo("You've Been Severely Wounded.", "You slink away to regenerate your lost limbs...", null, true);
+            monsterCanvas.GetComponent<CanvasScript>().FadeInfo("You've Been Severely Wounded.", "Night 2/3", null, true);
             stateProgressionTracker = 5;
         }
         
