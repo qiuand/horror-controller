@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
     int tutorialIndex_Macro = 0;
 
     public int monsterHealth;
-    public int maxMonsterHealth=4;
+    public int maxMonsterHealth=3;
 
     int stateProgressionTracker = 0;
 
@@ -974,8 +974,8 @@ public class GameManager : MonoBehaviour
 
                         playSound = false;
 
-                        humanCanvas.GetComponent<CanvasScript>().ChangePracticeText("Practice blocking the monster's vision now.");
                         monsterCanvas.GetComponent<CanvasScript>().ChangePracticeText("Practice finding and attacking undefended weak points now.");
+                        humanCanvas.GetComponent<CanvasScript>().ChangePracticeText("Practice blocking the monster's vision now.");
                     }
                     break;
                 case 3:
@@ -1249,7 +1249,7 @@ public class GameManager : MonoBehaviour
             tutorialIndex = temp_index_min;
         }
 
-        if (tutorialIndex_Macro == 2 && tutorialIndex >= temp_index_max)
+        if (tutorialIndex_Macro >= 2 && tutorialIndex >= temp_index_max)
         {
             playSound = false;
             FadeTutorialSlides(false);

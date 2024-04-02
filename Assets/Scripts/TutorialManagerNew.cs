@@ -97,7 +97,7 @@ public class TutorialManagerNew : MonoBehaviour
             );
         humanTutorialArray[2] = new TutorialObject
             (
-            "If a monster hits an <color=red>undefended</color>weak point, they will <color=red>damage that point.</color>" +
+            "If a monster hits an <color=red>undefended</color> weak point, they will <color=red>damage that point.</color>" +
             "<br><br>But if the monster hits a <color=green>defended</color> weak point, you will <color=green>deal damage to the monster.</color>" +
             "<br><br>If you kill the monster,<color=green> the night will immediately end.</color>",
             humanVideoArray[2]

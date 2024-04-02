@@ -1854,7 +1854,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 5da0876bdfeb63e4d93c2b6f076dcc3b, type: 3}
+  m_Texture: {fileID: 2800000, guid: e6ab7c7e1f38f454ab3916e502022c0a, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -2919,7 +2919,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: When both players are ready,
+  m_text: When done practicing,
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 90647f93e0a3ce742b2152213ef99f01, type: 2}
   m_sharedMaterial: {fileID: -4949351093035025804, guid: 90647f93e0a3ce742b2152213ef99f01, type: 2}
