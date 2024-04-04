@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
     public bool tutorialCompleted = false;
     public bool introSlideVisible = false;
 
-    bool serialFlag = true;
+    bool serialFlag = false;
 
     public bool playerAbsent = true;
 
@@ -186,7 +186,7 @@ public class GameManager : MonoBehaviour
     {
         buttonBufferTime_Long = .75f;
 
-        maxMonsterHealth = 4;
+        maxMonsterHealth = 3;
         monsterHealth = maxMonsterHealth;
 
         monsterAttackOriginalCooldown = startingChargeSpeed;
