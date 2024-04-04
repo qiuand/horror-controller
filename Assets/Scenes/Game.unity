@@ -4596,7 +4596,7 @@ AudioSource:
   m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 2f3379ec17103394cb320d6502d10c61, type: 3}
+  m_audioClip: {fileID: 8300000, guid: ee8f6ac19ce84d140bb7b5c8d9a69f13, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -37886,7 +37886,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -7326920162483980976, guid: 75705c6c83de746448eb583328c0a01e, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 076ddbfcc5820de498dfeb8d5aa09950, type: 3}
+  m_audioClip: {fileID: 8300000, guid: fce4ee7a346434849821ed542e620914, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -37894,7 +37894,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 0
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -81266,7 +81266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4851653026efd8d43ae4223a8b065237, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thud: {fileID: 8300000, guid: 3fffbb4b622e7964f8334f71e517b4a5, type: 3}
+  thud: {fileID: 8300000, guid: a0f519e31dfa1c24e9e12f473e0fa1d0, type: 3}
 --- !u!82 &1688087721
 AudioSource:
   m_ObjectHideFlags: 0
@@ -84101,7 +84101,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh35586
+  m_Name: pb_Mesh37188
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -84721,8 +84721,8 @@ MonoBehaviour:
   buttonBufferTime_Long: 2
   timer: {fileID: 1801125539}
   source: {fileID: 1801125538}
-  gong: {fileID: 8300000, guid: d5d7d04c299de644f99423f0e611ac7a, type: 3}
-  sting: {fileID: 8300000, guid: e207165b82e99b3438d5c6917f553d05, type: 3}
+  gong: {fileID: 8300000, guid: 57ffa79854949de4b9a903143cafa2e4, type: 3}
+  sting: {fileID: 8300000, guid: ee8f6ac19ce84d140bb7b5c8d9a69f13, type: 3}
   buttonClick: {fileID: 8300000, guid: 8b8827fb65427a2479e8337c11aed1ce, type: 3}
   monsterHealth: 0
   maxMonsterHealth: 3
@@ -84919,7 +84919,7 @@ AudioSource:
   m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 25ddb2a4d0c96a04f99525d0aff89830, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 7c4bb53f693a52e4da111f617641b151, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -85111,7 +85111,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -5758205633647522108, guid: 75705c6c83de746448eb583328c0a01e, type: 2}
-  m_audioClip: {fileID: 8300000, guid: d5d7d04c299de644f99423f0e611ac7a, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 57ffa79854949de4b9a903143cafa2e4, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
