@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
     public bool tutorialCompleted = false;
     public bool introSlideVisible = false;
 
-    bool serialFlag = false;
+    bool serialFlag = true;
 
     public bool playerAbsent = true;
 
@@ -418,8 +418,8 @@ public class GameManager : MonoBehaviour
             EnableButton(true);
             timer.enabled = false;
             nightCounter++;
-            humanCanvas.GetComponent<CanvasScript>().FadeInfo("You Drove the Monster Back", "...For now. It slinks off to regenerate its lost limbs...", null, true);
-            monsterCanvas.GetComponent<CanvasScript>().FadeInfo("You've Been Severely Wounded.", "Night 2/3", null, true);
+            humanCanvas.GetComponent<CanvasScript>().FadeInfo("You Drove the Monster Back", "...For now. "+nightCounter+"/"+maxNights+" left to defend.", null, true);
+            monsterCanvas.GetComponent<CanvasScript>().FadeInfo("You've Been Severely Wounded.", nightCounter+"/"+maxNights+" nights to kill the human.", null, true);
             stateProgressionTracker = 5;
         }
         
@@ -1002,7 +1002,7 @@ public class GameManager : MonoBehaviour
                     }
                     break;
 
-                case 5:
+                default:
 
                     humanCanvas.GetComponent<CanvasScript>().FadeTutorialWarning(false);
                     monsterCanvas.GetComponent<CanvasScript>().FadeTutorialWarning(false);
